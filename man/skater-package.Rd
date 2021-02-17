@@ -11,5 +11,10 @@ Utilities for SNP-based kinship analysis.
 \author{
 \strong{Maintainer}: Stephen Turner \email{sturner@signaturescience.com} (\href{https://orcid.org/0000-0001-9140-9028}{ORCID})
 
+Authors:
+\itemize{
+  \item VP Nagraj \email{pnagraj@signaturescience.com} (\href{https://orcid.org/0000-0003-0060-566X}{ORCID})
+}
+
 }
 \keyword{internal}
