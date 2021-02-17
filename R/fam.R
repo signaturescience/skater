@@ -24,7 +24,7 @@ fam2ped <- function(famfile, plotped=TRUE) {
     pdfoutfile <- paste0(famfile, ".pedigree.pdf")
     message(paste("Saving PDF plots of pedigrees to file:", pdfoutfile))
     grDevices::pdf(file = pdfoutfile, width=10, height=8, onefile=TRUE)
-    purrr::walk(peds$ped, ~plot.pedigree(., mar=c(1,4,1,4)))
+    purrr::walk(peds$ped, ~kinship2::plot.pedigree(., mar=c(1,4,1,4)))
     grDevices::dev.off()
   }
   return(peds)
