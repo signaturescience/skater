@@ -3,16 +3,16 @@ Title: Utilities for SNP-based kinship analysis
 Description: Utilities for SNP-based kinship analysis.
 Version: 0.1.0
 Authors@R: 
-    person(given = "VP",
-           family = "Nagraj",
-           role = c("aut", "cre"),
-           email = "pnagraj@signaturescience.com",
-           comment = c(ORCID = "0000-0003-0060-566X"))
-    person(given = "Stephen",
-           family = "Turner",
-           role = c("cre"),
-           email = "sturner@signaturescience.com",
-           comment = c(ORCID = "0000-0001-9140-9028"))
+    c(person(given = "Stephen",
+             family = "Turner",
+             role = c("aut", "cre"),
+             email = "sturner@signaturescience.com",
+             comment = c(ORCID = "0000-0001-9140-9028")),
+      person(given = "VP",
+             family = "Nagraj",
+             role = "aut",
+             email = "pnagraj@signaturescience.com",
+             comment = c(ORCID = "0000-0003-0060-566X")))
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
