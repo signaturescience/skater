@@ -14,6 +14,8 @@ fam2ped <- function(famfile, plotped=TRUE) {
                            col_types="ccccii")
   # Replace 0 father and mother IDs with NA
   fam <- fam %>% dplyr::mutate(dplyr::across(c(dadid, momid), dplyr::na_if, 0))
+  # Make affected status 2
+  fam <- fam %>% dplyr::mutate(affected=1)
   # Create a listcol with the pedigree object for each family
   peds <-
     fam %>%
