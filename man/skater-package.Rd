@@ -13,6 +13,7 @@ Utilities for SNP-based kinship analysis.
 
 Authors:
 \itemize{
+  \item Matthew Scholz \email{mscholz@signaturescience.com}
   \item VP Nagraj \email{pnagraj@signaturescience.com} (\href{https://orcid.org/0000-0003-0060-566X}{ORCID})
 }
 
