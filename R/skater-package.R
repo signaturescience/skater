@@ -8,4 +8,13 @@
 NULL
 
 # Quiet CRAN check notes for unbound global variables
-if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
+if(getRversion() >= "2.15.1")  utils::globalVariables(c(".",
+                                                        "fid",
+                                                        "dadid",
+                                                        "momid",
+                                                        "dadid",
+                                                        "dadid",
+                                                        "x",
+                                                        "y",
+                                                        "r",
+                                                        "data"))
