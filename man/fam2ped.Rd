@@ -15,5 +15,8 @@ fam2ped(famfile, plotped = TRUE)
 A tibble with new listcol \code{ped} containing pedigrees from \code{kinship2::pedigree}.
 }
 \description{
-Fam to pedigree
+Converts a \href{https://www.cog-genomics.org/plink/1.9/formats#fam}{PLINK-formatted fam file} to a pedigree object using \link[kinship2:pedigree]{kinship2::pedigree}.
+}
+\details{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }

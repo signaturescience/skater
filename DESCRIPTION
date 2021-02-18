@@ -29,4 +29,6 @@ Imports:
     purrr,
     kinship2,
     corrr,
-    grDevices
+    grDevices,
+    lifecycle
+Roxygen: list(markdown = TRUE)
