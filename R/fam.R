@@ -1,5 +1,9 @@
 #' Fam to pedigree
 #'
+#' Converts a [PLINK-formatted fam file](https://www.cog-genomics.org/plink/1.9/formats#fam) to a pedigree object using [kinship2::pedigree].
+#'
+#' `r lifecycle::badge("experimental")`
+#'
 #' @param famfile PLINK-formatted fam file
 #' @param plotped Logical, TRUE if you want to create a PDF with pedigree drawings at the same location as the fam file with extension .pedigree.pdf
 #'
@@ -32,6 +36,10 @@ fam2ped <- function(famfile, plotped=TRUE) {
 }
 
 #' Pedigree to pairwise kinship
+#'
+#' Converts a pedigree class object from [fam2ped][skater::fam2ped] to a pairwise list of relationships and their expected/theoretical kinship coefficient.
+#'
+#' `r lifecycle::badge("experimental")`
 #'
 #' @param ped A "pedigree" class object from [fam2ped][skater::fam2ped].
 #' @return A tibble containing all pairwise kinship coefficients from the input pedigree.
