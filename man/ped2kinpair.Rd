@@ -7,7 +7,7 @@
 ped2kinpair(ped)
 }
 \arguments{
-\item{ped}{A "pedigree" class object from \link[skater]{fam2ped}.}
+\item{ped}{A "pedigree" class object from \link[=fam2ped]{fam2ped}.}
 }
 \value{
 A tibble containing all pairwise kinship coefficients from the input pedigree.

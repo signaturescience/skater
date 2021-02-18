@@ -30,3 +30,4 @@ Imports:
     kinship2,
     corrr,
     grDevices
+Roxygen: list(markdown = TRUE)
