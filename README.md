@@ -4,6 +4,8 @@
 # skater
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/signaturescience/skater/workflows/R-CMD-check/badge.svg)](https://github.com/signaturescience/skater/actions)
 <!-- badges: end -->
 
 ## Installation
