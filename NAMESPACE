@@ -3,4 +3,5 @@
 export("%>%")
 export(fam2ped)
 export(ped2kinpair)
+importFrom(lifecycle,badge)
 importFrom(magrittr,"%>%")
