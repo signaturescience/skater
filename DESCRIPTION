@@ -30,5 +30,6 @@ Imports:
     kinship2,
     corrr,
     grDevices,
-    lifecycle
+    lifecycle,
+    tibble
 Roxygen: list(markdown = TRUE)
