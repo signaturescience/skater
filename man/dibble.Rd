@@ -10,8 +10,8 @@ dibble(max_degree = 3L)
 \item{max_degree}{The most distant degree you want to measure.}
 }
 \value{
-A tibble (class "dibble") containing the degree, expected kinship
-coefficient (\code{k}), lower (\code{l}) and upper (\code{u}) inference bounds.
+A tibble containing the degree, expected kinship coefficient (\code{k}),
+lower (\code{l}) and upper (\code{u}) inference bounds.
 }
 \description{
 Creates a tibble with degree, expected kinship coefficient, and inference boundaries.

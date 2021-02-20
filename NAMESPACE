@@ -3,7 +3,7 @@
 export("%>%")
 export(dibble)
 export(fam2ped)
-export(infer_degree)
+export(kin2degree)
 export(ped2kinpair)
 importFrom(lifecycle,badge)
 importFrom(magrittr,"%>%")
