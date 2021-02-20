@@ -47,18 +47,13 @@ dibble <- function(max_degree=3L) {
 #' infer_degree(0.0625, d3)
 #' infer_degree(0, d3)
 #' infer_degree(-0.05, d3)
-#' # Run on multiple kinship coefficients
 #' k <- seq(.02, .5, .03)
-#' # Not vectorized, this will not work:
-#' # infer_degree(k, d3)
-#' # This does:
-#' purrr::map_int(k, infer_degree, d3)
-#' tibble::tibble(k=k) %>% dplyr::mutate(degree=purrr::map_int(k, infer_degree, d3))
+#' infer_degree(k, d3)
+#' tibble::tibble(k=k) %>% dplyr::mutate(degree=infer_degree(k, d3))
 #' @export
 infer_degree <- function(k, dibble) {
-  stopifnot(is.numeric(k))
-  stopifnot(k %>% dplyr::between(-1, 1))
+  stopifnot(all(is.numeric(k)))
+  stopifnot(all(k %>% dplyr::between(-1, 1)))
   stopifnot("dibble" %in% class(dibble))
-  as.integer(dibble$degree[which(purrr::map2_lgl(dibble$l, dibble$u, ~dplyr::between(k, .x, .y)))])
+  vapply(k, function(k) as.integer(dibble$degree[which(purrr::map2_lgl(dibble$l, dibble$u, ~dplyr::between(k, .x, .y)))]), FUN.VALUE=1L)
 }
-
