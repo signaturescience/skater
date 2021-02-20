@@ -9,8 +9,8 @@
 #'
 #' @param max_degree The most distant degree you want to measure.
 #'
-#' @return A tibble containing the degree, expected kinship coefficient (`k`),
-#'   lower (`l`) and upper (`u`) inference bounds for that degree.
+#' @return A tibble (class "dibble") containing the degree, expected kinship
+#'   coefficient (`k`), lower (`l`) and upper (`u`) inference bounds.
 #'
 #' @examples
 #' dibble(3)
@@ -27,29 +27,33 @@ dibble <- function(max_degree=3L) {
     dplyr::mutate(u=ifelse(dplyr::row_number()==1L, 1, u)) %>%
     dplyr::mutate(l=ifelse(dplyr::row_number()==dplyr::n(), -1, l)) %>%
     dplyr::mutate(degree=ifelse(dplyr::row_number()==dplyr::n(), NA_integer_, degree)) %>%
-    dplyr::mutate(k=ifelse(dplyr::row_number()==dplyr::n(), 0, k))
+    dplyr::mutate(k=ifelse(dplyr::row_number()==dplyr::n(), 0, k)) %>%
+    structure(class=c("dibble", class(.)))
 }
 
 
 #' Infer degree for a kinship coefficient
 #'
 #' @param k Kinship coefficient (numeric, typically between 0 and .5, although KING can produce values <0).
-#' @param degree_resolution The maximum degree relationship you want to infer.
-#'   Defaults to third-degree relatives. Anything lower than `degree_resolution`
-#'   will produce `NA` (i.e., unrelated). See [dibble][skater::dibble].
+#' @param dibble Degree tibble from [dibble][skater::dibble].
 #'
-#' @return Inferred degree, up to the `degree_resolution` (anything more distant is `NA`, i.e., unrelated).
+#' @return Inferred degree, up to the maximum degree in `dibble` (anything more distant is `NA`, i.e., unrelated).
 #'
 #' @examples
-#' infer_degree(0.0625)
-#' infer_degree(0.125)
-#' infer_degree(0.25)
-#' infer_degree(0.5)
-#'
+#' d3 <- dibble(3)
+#' infer_degree(0.5, d3)
+#' infer_degree(0.25, d3)
+#' infer_degree(0.125, d3)
+#' infer_degree(0.0625, d3)
+#' infer_degree(0, d3)
+#' infer_degree(-0.05, d3)
+#' k <- seq(.02, .5, .03)
+#' purrr::map_int(k, infer_degree, d3)
+#' tibble::tibble(k=k) %>% dplyr::mutate(degree=purrr::map_int(k, infer_degree, d3))
 #' @export
-infer_degree <- function(k, degree_resolution=3L) {
+infer_degree <- function(k, dibble) {
   stopifnot(is.numeric(k))
   stopifnot(k %>% dplyr::between(-1, 1))
-  d <- dibble(degree_resolution)
-  as.integer(d$degree[which(purrr::map2_lgl(d$l, d$u, ~dplyr::between(k, .x, .y)))])
+  stopifnot("dibble" %in% class(dibble))
+  as.integer(dibble$degree[which(purrr::map2_lgl(dibble$l, dibble$u, ~dplyr::between(k, .x, .y)))])
 }
