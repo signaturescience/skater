@@ -9,8 +9,8 @@
 #'
 #' @param max_degree The most distant degree you want to measure.
 #'
-#' @return A tibble (class "dibble") containing the degree, expected kinship
-#'   coefficient (`k`), lower (`l`) and upper (`u`) inference bounds.
+#' @return A tibble containing the degree, expected kinship coefficient (`k`),
+#'   lower (`l`) and upper (`u`) inference bounds.
 #'
 #' @examples
 #' dibble(3)
@@ -27,33 +27,39 @@ dibble <- function(max_degree=3L) {
     dplyr::mutate(u=ifelse(dplyr::row_number()==1L, 1, u)) %>%
     dplyr::mutate(l=ifelse(dplyr::row_number()==dplyr::n(), -1, l)) %>%
     dplyr::mutate(degree=ifelse(dplyr::row_number()==dplyr::n(), NA_integer_, degree)) %>%
-    dplyr::mutate(k=ifelse(dplyr::row_number()==dplyr::n(), 0, k)) %>%
-    structure(class=c("dibble", class(.)))
+    dplyr::mutate(k=ifelse(dplyr::row_number()==dplyr::n(), 0, k))
 }
 
 
-#' Infer degree for a kinship coefficient
+#' Kinship coefficient to degree
+#'
+#' Infers relationship degree given a kinship coefficient.
 #'
 #' @param k Kinship coefficient (numeric, typically between 0 and .5, although KING can produce values <0).
-#' @param dibble Degree tibble from [dibble][skater::dibble].
+#' @param max_degree Max degree resolution (default 3). Used to seed
+#'   [dibble][skater::dibble]. Anything below the inference range of
+#'   `max_degree` will report `NA`. See [dibble][skater::dibble].
 #'
 #' @return Inferred degree, up to the maximum degree in `dibble` (anything more distant is `NA`, i.e., unrelated).
 #'
 #' @examples
-#' d3 <- dibble(3)
-#' infer_degree(0.5, d3)
-#' infer_degree(0.25, d3)
-#' infer_degree(0.125, d3)
-#' infer_degree(0.0625, d3)
-#' infer_degree(0, d3)
-#' infer_degree(-0.05, d3)
+#' kin2degree(0.5)
+#' kin2degree(0.25)
+#' kin2degree(0.125)
+#' kin2degree(0.0625)
+#' kin2degree(0.03125)
+#' kin2degree(0.03125, max_degree=5)
+#' kin2degree(-0.05)
 #' k <- seq(.02, .5, .03)
-#' infer_degree(k, d3)
-#' tibble::tibble(k=k) %>% dplyr::mutate(degree=infer_degree(k, d3))
+#' kin2degree(k)
+#' kin2degree(k, max_degree=5)
+#' tibble::tibble(k=k) %>% dplyr::mutate(degree=kin2degree(k))
+#'
 #' @export
-infer_degree <- function(k, dibble) {
+kin2degree <- function(k, max_degree=3L) {
   stopifnot(all(is.numeric(k)))
   stopifnot(all(k %>% dplyr::between(-1, 1)))
-  stopifnot("dibble" %in% class(dibble))
-  vapply(k, function(k) as.integer(dibble$degree[which(purrr::map2_lgl(dibble$l, dibble$u, ~dplyr::between(k, .x, .y)))]), FUN.VALUE=1L)
+  stopifnot(is.numeric(max_degree))
+  d <- dibble(max_degree)
+  vapply(k, function(k) as.integer(d$degree[which(purrr::map2_lgl(d$l, d$u, ~dplyr::between(k, .x, .y)))]), FUN.VALUE=1L)
 }
