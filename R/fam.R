@@ -8,6 +8,7 @@
 #' @param plotped Logical, TRUE if you want to create a PDF with pedigree drawings at the same location as the fam file with extension .pedigree.pdf
 #'
 #' @return A tibble with new listcol `ped` containing pedigrees from `kinship2::pedigree`.
+#'
 #' @export
 fam2ped <- function(famfile, plotped=TRUE) {
   # Read in the fam file
@@ -42,7 +43,9 @@ fam2ped <- function(famfile, plotped=TRUE) {
 #' `r lifecycle::badge("experimental")`
 #'
 #' @param ped A "pedigree" class object from [fam2ped][skater::fam2ped].
+#'
 #' @return A tibble containing all pairwise kinship coefficients from the input pedigree.
+#'
 #' @export
 ped2kinpair <- function(ped) {
   if (class(ped)!="pedigree") stop("Input must be of class 'pedigree'.")
