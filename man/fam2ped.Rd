@@ -4,12 +4,10 @@
 \alias{fam2ped}
 \title{Fam to pedigree}
 \usage{
-fam2ped(famfile, plotped = TRUE)
+fam2ped(fam)
 }
 \arguments{
-\item{famfile}{PLINK-formatted fam file}
-
-\item{plotped}{Logical, TRUE if you want to create a PDF with pedigree drawings at the same location as the fam file with extension .pedigree.pdf}
+\item{fam}{A tibble with six columns of PLINK .fam data as read in by \link{read_fam}.}
 }
 \value{
 A tibble with new listcol \code{ped} containing pedigrees from \code{kinship2::pedigree}.
@@ -19,4 +17,10 @@ Converts a \href{https://www.cog-genomics.org/plink/1.9/formats#fam}{PLINK-forma
 }
 \details{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+}
+\examples{
+famfile <- system.file("extdata", "3gens.fam", package="skater", mustWork=TRUE)
+fam <- read_fam(famfile)
+fam2ped(fam)
+
 }

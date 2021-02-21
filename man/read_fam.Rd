@@ -23,3 +23,9 @@ Reads in a \href{https://www.cog-genomics.org/plink/1.9/formats#fam}{PLINK-forma
 \item Affected Status
 }
 }
+\examples{
+famfile <- system.file("extdata", "3gens.fam", package="skater", mustWork=TRUE)
+fam <- read_fam(famfile)
+fam
+
+}

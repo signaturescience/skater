@@ -14,11 +14,12 @@
 #'
 #' @examples
 #' famfile <- system.file("extdata", "3gens.fam", package="skater", mustWork=TRUE)
-#' read_fam(famfile)
+#' fam <- read_fam(famfile)
+#' fam
 #'
 #' @export
 read_fam <- function(file) {
-  readr::read_delim(famfile,
+  readr::read_delim(file,
                     delim=" ",
                     col_names=c("fid", "id", "dadid", "momid", "sex", "affected"),
                     col_types="ccccii")
@@ -31,18 +32,17 @@ read_fam <- function(file) {
 #'
 #' `r lifecycle::badge("experimental")`
 #'
-#' @param famfile PLINK-formatted fam file
-#' @param plotped Logical, TRUE if you want to create a PDF with pedigree drawings at the same location as the fam file with extension .pedigree.pdf
+#' @param fam A tibble with six columns of PLINK .fam data as read in by [read_fam].
 #'
 #' @return A tibble with new listcol `ped` containing pedigrees from `kinship2::pedigree`.
 #'
+#' @examples
+#' famfile <- system.file("extdata", "3gens.fam", package="skater", mustWork=TRUE)
+#' fam <- read_fam(famfile)
+#' fam2ped(fam)
+#'
 #' @export
-fam2ped <- function(famfile, plotped=TRUE) {
-  # Read in the fam file
-  fam <- readr::read_delim(famfile,
-                           delim=" ",
-                           col_names=c("fid", "id", "dadid", "momid", "sex", "affected"),
-                           col_types="ccccii")
+fam2ped <- function(fam) {
   # Replace 0 father and mother IDs with NA
   fam <- fam %>% dplyr::mutate(dplyr::across(c(dadid, momid), dplyr::na_if, 0))
   # Make affected status 1
@@ -52,15 +52,25 @@ fam2ped <- function(famfile, plotped=TRUE) {
     fam %>%
     tidyr::nest(data=c(-fid)) %>%
     dplyr::mutate(ped=purrr::map(data, ~with(., kinship2::pedigree(id, dadid, momid, sex, affected))))
-  # Create a plot if plotped=TRUE
-  if (plotped) {
-    pdfoutfile <- paste0(famfile, ".pedigree.pdf")
-    message(paste("Saving PDF plots of pedigrees to file:", pdfoutfile))
-    grDevices::pdf(file = pdfoutfile, width=10, height=8, onefile=TRUE)
-    purrr::walk(peds$ped, ~kinship2::plot.pedigree(., mar=c(1,4,1,4)))
-    grDevices::dev.off()
-  }
+  # Return output
   return(peds)
+}
+
+
+#' Plot pedigree
+#'
+#' @param ped List of pedigree objects from [fam2ped]
+#' @param file Output file path (must end in ".pdf")
+#' @param width Width of output PDF
+#' @param height Height of output PDF
+#'
+#' @export
+plot_pedigree <- function(ped, file=NULL, width=10, height=8) {
+  if (is.null(file)) stop("Must provide output PDF file path.")
+  if (!grepl("\\.pdf$", file, ignore.case=TRUE)) stop("Must provide output PDF file path.")
+  grDevices::pdf(file = file, width=width, height=height, onefile=TRUE)
+  purrr::walk(ped, ~kinship2::plot.pedigree(., mar=c(1,4,1,4)))
+  grDevices::dev.off()
 }
 
 #' Pedigree to pairwise kinship
