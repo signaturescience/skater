@@ -7,7 +7,7 @@
 #' row will be `NA`. This represents inference criteria for "unrelated"
 #' individuals. See examples.
 #'
-#' @param max_degree The most distant degree you want to measure.
+#' @param max_degree The most distant degree you want to measure (usually between 3-9, default 3).
 #'
 #' @return A tibble containing the degree, expected kinship coefficient (`k`),
 #'   lower (`l`) and upper (`u`) inference bounds.
@@ -18,7 +18,11 @@
 #'
 #' @export
 dibble <- function(max_degree=3L) {
-  stopifnot(is.numeric(max_degree))
+  if (!is.numeric(max_degree)) stop("max_degree must be numeric")
+  if (max_degree<1) stop("max_degree must be >=1")
+  if (max_degree<3) warning("max_degree should be >=3")
+  if (max_degree>=12) stop("max_degree must be <12")
+  if (max_degree>=10) warning("max_degree should be <10")
   max_degree <- as.integer(round(max_degree))
   tibble::tibble(degree=0:(max_degree+1)) %>%
     dplyr::mutate(k=.5^(degree+1)) %>%

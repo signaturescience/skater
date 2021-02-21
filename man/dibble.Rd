@@ -7,7 +7,7 @@
 dibble(max_degree = 3L)
 }
 \arguments{
-\item{max_degree}{The most distant degree you want to measure.}
+\item{max_degree}{The most distant degree you want to measure (usually between 3-9, default 3).}
 }
 \value{
 A tibble containing the degree, expected kinship coefficient (\code{k}),
