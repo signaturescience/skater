@@ -13,10 +13,9 @@ fam2ped(fam)
 A tibble with new listcol \code{ped} containing pedigrees from \code{kinship2::pedigree}.
 }
 \description{
-Converts a \href{https://www.cog-genomics.org/plink/1.9/formats#fam}{PLINK-formatted fam file} to a pedigree object using \link[kinship2:pedigree]{kinship2::pedigree}.
-}
-\details{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+Converts a \href{https://www.cog-genomics.org/plink/1.9/formats#fam}{PLINK-formatted fam file} to a pedigree object using \link[kinship2:pedigree]{kinship2::pedigree}.
 }
 \examples{
 famfile <- system.file("extdata", "3gens.fam", package="skater", mustWork=TRUE)

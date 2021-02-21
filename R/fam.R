@@ -1,5 +1,6 @@
 #' Read PLINK-formatted .fam file
 #'
+#' @description
 #' Reads in a [PLINK-formatted .fam file](https://www.cog-genomics.org/plink/1.9/formats#fam). Input `file` must have six columns:
 #' 1. Family ID
 #' 2. Individual ID
@@ -28,9 +29,11 @@ read_fam <- function(file) {
 
 #' Fam to pedigree
 #'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
 #' Converts a [PLINK-formatted fam file](https://www.cog-genomics.org/plink/1.9/formats#fam) to a pedigree object using [kinship2::pedigree].
 #'
-#' `r lifecycle::badge("experimental")`
 #'
 #' @param fam A tibble with six columns of PLINK .fam data as read in by [read_fam].
 #'
@@ -76,9 +79,11 @@ plot_pedigree <- function(ped, file=NULL, width=10, height=8) {
 
 #' Pedigree to pairwise kinship
 #'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
 #' Converts a pedigree class object from [fam2ped][skater::fam2ped] to a pairwise list of relationships and their expected/theoretical kinship coefficient.
 #'
-#' `r lifecycle::badge("experimental")`
 #'
 #' @param ped A "pedigree" class object from [fam2ped][skater::fam2ped].
 #'

@@ -1,5 +1,6 @@
 #' Degree tibble
 #'
+#' @description
 #' Creates a tibble with degree, expected kinship coefficient, and inference boundaries.
 #'
 #' Rows will be created up to the `max_degree`, with an additional row for any
@@ -37,6 +38,7 @@ dibble <- function(max_degree=3L) {
 
 #' Kinship coefficient to degree
 #'
+#' @description
 #' Infers relationship degree given a kinship coefficient.
 #'
 #' @param k Kinship coefficient (numeric, typically between 0 and .5, although KING can produce values <0).
