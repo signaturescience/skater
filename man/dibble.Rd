@@ -15,8 +15,7 @@ lower (\code{l}) and upper (\code{u}) inference bounds.
 }
 \description{
 Creates a tibble with degree, expected kinship coefficient, and inference boundaries.
-}
-\details{
+
 Rows will be created up to the \code{max_degree}, with an additional row for any
 relationship more distant than \code{max_degree}. The \code{degree} value for the final
 row will be \code{NA}. This represents inference criteria for "unrelated"
