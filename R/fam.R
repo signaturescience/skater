@@ -73,6 +73,7 @@ plot_pedigree <- function(ped, file=NULL, width=10, height=8) {
   grDevices::dev.off()
 }
 
+
 #' Pedigree to pairwise kinship
 #'
 #' Converts a pedigree class object from [fam2ped][skater::fam2ped] to a pairwise list of relationships and their expected/theoretical kinship coefficient.
