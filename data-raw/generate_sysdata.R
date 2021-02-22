@@ -1,6 +1,6 @@
-## code to prepare `DATASET` dataset goes here
-
 library(tidyverse)
+
+## 1000 Genomes pedigree
 
 # Read ped file from 1kg FTP
 ped1kg <- read_tsv("http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/integrated_call_samples_v3.20200731.ALL.ped", guess_max = 4000)
