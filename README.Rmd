@@ -150,3 +150,12 @@ kinpairs_subset %>%
   dplyr::mutate(degree=kin2degree(k, max_degree=3))
 ```
 
+### Package data
+
+Unexported objects `ped1kg` and `ped1kg_unrel` contain pedigree data obtained from 1000 Genomes FTP (http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/integrated_call_samples_v3.20200731.ALL.ped) for all 2504 individuals with sequencing data, and all individuals unrelated to anyone else in the data (momid, dadid, siblings, second_order, and third_order all =0). See [data-raw/generate_sysdata.R](data-raw/generate_sysdata.R) for details.
+
+```{r}
+skater:::ped1kg
+skater:::ped1kg_unrel
+```
+

@@ -282,3 +282,48 @@ kinpairs_subset %>%
 #>  9 testped1 testped1_g1-b1-s1 testped1_g1-b1-s1 0.5         0
 #> 10 testped1 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5         0
 ```
+
+### Package data
+
+Unexported objects `ped1kg` and `ped1kg_unrel` contain pedigree data
+obtained from 1000 Genomes FTP
+(<http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/integrated_call_samples_v3.20200731.ALL.ped>)
+for all 2504 individuals with sequencing data, and all individuals
+unrelated to anyone else in the data (momid, dadid, siblings,
+second\_order, and third\_order all =0). See
+[data-raw/generate\_sysdata.R](data-raw/generate_sysdata.R) for details.
+
+``` r
+skater:::ped1kg
+#> # A tibble: 2,504 x 13
+#>    fid   id    dadid momid   sex affected population relationship siblings
+#>    <chr> <chr> <chr> <chr> <dbl>    <dbl> <chr>      <chr>        <chr>   
+#>  1 HG00… HG00… 0     0         1        0 GBR        unrel        0       
+#>  2 HG00… HG00… 0     0         2        0 GBR        unrel        0       
+#>  3 HG00… HG00… 0     0         2        0 GBR        unrel        0       
+#>  4 HG00… HG00… 0     0         2        0 GBR        unrel        0       
+#>  5 HG00… HG00… 0     0         1        0 GBR        unrel        0       
+#>  6 HG00… HG00… 0     0         2        0 GBR        unrel        0       
+#>  7 HG00… HG00… 0     0         1        0 GBR        unrel        0       
+#>  8 HG00… HG00… 0     0         1        0 GBR        unrel        0       
+#>  9 HG00… HG00… 0     0         2        0 GBR        unrel        0       
+#> 10 HG00… HG00… 0     0         1        0 GBR        unrel        0       
+#> # … with 2,494 more rows, and 4 more variables: second_order <chr>,
+#> #   third_order <chr>, children <chr>, other_comments <chr>
+skater:::ped1kg_unrel
+#> # A tibble: 1,218 x 13
+#>    fid   id    dadid momid   sex affected population relationship siblings
+#>    <chr> <chr> <chr> <chr> <dbl>    <dbl> <chr>      <chr>        <chr>   
+#>  1 HG00… HG00… 0     0         1        0 GBR        unrel        0       
+#>  2 HG00… HG00… 0     0         2        0 GBR        unrel        0       
+#>  3 HG00… HG00… 0     0         2        0 GBR        unrel        0       
+#>  4 HG00… HG00… 0     0         2        0 GBR        unrel        0       
+#>  5 HG00… HG00… 0     0         1        0 GBR        unrel        0       
+#>  6 HG00… HG00… 0     0         2        0 GBR        unrel        0       
+#>  7 HG00… HG00… 0     0         1        0 GBR        unrel        0       
+#>  8 HG00… HG00… 0     0         1        0 GBR        unrel        0       
+#>  9 HG00… HG00… 0     0         2        0 GBR        unrel        0       
+#> 10 HG00… HG00… 0     0         1        0 GBR        unrel        0       
+#> # … with 1,208 more rows, and 4 more variables: second_order <chr>,
+#> #   third_order <chr>, children <chr>, other_comments <chr>
+```
