@@ -23,4 +23,12 @@ ped1kg_unrel <-
   filter(third_order=="0") %>%
   filter(children=="0")
 
+# Write out individual files containing IDs for unrelated individuals
+unrel_path <- here::here("data-raw/1000g_unrel")
+dir.create(unrel_path, showWarnings = FALSE)
+for(pop in unique(ped1kg_unrel$population)) {
+  write_lines(ped1kg_unrel %>% filter(population==pop) %>% pull(id),
+              paste0(file.path(unrel_path, pop), ".txt"))
+}
+
 usethis::use_data(ped1kg, ped1kg_unrel, internal = TRUE, overwrite = TRUE)
