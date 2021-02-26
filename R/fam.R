@@ -70,7 +70,7 @@ fam2ped <- function(fam) {
 #' @export
 plot_pedigree <- function(ped, file=NULL, width=10, height=8) {
   if (is.null(file)) stop("Must provide output PDF file path.")
-  if (class(ped)!="list") stop("ped must contain list of pedigree objects from fam2ped.")
+  if (!identical(class(ped),"list")) stop("ped must contain list of pedigree objects from fam2ped.")
   if (!all(purrr::map_chr(ped, class)=="pedigree")) stop("ped must contain list of pedigree objects from fam2ped.")
   if (!grepl("\\.pdf$", file, ignore.case=TRUE)) stop("Must provide output PDF file path.")
   grDevices::pdf(file = file, width=width, height=height, onefile=TRUE)
