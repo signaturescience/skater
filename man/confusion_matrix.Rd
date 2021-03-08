@@ -56,7 +56,8 @@ confusion_matrix(prediction, target)
 prediction = c(rep(1, 50), rep(2, 40), rep(3, 60))
 target     = c(rep(1, 50), rep(2, 50), rep(3, 50))
 confusion_matrix(prediction, target)
-confusion_matrix(prediction, target, longer=TRUE) \%>\% purrr::pluck("Table")
+confusion_matrix(prediction, target) \%>\% purrr::pluck("Table")
+confusion_matrix(prediction, target, longer=TRUE)
 confusion_matrix(prediction, target, longer=TRUE) \%>\%
   purrr::pluck("Other") \%>\%
   tidyr::spread(Class, Value)
