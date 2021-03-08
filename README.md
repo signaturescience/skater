@@ -361,11 +361,11 @@ to `inst/extdata`. These can be used to pass to
 `bcftools view --samples-file <POP.txt>`.
 
 The directory containing these files can be found on any system where
-skater is installed:
+skater is installed. On MacOS, this is usually something like
+`/Library/Frameworks/R.framework/Versions/4.0/Resources/library/skater/extdata/sampleids-1000g-unrelated`.
 
 ``` r
 system.file("extdata", "sampleids-1000g-unrelated", package="skater", mustWork=TRUE)
-#> [1] "/private/var/folders/l_/rzfqpd2d46sfnlvlnqq1tcj4db3xty/T/RtmphzsGwq/temp_libpath16ea45e9177db/skater/extdata/sampleids-1000g-unrelated"
 ```
 
 The table below shows how many unrelated founders are available in any

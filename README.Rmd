@@ -174,9 +174,9 @@ skater:::ped1kg %>%
 
 After creating the `ped1kg_unrel` object in [data-raw/generate_sysdata.R](data-raw/generate_sysdata.R) as described above, the code in [data-raw/write-sampleids-1000g-unrelated.R](data-raw/write-sampleids-1000g-unrelated.R) then writes one sample ID per line for each of those unrelated samples to `inst/extdata`. These can be used to pass to `bcftools view --samples-file <POP.txt>`.
 
-The directory containing these files can be found on any system where skater is installed:
+The directory containing these files can be found on any system where skater is installed. On MacOS, this is usually something like `/Library/Frameworks/R.framework/Versions/4.0/Resources/library/skater/extdata/sampleids-1000g-unrelated`.
 
-```{r}
+```{r, eval=FALSE}
 system.file("extdata", "sampleids-1000g-unrelated", package="skater", mustWork=TRUE)
 ```
 
