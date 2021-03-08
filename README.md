@@ -283,15 +283,21 @@ kinpairs_subset %>%
 #> 10 testped1 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5         0
 ```
 
-### Package data
+## Package data
 
-Unexported objects `ped1kg` and `ped1kg_unrel` contain pedigree data
-obtained from 1000 Genomes FTP
-(<http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/integrated_call_samples_v3.20200731.ALL.ped>)
+### Package data objects
+
+Unexported objects `ped1kg` and `ped1kg_unrel` contain [pedigree data
+obtained from 1000 Genomes
+FTP](http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/integrated_call_samples_v3.20200731.ALL.ped)
 for all 2504 individuals with sequencing data, and all individuals
 unrelated to anyone else in the data (momid, dadid, siblings,
-second\_order, and third\_order all =0). See
-[data-raw/generate\_sysdata.R](data-raw/generate_sysdata.R) for details.
+second\_order, and third\_order all =0). This code gets all the unique
+IDs for anyone listed as a mother, father, sibling, child, second order,
+or third order relative, *who also has sequencing data*, and removes any
+*individual ID* who matches one of these relatives. See
+[data-raw/generate\_sysdata.R](data-raw/generate_sysdata.R),
+specifically the code that begins with the `relatives <-` assignment.
 
 ``` r
 skater:::ped1kg
@@ -311,7 +317,7 @@ skater:::ped1kg
 #> # … with 2,494 more rows, and 4 more variables: second_order <chr>,
 #> #   third_order <chr>, children <chr>, other_comments <chr>
 skater:::ped1kg_unrel
-#> # A tibble: 1,218 x 13
+#> # A tibble: 2,502 x 13
 #>    fid   id    dadid momid   sex affected population relationship siblings
 #>    <chr> <chr> <chr> <chr> <dbl>    <dbl> <chr>      <chr>        <chr>   
 #>  1 HG00… HG00… 0     0         1        0 GBR        unrel        0       
@@ -324,6 +330,81 @@ skater:::ped1kg_unrel
 #>  8 HG00… HG00… 0     0         1        0 GBR        unrel        0       
 #>  9 HG00… HG00… 0     0         2        0 GBR        unrel        0       
 #> 10 HG00… HG00… 0     0         1        0 GBR        unrel        0       
-#> # … with 1,208 more rows, and 4 more variables: second_order <chr>,
+#> # … with 2,492 more rows, and 4 more variables: second_order <chr>,
 #> #   third_order <chr>, children <chr>, other_comments <chr>
 ```
+
+There are **2** samples who have known relatives in the 1000 Genomes ped
+file (included in `ped1kg` but not in `ped1kg_unrel`):
+
+``` r
+skater:::ped1kg %>% 
+  dplyr::anti_join(skater:::ped1kg_unrel) %>% 
+  dplyr::select(fid, id, population, second_order:other_comments) %>% 
+  knitr::kable()
+#> Joining, by = c("fid", "id", "dadid", "momid", "sex", "affected", "population", "relationship", "siblings", "second_order", "third_order", "children", "other_comments")
+```
+
+| fid     | id      | population | second\_order | third\_order | children | other\_comments                          |
+|:--------|:--------|:-----------|:--------------|:-------------|:---------|:-----------------------------------------|
+| LWK001  | NA19331 | LWK        | 0             | NA19334      | NA19313  | Parent/Child directionality is uncertain |
+| NA19334 | NA19334 | LWK        | NA19313       | NA19331      | 0        | 0                                        |
+
+### Text files with unrelated founder sample IDs
+
+After creating the `ped1kg_unrel` object in
+[data-raw/generate\_sysdata.R](data-raw/generate_sysdata.R) as described
+above, the code in
+[data-raw/write-sampleids-1000g-unrelated.R](data-raw/write-sampleids-1000g-unrelated.R)
+then writes one sample ID per line for each of those unrelated samples
+to `inst/extdata`. These can be used to pass to
+`bcftools view --samples-file <POP.txt>`.
+
+The directory containing these files can be found on any system where
+skater is installed:
+
+``` r
+system.file("extdata", "sampleids-1000g-unrelated", package="skater", mustWork=TRUE)
+#> [1] "/private/var/folders/l_/rzfqpd2d46sfnlvlnqq1tcj4db3xty/T/RtmphzsGwq/temp_libpath16ea45e9177db/skater/extdata/sampleids-1000g-unrelated"
+```
+
+The table below shows how many unrelated founders are available in any
+given population:
+
+``` r
+system.file("extdata", "sampleids-1000g-unrelated", package="skater", mustWork=TRUE) %>% 
+  list.files(full.names=TRUE) %>% 
+  rlang::set_names(basename) %>% 
+  purrr::map_int(~length(readr::read_lines(.))) %>% 
+  tibble::enframe() %>% 
+  knitr::kable()
+```
+
+| name    | value |
+|:--------|------:|
+| ACB.txt |    96 |
+| ASW.txt |    61 |
+| BEB.txt |    86 |
+| CDX.txt |    93 |
+| CEU.txt |    99 |
+| CHB.txt |   103 |
+| CHS.txt |   105 |
+| CLM.txt |    94 |
+| ESN.txt |    99 |
+| FIN.txt |    99 |
+| GBR.txt |    91 |
+| GIH.txt |   103 |
+| GWD.txt |   113 |
+| IBS.txt |   107 |
+| ITU.txt |   102 |
+| JPT.txt |   104 |
+| KHV.txt |    99 |
+| LWK.txt |    97 |
+| MSL.txt |    85 |
+| MXL.txt |    64 |
+| PEL.txt |    85 |
+| PJL.txt |    96 |
+| PUR.txt |   104 |
+| STU.txt |   102 |
+| TSI.txt |   107 |
+| YRI.txt |   108 |
