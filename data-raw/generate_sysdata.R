@@ -1,8 +1,6 @@
 library(tidyverse)
 
-## 1000 Genomes pedigree
-
-# Read ped file from 1kg FTP
+# Read 1000Gped file from 1kg FTP
 ped1kg <- read_tsv("http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/release/20130502/integrated_call_samples_v3.20200731.ALL.ped", guess_max = 4000)
 # Clean names
 ped1kg <- ped1kg %>% janitor::clean_names()
@@ -13,22 +11,26 @@ ped1kg <- ped1kg %>% filter(phase_3_genotypes %>% near(1))
 # Remove unneeded columns
 ped1kg <- ped1kg %>% select(-phase_3_genotypes, -related_genotypes, -omni_genotypes, -affy_genotypes)
 
-# Get all samples unrelated to anyone
-ped1kg_unrel <-
-  ped1kg %>%
-  filter(dadid=="0") %>%
-  filter(momid=="0") %>%
-  filter(siblings=="0") %>%
-  filter(second_order=="0") %>%
-  filter(third_order=="0") %>%
-  filter(children=="0")
+# Who are the relatives in the ped file (e.g., mom, dad, sibs, 2d, 3d, and children)?
+relatives <-
+  with(ped1kg, c(dadid, momid, siblings, second_order, third_order, children)) %>%
+  strsplit(",") %>%
+  unlist() %>%
+  grep("0", ., invert=TRUE, value=TRUE) %>%
+  unique() %>%
+  print()
 
-# Write out individual files containing IDs for unrelated individuals
-unrel_path <- here::here("data-raw/1000g_unrel")
-dir.create(unrel_path, showWarnings = FALSE)
-for(pop in unique(ped1kg_unrel$population)) {
-  write_lines(ped1kg_unrel %>% filter(population==pop) %>% pull(id),
-              paste0(file.path(unrel_path, pop), ".txt"))
-}
+# See how many individual IDs are any of the relatives to any other individual ID:
+ped1kg %>% filter(id %in% relatives)
+# # A tibble: 2 x 13
+#   fid     id      dadid momid   sex affected population relationship siblings second_order third_order children other_comments
+#   <chr>   <chr>   <chr> <chr> <dbl>    <dbl> <chr>      <chr>        <chr>    <chr>        <chr>       <chr>    <chr>
+# 1 LWK001  NA19331 0     0         1        0 LWK        unrel        0        0            NA19334     NA19313  Parent/Child directionality is uncertain
+# 2 NA19334 NA19334 0     0         1        0 LWK        unrel        0        NA19313      NA19331     0        0
 
+# Get all samples unrelated to anyone who also has sequencing data
+ped1kg_unrel <- ped1kg %>% filter(!(id %in% relatives))
+
+# save objects as internal sysdata.rda
 usethis::use_data(ped1kg, ped1kg_unrel, internal = TRUE, overwrite = TRUE)
+
