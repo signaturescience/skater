@@ -303,8 +303,9 @@ calc_stats <- function(tabble, prevalence = NULL, positive, ...) {
 #'   functions below to find out more. Originally inspired by the
 #'   \code{confusionMatrix} function from the \code{caret} package.
 #'
-#' @seealso \code{\link[caret]{confusionMatrix}}  \code{\link{calc_accuracy}}
-#'   \code{\link{calc_stats}} \code{\link[confusionMatrix]{confusion_matrix}}
+#' @seealso
+#'   \code{\link{calc_accuracy}} \code{\link{calc_stats}}
+#'   \code{\link{confusion_matrix}}
 #'
 #' @return A list of tibble(s) with the associated statistics and possibly the
 #'   frequency table as list column of the first element.

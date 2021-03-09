@@ -68,6 +68,6 @@ confusion_matrix(prediction, target, longer=TRUE) \%>\%
 Kuhn, M., & Johnson, K. (2013). Applied predictive modeling.
 }
 \seealso{
-\code{\link[caret]{confusionMatrix}}  \code{\link{calc_accuracy}}
-\code{\link{calc_stats}} \code{\link[confusionMatrix]{confusion_matrix}}
+\code{\link{calc_accuracy}} \code{\link{calc_stats}}
+\code{\link{confusion_matrix}}
 }
