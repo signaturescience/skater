@@ -326,28 +326,24 @@ objects:
 1.  Calculates accuracy, lower and upper bounds, the guessing rate and
     p-value of the accuracy vs. the guessing rate.
 2.  Calculates by class the following statistics:
-
--   Sensitivity = A/(A+C)
--   Specificity = D/(B+D)
--   Prevalence = (A+C)/(A+B+C+D)
--   Positive Predictive Value = (sensitivity \*
-    prevalence)/((sensitivity*prevalence) +
-    ((1-specificity)*(1-prevalence)))
--   Negative Predictive Value = (specificity \*
-    (1-prevalence))/(((1-sensitivity)*prevalence) +
-    ((specificity)*(1-prevalence)))
--   Detection Rate = A/(A+B+C+D)
--   Detection Prevalence = (A+B)/(A+B+C+D)
--   Balanced Accuracy = (sensitivity+specificity)/2
--   Precision = A/(A+B)
--   Recall = A/(A+C)
--   F1 = harmonic mean of precision and recall
--   False Discovery Rate = 1 - Positive Predictive Value
--   False Omission Rate = 1 - Negative Predictive Value
--   False Positive Rate = 1 - Specificity
--   False Negative Rate = 1 - Sensitivity
-
-1.  The contingency table object itself.
+    -   Sensitivity = A/(A+C)
+    -   Specificity = D/(B+D)
+    -   Prevalence = (A+C)/(A+B+C+D)
+    -   PPV = (sensitivity \* prevalence)/((sensitivity \* prevalence) +
+        ((1-specificity) \* (1-prevalence)))
+    -   NPV = (specificity \* (1-prevalence))/(((1-sensitivity) \*
+        prevalence) + ((specificity) \* (1-prevalence)))
+    -   Detection Rate = A/(A+B+C+D)
+    -   Detection Prevalence = (A+B)/(A+B+C+D)
+    -   Balanced Accuracy = (sensitivity+specificity)/2
+    -   Precision = A/(A+B)
+    -   Recall = A/(A+C)
+    -   F1 = harmonic mean of precision and recall
+    -   False Discovery Rate = 1 - PPV
+    -   False Omission Rate = 1 - NPV
+    -   False Positive Rate = 1 - Specificity
+    -   False Negative Rate = 1 - Sensitivity
+3.  The contingency table object itself.
 
 ``` r
 confusion_matrix(prediction = kinpairs_inferred$degree_inferred, 
