@@ -283,6 +283,150 @@ kinpairs_subset %>%
 #> 10 testped1 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5         0
 ```
 
+### Confusion matrix
+
+The skater package adapts functionality from the
+[m-clark/confusion\_matrix](https://github.com/m-clark/confusionMatrix)
+package to create a confusion matrix and statistics with minimal
+dependencies.
+
+First, take the `kinpairs` data from above and randomly flip \~20% of
+the true relationship degrees.
+
+``` r
+# Function to randomly flip levels of a factor (at 20%, by default)
+randomflip <- function(x, p=.2) ifelse(runif(length(x))<p, sample(unique(x)), x)
+
+# Infer degree (truth/target) using kin2degree, then randomly flip 20% of them
+set.seed(42)
+kinpairs_inferred <- kinpairs %>% 
+  dplyr::mutate(degree_truth=kin2degree(k, max_degree=3)) %>% 
+  dplyr::mutate(degree_truth=tidyr::replace_na(degree_truth, "unrelated")) %>% 
+  dplyr::mutate(degree_inferred=randomflip(degree_truth))
+kinpairs_inferred
+#> # A tibble: 288 x 6
+#>    fid      id1              id2                  k degree_truth degree_inferred
+#>    <chr>    <chr>            <chr>            <dbl> <chr>        <chr>          
+#>  1 testped1 testped1_g1-b1-… testped1_g1-b1-… 0.5   0            0              
+#>  2 testped1 testped1_g1-b1-… testped1_g1-b1-… 0     unrelated    unrelated      
+#>  3 testped1 testped1_g1-b1-… testped1_g2-b1-… 0     unrelated    unrelated      
+#>  4 testped1 testped1_g1-b1-… testped1_g2-b1-… 0.25  1            1              
+#>  5 testped1 testped1_g1-b1-… testped1_g2-b2-… 0     unrelated    unrelated      
+#>  6 testped1 testped1_g1-b1-… testped1_g2-b2-… 0.25  1            1              
+#>  7 testped1 testped1_g1-b1-… testped1_g3-b1-… 0.125 2            2              
+#>  8 testped1 testped1_g1-b1-… testped1_g3-b2-… 0.125 2            1              
+#>  9 testped1 testped1_g1-b1-… testped1_g1-b1-… 0.5   0            0              
+#> 10 testped1 testped1_g1-b1-… testped1_g2-b1-… 0     unrelated    unrelated      
+#> # … with 278 more rows
+```
+
+The `confusion_matrix` function on its own outputs a list with three
+objects:
+
+1.  Calculates accuracy, lower and upper bounds, the guessing rate and
+    p-value of the accuracy vs. the guessing rate.
+2.  Calculates by class the following statistics:
+
+-   Sensitivity = A/(A+C)
+-   Specificity = D/(B+D)
+-   Prevalence = (A+C)/(A+B+C+D)
+-   Positive Predictive Value = (sensitivity \*
+    prevalence)/((sensitivity*prevalence) +
+    ((1-specificity)*(1-prevalence)))
+-   Negative Predictive Value = (specificity \*
+    (1-prevalence))/(((1-sensitivity)*prevalence) +
+    ((specificity)*(1-prevalence)))
+-   Detection Rate = A/(A+B+C+D)
+-   Detection Prevalence = (A+B)/(A+B+C+D)
+-   Balanced Accuracy = (sensitivity+specificity)/2
+-   Precision = A/(A+B)
+-   Recall = A/(A+C)
+-   F1 = harmonic mean of precision and recall
+-   False Discovery Rate = 1 - Positive Predictive Value
+-   False Omission Rate = 1 - Negative Predictive Value
+-   False Positive Rate = 1 - Specificity
+-   False Negative Rate = 1 - Sensitivity
+
+1.  The contingency table object itself.
+
+``` r
+confusion_matrix(prediction = kinpairs_inferred$degree_inferred, 
+                 target = kinpairs_inferred$degree_truth)
+#> $Accuracy
+#> # A tibble: 1 x 5
+#>   Accuracy `Accuracy LL` `Accuracy UL` `Accuracy Guessing` `Accuracy P-value`
+#>      <dbl>         <dbl>         <dbl>               <dbl>              <dbl>
+#> 1    0.812         0.763         0.856               0.333           1.09e-62
+#> 
+#> $Other
+#> # A tibble: 6 x 15
+#>   Class     N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`
+#>   <chr> <dbl>            <dbl>            <dbl>           <dbl> <dbl>     <dbl>
+#> 1 0      64              0.75             0.964           0.857 0.931     0.8  
+#> 2 1      72              0.806            0.944           0.829 0.936     0.817
+#> 3 2      48              0.833            0.967           0.833 0.967     0.833
+#> 4 3       8              0.75             0.936           0.25  0.992     0.375
+#> 5 unre…  96              0.854            0.958           0.911 0.929     0.882
+#> 6 Aver…  57.6            0.799            0.954           0.736 0.951     0.741
+#> # … with 8 more variables: Prevalence <dbl>, `Detection Rate` <dbl>, `Detection
+#> #   Prevalence` <dbl>, `Balanced Accuracy` <dbl>, FDR <dbl>, FOR <dbl>,
+#> #   `FPR/Fallout` <dbl>, FNR <dbl>
+#> 
+#> $Table
+#>            Target
+#> Predicted    0  1  2  3 unrelated
+#>   0         48  4  2  1         1
+#>   1          5 58  4  0         3
+#>   2          0  3 40  1         4
+#>   3          8  4  0  6         6
+#>   unrelated  3  3  2  0        82
+```
+
+Pluck out just the contingency table:
+
+``` r
+confusion_matrix(prediction = kinpairs_inferred$degree_inferred, 
+                 target = kinpairs_inferred$degree_truth) %>% 
+  purrr::pluck("Table")
+#>            Target
+#> Predicted    0  1  2  3 unrelated
+#>   0         48  4  2  1         1
+#>   1          5 58  4  0         3
+#>   2          0  3 40  1         4
+#>   3          8  4  0  6         6
+#>   unrelated  3  3  2  0        82
+```
+
+Output in tidy (`longer=TRUE`) format, then spread stats by class:
+
+``` r
+confusion_matrix(prediction = kinpairs_inferred$degree_inferred, 
+                 target = kinpairs_inferred$degree_truth, 
+                 longer = TRUE) %>% 
+  purrr::pluck("Other") %>% 
+  tidyr::spread(Class, Value) %>% 
+  dplyr::relocate(Average, .after=dplyr::last_col()) %>% 
+  dplyr::mutate_if(rlang::is_double, signif, 2) %>% 
+  knitr::kable()
+```
+
+| Statistic              |      0 |      1 |      2 |      3 | unrelated | Average |
+|:-----------------------|-------:|-------:|-------:|-------:|----------:|--------:|
+| Balanced Accuracy      |  0.860 |  0.880 |  0.900 | 0.8400 |     0.910 |   0.880 |
+| Detection Prevalence   |  0.190 |  0.240 |  0.170 | 0.0830 |     0.310 |   0.200 |
+| Detection Rate         |  0.170 |  0.200 |  0.140 | 0.0210 |     0.280 |   0.160 |
+| F1/Dice                |  0.800 |  0.820 |  0.830 | 0.3800 |     0.880 |   0.740 |
+| FDR                    |  0.140 |  0.170 |  0.170 | 0.7500 |     0.089 |   0.260 |
+| FNR                    |  0.250 |  0.190 |  0.170 | 0.2500 |     0.150 |   0.200 |
+| FOR                    |  0.069 |  0.064 |  0.033 | 0.0076 |     0.071 |   0.049 |
+| FPR/Fallout            |  0.036 |  0.056 |  0.033 | 0.0640 |     0.042 |   0.046 |
+| N                      | 64.000 | 72.000 | 48.000 | 8.0000 |    96.000 |  58.000 |
+| NPV                    |  0.930 |  0.940 |  0.970 | 0.9900 |     0.930 |   0.950 |
+| PPV/Precision          |  0.860 |  0.830 |  0.830 | 0.2500 |     0.910 |   0.740 |
+| Prevalence             |  0.220 |  0.250 |  0.170 | 0.0280 |     0.330 |   0.200 |
+| Sensitivity/Recall/TPR |  0.750 |  0.810 |  0.830 | 0.7500 |     0.850 |   0.800 |
+| Specificity/TNR        |  0.960 |  0.940 |  0.970 | 0.9400 |     0.960 |   0.950 |
+
 ## Package data
 
 ### Package data objects

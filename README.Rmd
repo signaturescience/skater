@@ -150,6 +150,72 @@ kinpairs_subset %>%
   dplyr::mutate(degree=kin2degree(k, max_degree=3))
 ```
 
+### Confusion matrix
+
+The skater package adapts functionality from the [m-clark/confusion_matrix](https://github.com/m-clark/confusionMatrix) package to create a confusion matrix and statistics with minimal dependencies.
+
+First, take the `kinpairs` data from above and randomly flip ~20% of the true relationship degrees.
+
+```{r}
+# Function to randomly flip levels of a factor (at 20%, by default)
+randomflip <- function(x, p=.2) ifelse(runif(length(x))<p, sample(unique(x)), x)
+
+# Infer degree (truth/target) using kin2degree, then randomly flip 20% of them
+set.seed(42)
+kinpairs_inferred <- kinpairs %>% 
+  dplyr::mutate(degree_truth=kin2degree(k, max_degree=3)) %>% 
+  dplyr::mutate(degree_truth=tidyr::replace_na(degree_truth, "unrelated")) %>% 
+  dplyr::mutate(degree_inferred=randomflip(degree_truth))
+kinpairs_inferred
+```
+
+The `confusion_matrix` function on its own outputs a list with three objects:
+
+1. Calculates accuracy, lower and upper bounds, the guessing rate and p-value of the accuracy vs. the guessing rate. 
+2. Calculates by class the following statistics:
+  - Sensitivity = A/(A+C)
+  - Specificity = D/(B+D)
+  - Prevalence = (A+C)/(A+B+C+D)
+  - Positive Predictive Value = (sensitivity * prevalence)/((sensitivity*prevalence) + ((1-specificity)*(1-prevalence)))
+  - Negative Predictive Value = (specificity * (1-prevalence))/(((1-sensitivity)*prevalence) + ((specificity)*(1-prevalence)))
+  - Detection Rate = A/(A+B+C+D)
+  - Detection Prevalence = (A+B)/(A+B+C+D)
+  - Balanced Accuracy = (sensitivity+specificity)/2
+  - Precision = A/(A+B)
+  - Recall = A/(A+C)
+  - F1 = harmonic mean of precision and recall
+  - False Discovery Rate = 1 - Positive Predictive Value
+  - False Omission Rate = 1 - Negative Predictive Value
+  - False Positive Rate = 1 - Specificity
+  - False Negative Rate = 1 - Sensitivity
+3. The contingency table object itself.
+
+```{r}
+confusion_matrix(prediction = kinpairs_inferred$degree_inferred, 
+                 target = kinpairs_inferred$degree_truth)
+```
+
+Pluck out just the contingency table:
+
+```{r}
+confusion_matrix(prediction = kinpairs_inferred$degree_inferred, 
+                 target = kinpairs_inferred$degree_truth) %>% 
+  purrr::pluck("Table")
+```
+
+Output in tidy (`longer=TRUE`) format, then spread stats by class:
+
+```{r}
+confusion_matrix(prediction = kinpairs_inferred$degree_inferred, 
+                 target = kinpairs_inferred$degree_truth, 
+                 longer = TRUE) %>% 
+  purrr::pluck("Other") %>% 
+  tidyr::spread(Class, Value) %>% 
+  dplyr::relocate(Average, .after=dplyr::last_col()) %>% 
+  dplyr::mutate_if(rlang::is_double, signif, 2) %>% 
+  knitr::kable()
+```
+
 ## Package data
 
 ### Package data objects
