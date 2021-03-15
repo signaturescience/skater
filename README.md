@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check-stable](https://github.com/signaturescience/skater/workflows/R-CMD-check-stable/badge.svg)](https://github.com/signaturescience/skater/actions)
+
+[![R-CMD-check-dev](https://github.com/signaturescience/skater/workflows/R-CMD-check-dev/badge.svg)](https://github.com/signaturescience/skater/actions)
 <!-- badges: end -->
 
 **S**NP-based **K**inship **A**nalysis **T**esting and **E**valuation:
