@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/signaturescience/skater/workflows/R-CMD-check/badge.svg)](https://github.com/signaturescience/skater/actions)
+[![R-CMD-check-stable](https://github.com/signaturescience/skater/workflows/R-CMD-check-stable/badge.svg)](https://github.com/signaturescience/skater/actions)
 <!-- badges: end -->
 
 **S**NP-based **K**inship **A**nalysis **T**esting and **E**valuation:
@@ -356,17 +356,17 @@ confusion_matrix(prediction = kinpairs_inferred$degree_inferred,
 #> 
 #> $Other
 #> # A tibble: 6 x 15
-#>   Class     N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`
-#>   <chr> <dbl>            <dbl>            <dbl>           <dbl> <dbl>     <dbl>
-#> 1 0      64              0.75             0.964           0.857 0.931     0.8  
-#> 2 1      72              0.806            0.944           0.829 0.936     0.817
-#> 3 2      48              0.833            0.967           0.833 0.967     0.833
-#> 4 3       8              0.75             0.936           0.25  0.992     0.375
-#> 5 unre…  96              0.854            0.958           0.911 0.929     0.882
-#> 6 Aver…  57.6            0.799            0.954           0.736 0.951     0.741
-#> # … with 8 more variables: Prevalence <dbl>, `Detection Rate` <dbl>, `Detection
-#> #   Prevalence` <dbl>, `Balanced Accuracy` <dbl>, FDR <dbl>, FOR <dbl>,
-#> #   `FPR/Fallout` <dbl>, FNR <dbl>
+#>   Class      N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`
+#>   <chr>  <dbl>            <dbl>            <dbl>           <dbl> <dbl>     <dbl>
+#> 1 0       64              0.75             0.964           0.857 0.931     0.8  
+#> 2 1       72              0.806            0.944           0.829 0.936     0.817
+#> 3 2       48              0.833            0.967           0.833 0.967     0.833
+#> 4 3        8              0.75             0.936           0.25  0.992     0.375
+#> 5 unrel…  96              0.854            0.958           0.911 0.929     0.882
+#> 6 Avera…  57.6            0.799            0.954           0.736 0.951     0.741
+#> # … with 8 more variables: Prevalence <dbl>, Detection Rate <dbl>,
+#> #   Detection Prevalence <dbl>, Balanced Accuracy <dbl>, FDR <dbl>, FOR <dbl>,
+#> #   FPR/Fallout <dbl>, FNR <dbl>
 #> 
 #> $Table
 #>            Target
@@ -442,34 +442,34 @@ specifically the code that begins with the `relatives <-` assignment.
 ``` r
 skater:::ped1kg
 #> # A tibble: 2,504 x 13
-#>    fid   id    dadid momid   sex affected population relationship siblings
-#>    <chr> <chr> <chr> <chr> <dbl>    <dbl> <chr>      <chr>        <chr>   
-#>  1 HG00… HG00… 0     0         1        0 GBR        unrel        0       
-#>  2 HG00… HG00… 0     0         2        0 GBR        unrel        0       
-#>  3 HG00… HG00… 0     0         2        0 GBR        unrel        0       
-#>  4 HG00… HG00… 0     0         2        0 GBR        unrel        0       
-#>  5 HG00… HG00… 0     0         1        0 GBR        unrel        0       
-#>  6 HG00… HG00… 0     0         2        0 GBR        unrel        0       
-#>  7 HG00… HG00… 0     0         1        0 GBR        unrel        0       
-#>  8 HG00… HG00… 0     0         1        0 GBR        unrel        0       
-#>  9 HG00… HG00… 0     0         2        0 GBR        unrel        0       
-#> 10 HG00… HG00… 0     0         1        0 GBR        unrel        0       
+#>    fid     id      dadid momid   sex affected population relationship siblings
+#>    <chr>   <chr>   <chr> <chr> <dbl>    <dbl> <chr>      <chr>        <chr>   
+#>  1 HG00096 HG00096 0     0         1        0 GBR        unrel        0       
+#>  2 HG00097 HG00097 0     0         2        0 GBR        unrel        0       
+#>  3 HG00099 HG00099 0     0         2        0 GBR        unrel        0       
+#>  4 HG00100 HG00100 0     0         2        0 GBR        unrel        0       
+#>  5 HG00101 HG00101 0     0         1        0 GBR        unrel        0       
+#>  6 HG00102 HG00102 0     0         2        0 GBR        unrel        0       
+#>  7 HG00103 HG00103 0     0         1        0 GBR        unrel        0       
+#>  8 HG00105 HG00105 0     0         1        0 GBR        unrel        0       
+#>  9 HG00106 HG00106 0     0         2        0 GBR        unrel        0       
+#> 10 HG00107 HG00107 0     0         1        0 GBR        unrel        0       
 #> # … with 2,494 more rows, and 4 more variables: second_order <chr>,
 #> #   third_order <chr>, children <chr>, other_comments <chr>
 skater:::ped1kg_unrel
 #> # A tibble: 2,502 x 13
-#>    fid   id    dadid momid   sex affected population relationship siblings
-#>    <chr> <chr> <chr> <chr> <dbl>    <dbl> <chr>      <chr>        <chr>   
-#>  1 HG00… HG00… 0     0         1        0 GBR        unrel        0       
-#>  2 HG00… HG00… 0     0         2        0 GBR        unrel        0       
-#>  3 HG00… HG00… 0     0         2        0 GBR        unrel        0       
-#>  4 HG00… HG00… 0     0         2        0 GBR        unrel        0       
-#>  5 HG00… HG00… 0     0         1        0 GBR        unrel        0       
-#>  6 HG00… HG00… 0     0         2        0 GBR        unrel        0       
-#>  7 HG00… HG00… 0     0         1        0 GBR        unrel        0       
-#>  8 HG00… HG00… 0     0         1        0 GBR        unrel        0       
-#>  9 HG00… HG00… 0     0         2        0 GBR        unrel        0       
-#> 10 HG00… HG00… 0     0         1        0 GBR        unrel        0       
+#>    fid     id      dadid momid   sex affected population relationship siblings
+#>    <chr>   <chr>   <chr> <chr> <dbl>    <dbl> <chr>      <chr>        <chr>   
+#>  1 HG00096 HG00096 0     0         1        0 GBR        unrel        0       
+#>  2 HG00097 HG00097 0     0         2        0 GBR        unrel        0       
+#>  3 HG00099 HG00099 0     0         2        0 GBR        unrel        0       
+#>  4 HG00100 HG00100 0     0         2        0 GBR        unrel        0       
+#>  5 HG00101 HG00101 0     0         1        0 GBR        unrel        0       
+#>  6 HG00102 HG00102 0     0         2        0 GBR        unrel        0       
+#>  7 HG00103 HG00103 0     0         1        0 GBR        unrel        0       
+#>  8 HG00105 HG00105 0     0         1        0 GBR        unrel        0       
+#>  9 HG00106 HG00106 0     0         2        0 GBR        unrel        0       
+#> 10 HG00107 HG00107 0     0         1        0 GBR        unrel        0       
 #> # … with 2,492 more rows, and 4 more variables: second_order <chr>,
 #> #   third_order <chr>, children <chr>, other_comments <chr>
 ```
