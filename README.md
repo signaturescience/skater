@@ -18,11 +18,12 @@ miscellaneous **R** utilties.
 Install from GitHub:
 
 ``` r
-remotes::install_github("signaturescience/skater", auth_token = github_pat(quiet))
+remotes::install_github("signaturescience/skater")
 ```
 
 A GitHub [personal access token](https://github.com/settings/tokens)
-must be in the environment variable `GITHUB_PAT`.
+must be in the environment variable `GITHUB_PAT` or supplied as a string
+to `auth_token`. See `?remotes::install_github`.
 
 ## Examples
 
