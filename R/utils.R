@@ -69,3 +69,36 @@ kin2degree <- function(k, max_degree=3L) {
   d <- dibble(max_degree)
   vapply(k, function(k) as.integer(d$degree[which(purrr::map2_lgl(d$l, d$u, ~dplyr::between(k, .x, .y)))]), FUN.VALUE=1L)
 }
+
+
+#' Kinship coefficient to cM
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' "Converts" a kinship coefficient to put on the same scale as shared cM using the formula
+#' \eqn{cm <- pmin(3560, 4*pmax(0, k)*3560)}.
+#'
+#'
+#' @param k Kinship coefficient (numeric, typically between 0 and .5, although KING can produce values <0).
+#'
+#' @return Estimated cM, ranging from 0-3560.
+#'
+#' @examples
+#' kin2cm(.25)
+#' kin2cm(.125)
+#' kin2cm(.0625)
+#' dibble(9) %>% dplyr::mutate(cm=kin2cm(k))
+#'
+#' @references <https://dnapainter.com/tools/sharedcmv4>.
+#' @references <https://www.ancestry.com/dna/resource/whitePaper/AncestryDNA-Matching-White-Paper.pdf>.
+#' @references <https://verogen.com/wp-content/uploads/2021/03/snp-typing-uas-kinship-estimation-gedmatch-pro-tech-note-vd2020058-a.pdf>.
+#'
+#'
+#' @export
+kin2cm <- function(k) {
+  stopifnot(all(is.numeric(k)))
+  stopifnot(all(k %>% dplyr::between(-1, 1)))
+  cm <- pmin(3560, 4*pmax(0, k)*3560)
+  return(cm)
+}
