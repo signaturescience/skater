@@ -21,6 +21,8 @@ License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
+Depends: 
+    R (>= 3.0.0)
 Imports: 
     magrittr,
     dplyr,
@@ -30,5 +32,10 @@ Imports:
     kinship2,
     corrr,
     grDevices,
-    lifecycle
+    lifecycle,
+    tibble
+Suggests: 
+    testthat (>= 3.0.0)
 Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3
+
