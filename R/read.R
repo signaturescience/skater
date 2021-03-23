@@ -27,10 +27,10 @@ read_fam <- function(file) {
 }
 
 
-#' Read akt kin output file
+#' Read AKT kin output file
 #'
 #' @description
-#' Reads in an [AKT kin formatted file (.akt)](https://illumina.github.io/akt/#kin). Input `file` must have seven columns:
+#' Reads in an `akt kin` [results file](https://illumina.github.io/akt/#kin). Input `file` must have seven columns, whitespace delimited:
 #' 1. id1 (member 1)
 #' 2. id2 (member 2)
 #' 3. IBD0 (ratio of IBD0/All SNPS)
