@@ -44,14 +44,14 @@ read_fam <- function(file) {
 #' @return A tibble containing the 7 columns from the akt file.
 #'
 #' @examples
-#' aktFile <- system.file("extdata", "3gens.fam", package="skater", mustWork=TRUE)
-#' akt <- read_fam(aktFile)
+#' aktFile <- system.file("extdata", "3gens.akt", package="skater", mustWork=TRUE)
+#' akt <- read_akt(aktFile)
 #' akt
 #'
 #' @export
-read_akt <- function(file){
+read_akt <- function(file) {
   readr::read_table2(
-  file,
-  col_names=c("id1","id2","IBD0","IBD1","IBD_2","k_akt","Markers"),
-  col_types="ccddddi")
+    file,
+    col_names=c("id1","id2","ibd0","ibd1","ibd2","k","nsnps"),
+    col_types="ccddddi")
 }
