@@ -1,32 +1,3 @@
-#' Read PLINK-formatted .fam file
-#'
-#' @description
-#' Reads in a [PLINK-formatted .fam file](https://www.cog-genomics.org/plink/1.9/formats#fam). Input `file` must have six columns:
-#' 1. Family ID
-#' 2. Individual ID
-#' 3. Father ID
-#' 4. Mother ID
-#' 5. Sex
-#' 6. Affected Status
-#'
-#' @param file Input file path
-#'
-#' @return A tibble containing the 6 columns from the fam file.
-#'
-#' @examples
-#' famfile <- system.file("extdata", "3gens.fam", package="skater", mustWork=TRUE)
-#' fam <- read_fam(famfile)
-#' fam
-#'
-#' @export
-read_fam <- function(file) {
-  readr::read_delim(file,
-                    delim=" ",
-                    col_names=c("fid", "id", "dadid", "momid", "sex", "affected"),
-                    col_types="ccccii")
-}
-
-
 #' Fam to pedigree
 #'
 #' @description
