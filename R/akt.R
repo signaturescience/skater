@@ -10,7 +10,7 @@
 #' 5. Kinship Coefficient
 #' 6. NSNPS
 #'
-#' @param filename Input file path
+#' @param file Input file path
 #'
 #' @return A tibble containing the 7 columns from the akt file.
 #'
@@ -21,9 +21,9 @@
 #'
 #' @export
 
-read_akt <- function(filename){
+read_akt <- function(file){
   readr::read_table2(
-  filename,  
-  col_names=c("id1","id2","IBD0","IBD1","IBD_2","k_akt","Markers"), 
+  file,
+  col_names=c("id1","id2","IBD0","IBD1","IBD_2","k_akt","Markers"),
   col_types="ccddddi")
 }
