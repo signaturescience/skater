@@ -55,3 +55,32 @@ read_akt <- function(file) {
     col_names=c("id1","id2","ibd0","ibd1","ibd2","k","nsnps"),
     col_types="ccddddi")
 }
+
+
+#' Read IBIS coef output file
+#'
+#' @description
+#' Reads in an `ibis` [results file](https://github.com/williamslab/ibis). Input `file` must have six columns, whitespace delimited:
+#' 1. id1 (member 1)
+#' 2. id2 (member 2)
+#' 3. Kinship Coefficient
+#' 4. IBD2 (ratio of IBD2/All SNPS)
+#' 5. Segment count
+#' 6. Kinship Degree
+#'
+#' @param file Input file path
+#'
+#' @return A tibble containing the 6 columns from the ibis file.
+#'
+#' @examples
+#' ibisFile <- system.file("extdata", "3gens.ibd.coef", package="skater", mustWork=TRUE)
+#' ibis <- read_ibis(ibisFile)
+#' ibis
+#'
+#' @export
+read_ibis <- function(file){
+  readr::read_table2(file , col_names=c("id1", "id2", "k","ibd2","segment_count", "degree"), col_types="ccddii", skip = 1) %>%
+    mutate(id1=gsub(":","_", id1)) %>%
+    mutate(id2=gsub(":","_", id2))
+
+}
