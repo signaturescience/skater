@@ -73,7 +73,7 @@ read_akt <- function(file) {
 #' @return A tibble containing the 6 columns from the ibis file.
 #'
 #' @examples
-#' ibisFile <- system.file("extdata", "3gens.ibd.coef", package="skater", mustWork=TRUE)
+#' ibisFile <- system.file("extdata", "3gens.ibis.coef", package="skater", mustWork=TRUE)
 #' ibis <- read_ibis(ibisFile)
 #' ibis
 #'
