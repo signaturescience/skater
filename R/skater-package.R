@@ -24,4 +24,6 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c("data",
                                                         "u",
                                                         "l",
                                                         "degree",
+                                                        "id1",
+                                                        "id2",
                                                         "."))
