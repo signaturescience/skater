@@ -22,8 +22,6 @@ utils::globalVariables(c('Class', 'Positive', 'N Positive', 'N Negative', 'N'))
 #' o = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
 #' calc_accuracy(table(p, o))
 #'
-#' @importFrom stats binom.test
-#'
 #' @export
 calc_accuracy <- function(tabble) {
 
@@ -52,7 +50,7 @@ calc_accuracy <- function(tabble) {
   else
     acc_p <- unlist(acc_p[c("null.value", "p.value")])
 
-  tibble(
+  tibble::tibble(
     Accuracy = acc,
     `Accuracy LL` = acc_ci[1],
     `Accuracy UL` = acc_ci[2],
@@ -140,9 +138,6 @@ calc_accuracy <- function(tabble) {
 #' Velez, D.R., et. al. (2008) "A balanced accuracy function for epistasis
 #' modeling in imbalanced datasets using multifactor dimensionality
 #' reduction.," \emph{Genetic Epidemiology}, vol 4, 306.
-#'
-#' @importFrom dplyr tibble
-#' @importFrom stats pnorm qnorm
 #'
 #' @examples
 #' p = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
@@ -232,7 +227,7 @@ calc_stats <- function(tabble, prevalence = NULL, positive, ...) {
   #   auc <- NA
   # }
   # else {
-  #   d_prime <- qnorm(sens) - qnorm(1-spec)  # primary calculation
+  #   d_prime <- stats::qnorm(sens) - stats::qnorm(1-spec)  # primary calculation
   #
   #   # check if sens/spec 1/0 and fudge with warning
   #   if (is.infinite(d_prime)) {
@@ -240,7 +235,7 @@ calc_stats <- function(tabble, prevalence = NULL, positive, ...) {
   #   fudge factor introduced to correct.')
   #     sens_   <- abs(sens - .000001)
   #     spec_   <- abs(spec - .000001)
-  #     d_prime <- qnorm(sens_) - qnorm(1 - spec_)
+  #     d_prime <- stats::qnorm(sens_) - stats::qnorm(1 - spec_)
   #
   #     xmax <- max(4, d_prime + 3)
   #     x <- seq(-3, xmax, 0.05)
@@ -261,13 +256,13 @@ calc_stats <- function(tabble, prevalence = NULL, positive, ...) {
   #   upper.sum <- sum(fpx.diff * vpx[-length(vpx)])
   #   auc <- (lower.sum + upper.sum)/2
   #   auc <- ifelse(auc < .5, 1 - auc, auc)
-  #   # shortcut auc = pnorm(tab$`D Prime`/sqrt(2))
+  #   # shortcut auc = stats::pnorm(tab$`D Prime`/sqrt(2))
   # }
 
 
   # Return result -----------------------------------------------------------
 
-  dplyr::tibble(
+  tibble::tibble(
     `Sensitivity/Recall/TPR` = sens,
     `Specificity/TNR` = spec,
     `PPV/Precision` = ppv,
@@ -311,9 +306,6 @@ calc_stats <- function(tabble, prevalence = NULL, positive, ...) {
 #'   frequency table as list column of the first element.
 #'
 #' @references Kuhn, M., & Johnson, K. (2013). Applied predictive modeling.
-#'
-#' @importFrom dplyr mutate everything %>%
-#' @importFrom utils packageVersion
 #'
 #' @examples
 #' prediction = c(0,1,1,0,0,1,0,1,1,1)
@@ -428,7 +420,7 @@ confusion_matrix <- function(
       )
 
     result_statistics <- result_statistics %>%
-      dplyr::select(Positive, N, `N Positive`, `N Negative`, everything())
+      dplyr::select(Positive, N, `N Positive`, `N Negative`, dplyr::everything())
 
     result <- list(
       Accuracy = result_accuracy,
@@ -446,7 +438,7 @@ confusion_matrix <- function(
     )
 
     result_statistics <- dplyr::bind_rows(result_statistics) %>%
-      mutate(N = colSums(conf_mat))
+      dplyr::mutate(N = colSums(conf_mat))
 
     # add averages
     avg <- data.frame(t(colMeans(result_statistics)))
@@ -458,7 +450,7 @@ confusion_matrix <- function(
 
     result_statistics <- result_statistics %>%
       dplyr::mutate(Class = c(classLevels, 'Average')) %>%
-      dplyr::select(Class, N, everything())
+      dplyr::select(Class, N, dplyr::everything())
 
     result <- list(
       Accuracy = result_accuracy,
@@ -486,7 +478,7 @@ confusion_matrix <- function(
   if (longer) {
     result$Accuracy = tidyr::pivot_longer(
       result$Accuracy,
-      cols = everything(),
+      cols = dplyr::everything(),
       names_to = 'Statistic',
       values_to = 'Value',
     )
@@ -511,7 +503,7 @@ confusion_matrix <- function(
 
     # result$`Association and Agreement` = tidyr::pivot_longer(
     #   result$`Association and Agreement`,
-    #   cols = everything(),
+    #   cols = dplyr::everything(),
     #   names_to = 'Statistic',
     #   values_to = 'Value',
     # )
