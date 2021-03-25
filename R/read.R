@@ -80,7 +80,7 @@ read_akt <- function(file) {
 #' @export
 read_ibis <- function(file){
   readr::read_table2(file , col_names=c("id1", "id2", "k","ibd2","segment_count", "degree"), col_types="ccddii", skip = 1) %>%
-    mutate(id1=gsub(":","_", id1)) %>%
-    mutate(id2=gsub(":","_", id2))
+    dplyr::mutate(id1=gsub(":","_", id1)) %>%
+    dplyr::mutate(id2=gsub(":","_", id2))
 
 }
