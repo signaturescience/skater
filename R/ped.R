@@ -61,7 +61,14 @@ plot_pedigree <- function(ped, file=NULL, width=10, height=8) {
 #' @param ped A "pedigree" class object from [fam2ped][skater::fam2ped].
 #'
 #' @return A tibble containing all pairwise kinship coefficients from the input pedigree.
-#'
+#' @examples
+#' famfile <- system.file("extdata", "3gens.fam", package="skater", mustWork=TRUE)
+#' famfile %>%
+#'   read_fam() %>%
+#'   fam2ped() %>%
+#'   dplyr::mutate(kinpairs=purrr::map(ped, ped2kinpair)) %>%
+#'   dplyr::select(fid, kinpairs) %>%
+#'   tidyr::unnest(cols=kinpairs)
 #' @export
 ped2kinpair <- function(ped) {
   if (class(ped)!="pedigree") stop("Input must be of class 'pedigree'.")
@@ -70,5 +77,6 @@ ped2kinpair <- function(ped) {
     corrr::shave() %>%
     corrr::stretch() %>%
     stats::na.omit() %>%
-    dplyr::transmute(id1=pmin(x, y), id2=pmax(x, y), k=r)
+    dplyr::transmute(id1=pmin(x, y), id2=pmax(x, y), k=r) %>%
+    arrange_ids(id1, id2)
 }
