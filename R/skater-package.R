@@ -11,7 +11,10 @@ NULL
 #' @importFrom lifecycle badge
 
 # Quiet CRAN check notes for unbound global variables
-if(getRversion() >= "2.15.1")  utils::globalVariables(c("data",
+if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data",
+                                                        "data",
+                                                        ".x1",
+                                                        ".x2",
                                                         "fid",
                                                         "dadid",
                                                         "momid",
