@@ -53,7 +53,9 @@ read_akt <- function(file) {
   readr::read_table2(
     file,
     col_names=c("id1","id2","ibd0","ibd1","ibd2","k","nsnps"),
-    col_types="ccddddi")
+    col_types="ccddddi"
+  ) %>%
+    arrange_ids(id1, id2)
 }
 
 
@@ -81,6 +83,6 @@ read_akt <- function(file) {
 read_ibis <- function(file){
   readr::read_table2(file , col_names=c("id1", "id2", "k","ibd2","segment_count", "degree"), col_types="ccddii", skip = 1) %>%
     dplyr::mutate(id1=gsub(":","_", id1)) %>%
-    dplyr::mutate(id2=gsub(":","_", id2))
-
+    dplyr::mutate(id2=gsub(":","_", id2)) %>%
+    arrange_ids(id1, id2)
 }
