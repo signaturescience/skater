@@ -33,9 +33,9 @@ Imports:
     corrr,
     grDevices,
     lifecycle,
-    tibble
+    tibble,
+    rlang
 Suggests: 
     testthat (>= 3.0.0)
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
-

@@ -17,3 +17,12 @@ A tibble containing all pairwise kinship coefficients from the input pedigree.
 
 Converts a pedigree class object from \link[=fam2ped]{fam2ped} to a pairwise list of relationships and their expected/theoretical kinship coefficient.
 }
+\examples{
+famfile <- system.file("extdata", "3gens.fam", package="skater", mustWork=TRUE)
+famfile \%>\%
+  read_fam() \%>\%
+  fam2ped() \%>\%
+  dplyr::mutate(kinpairs=purrr::map(ped, ped2kinpair)) \%>\%
+  dplyr::select(fid, kinpairs) \%>\%
+  tidyr::unnest(cols=kinpairs)
+}
