@@ -24,19 +24,25 @@ confusion_matrix(
 
 \item{prevalence}{Prevalence rate.  Default is \code{NULL}.}
 
-\item{dnn}{The row and column headers for the contingency table returned. Default is 'Predicted' for rows and 'Target' for columns.}
+\item{dnn}{The row and column headers for the contingency table returned.
+Default is 'Predicted' for rows and 'Target' for columns.}
 
-\item{longer}{Transpose the output to long form.  Default is FALSE (requires \code{tidyr 1.0}).}
+\item{longer}{Transpose the output to long form.  Default is FALSE (requires
+\code{tidyr 1.0}).}
 
 \item{...}{Other parameters, not currently used.}
 }
 \value{
 A list of tibble(s) with the associated statistics and possibly the
-frequency table as list column of the first element.
+frequency table as list column of the first element. If classes contain >1
+numeric class and a single non-numeric class (e.g., "1", "2", "3", and
+"Unrelated", the RMSE of the reciprocal of the Targets + 0.5 will also be
+returned.)
 }
 \description{
 Given a vector of predictions and target values, calculate
-numerous statistics of interest. Modified from \href{https://github.com/m-clark/confusionMatrix}{m-clark/confusion_matrix}.
+numerous statistics of interest. Modified from
+\href{https://github.com/m-clark/confusionMatrix}{m-clark/confusion_matrix}.
 }
 \details{
 This returns accuracy, agreement, and other statistics. See the
@@ -62,6 +68,9 @@ confusion_matrix(prediction, target, longer=TRUE) \%>\%
   purrr::pluck("Other") \%>\%
   tidyr::spread(Class, Value)
 
+prediction = c(rep(1, 50), rep(2, 40), rep(3, 60), rep("Unrelated", 55))
+target     = c(rep(1, 50), rep(2, 50), rep(3, 55), rep("Unrelated", 50))
+confusion_matrix(prediction, target)
 
 }
 \references{
