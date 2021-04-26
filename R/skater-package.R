@@ -29,4 +29,8 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data",
                                                         "degree",
                                                         "id1",
                                                         "id2",
+                                                        "Target",
+                                                        "Predicted",
+                                                        "n",
+                                                        "rmse",
                                                         "."))
