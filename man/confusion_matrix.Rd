@@ -68,8 +68,13 @@ confusion_matrix(prediction, target, longer=TRUE) \%>\%
   purrr::pluck("Other") \%>\%
   tidyr::spread(Class, Value)
 
+# Prediction with an unrelated class
 prediction = c(rep(1, 50), rep(2, 40), rep(3, 60), rep("Unrelated", 55))
 target     = c(rep(1, 50), rep(2, 50), rep(3, 55), rep("Unrelated", 50))
+confusion_matrix(prediction, target)
+# Prediction with two unrelated classes
+prediction = c(rep(1, 50), rep(2, 40), rep("Third", 60), rep("Unrelated", 55))
+target     = c(rep(1, 50), rep(2, 50), rep("Third", 55), rep("Unrelated", 50))
 confusion_matrix(prediction, target)
 
 }

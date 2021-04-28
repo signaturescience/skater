@@ -331,8 +331,14 @@ calc_stats <- function(tabble, prevalence = NULL, positive, ...) {
 #'   purrr::pluck("Other") %>%
 #'   tidyr::spread(Class, Value)
 #'
+#' # Prediction with an unrelated class
 #' prediction = c(rep(1, 50), rep(2, 40), rep(3, 60), rep("Unrelated", 55))
 #' target     = c(rep(1, 50), rep(2, 50), rep(3, 55), rep("Unrelated", 50))
+#' confusion_matrix(prediction, target)
+
+#' # Prediction with two unrelated classes
+#' prediction = c(rep(1, 50), rep(2, 40), rep("Third", 60), rep("Unrelated", 55))
+#' target     = c(rep(1, 50), rep(2, 50), rep("Third", 55), rep("Unrelated", 50))
 #' confusion_matrix(prediction, target)
 #'
 #' @export
@@ -415,11 +421,10 @@ confusion_matrix <- function(
   # Levels are something like 1, 2, 3, "Unrelated". Figure out which index is NOT numeric.
   which_unrelated <- which(is.na(suppressWarnings(as.numeric(conf_mat_names))))
   # If there is more or less than one non-numeric class, don't proceed further.
-  if (length(which_unrelated)==0L) {
-    recip_rmse <- "Reciprocal RMSE not calculated: zero non-numeric classes."
-  } else if (length(which_unrelated)>1L) {
-    recip_rmse <- "Reciprocal RMSE not calculated: more than one non-numeric class."
-  } else if (length(which_unrelated)==1L) {
+  if (length(which_unrelated)>1L) {
+    message("Reciprocal RMSE not calculated: more than one non-numeric class.")
+    recip_rmse <- NA
+  } else {
     # Get the max of the numeric classes
     max_numeric_class <- max(suppressWarnings(as.numeric(conf_mat_names)), na.rm=TRUE)
     # set the names of the confusion matrix non-numeric class to max(numeric)+1
