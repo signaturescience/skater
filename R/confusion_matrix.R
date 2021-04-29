@@ -284,26 +284,31 @@ calc_stats <- function(tabble, prevalence = NULL, positive, ...) {
 #' Calculate various statistics from a confusion matrix
 #'
 #' @description Given a vector of predictions and target values, calculate
-#'   numerous statistics of interest. Modified from [m-clark/confusion_matrix](https://github.com/m-clark/confusionMatrix).
+#'   numerous statistics of interest. Modified from
+#'   [m-clark/confusion_matrix](https://github.com/m-clark/confusionMatrix).
 #' @param prediction A vector of predictions
 #' @param target A vector of target values
 #' @param positive The positive class for a 2-class setting. Default is
 #'   \code{NULL}, which will result in using the first level of \code{target}.
 #' @param prevalence Prevalence rate.  Default is \code{NULL}.
-#' @param dnn The row and column headers for the contingency table returned. Default is 'Predicted' for rows and 'Target' for columns.
-#' @param longer Transpose the output to long form.  Default is FALSE (requires \code{tidyr 1.0}).
+#' @param dnn The row and column headers for the contingency table returned.
+#'   Default is 'Predicted' for rows and 'Target' for columns.
+#' @param longer Transpose the output to long form.  Default is FALSE (requires
+#'   \code{tidyr 1.0}).
 #' @param ... Other parameters, not currently used.
 #'
 #' @details This returns accuracy, agreement, and other statistics. See the
 #'   functions below to find out more. Originally inspired by the
 #'   \code{confusionMatrix} function from the \code{caret} package.
 #'
-#' @seealso
-#'   \code{\link{calc_accuracy}} \code{\link{calc_stats}}
-#'   \code{\link{confusion_matrix}}
+#' @seealso \code{\link{calc_accuracy}} \code{\link{calc_stats}}
+#' \code{\link{confusion_matrix}}
 #'
 #' @return A list of tibble(s) with the associated statistics and possibly the
-#'   frequency table as list column of the first element.
+#'   frequency table as list column of the first element. If classes contain >1
+#'   numeric class and a single non-numeric class (e.g., "1", "2", "3", and
+#'   "Unrelated", the RMSE of the reciprocal of the Targets + 0.5 will also be
+#'   returned.)
 #'
 #' @references Kuhn, M., & Johnson, K. (2013). Applied predictive modeling.
 #'
@@ -326,6 +331,15 @@ calc_stats <- function(tabble, prevalence = NULL, positive, ...) {
 #'   purrr::pluck("Other") %>%
 #'   tidyr::spread(Class, Value)
 #'
+#' # Prediction with an unrelated class
+#' prediction = c(rep(1, 50), rep(2, 40), rep(3, 60), rep("Unrelated", 55))
+#' target     = c(rep(1, 50), rep(2, 50), rep(3, 55), rep("Unrelated", 50))
+#' confusion_matrix(prediction, target)
+
+#' # Prediction with two unrelated classes
+#' prediction = c(rep(1, 50), rep(2, 40), rep("Third", 60), rep("Unrelated", 55))
+#' target     = c(rep(1, 50), rep(2, 50), rep("Third", 55), rep("Unrelated", 50))
+#' confusion_matrix(prediction, target)
 #'
 #' @export
 confusion_matrix <- function(
@@ -399,6 +413,36 @@ confusion_matrix <- function(
 
   conf_mat <- table(prediction, target, dnn = dnn)
 
+  ### reciprocal RMSE on the confusion matrix ###
+  # Make a copy of the confusion matrix to work with here
+  conf_mat2 <- conf_mat
+  # what are the conf mat names?
+  conf_mat_names <- colnames(conf_mat2)
+  # Levels are something like 1, 2, 3, "Unrelated". Figure out which index is NOT numeric.
+  which_unrelated <- which(is.na(suppressWarnings(as.numeric(conf_mat_names))))
+  # If there is more or less than one non-numeric class, don't proceed further.
+  if (length(which_unrelated)>1L) {
+    message("Reciprocal RMSE not calculated: more than one non-numeric class.")
+    recip_rmse <- NA
+  } else {
+    # Get the max of the numeric classes
+    max_numeric_class <- max(suppressWarnings(as.numeric(conf_mat_names)), na.rm=TRUE)
+    # set the names of the confusion matrix non-numeric class to max(numeric)+1
+    # E.g.: 1, 2, 3, Unrelated  becomes 1, 2, 3, 4.
+    conf_mat_names[which_unrelated] <- max_numeric_class+1
+    # set the names in copy of the confusion matrix
+    colnames(conf_mat2) <- conf_mat_names
+    rownames(conf_mat2) <- conf_mat_names
+    # Calculate the reciprocal rmse as described in https://github.com/signaturescience/skater/issues/38
+    recip_rmse <- conf_mat2 %>%
+      dplyr::as_tibble(.) %>%
+      dplyr::mutate(Target = as.numeric(Target)) %>%
+      dplyr::mutate(Predicted = as.numeric(Predicted)) %>%
+      tidyr::uncount(n) %>%
+      # rmse of the reciprocal of each class + .5 to avoid problems with degree=0
+      dplyr::summarise(rmse = sqrt(mean((1/(Target+.5)-1/(Predicted+.5))^2))) %>%
+      dplyr::pull(rmse)
+  }
 
   # Calculate stats ---------------------------------------------------------
 
@@ -456,7 +500,8 @@ confusion_matrix <- function(
       Accuracy = result_accuracy,
       Other = result_statistics,
       # `Association and Agreement` = result_agreement
-      Table=conf_mat
+      Table=conf_mat,
+      recip_rmse=recip_rmse
     )
   }
 
