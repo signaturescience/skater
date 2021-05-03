@@ -163,7 +163,13 @@ read_plink2_king <- function(file) {
 #' 6. length (shared segement length in genetic units)
 #'
 #' @references <https://github.com/browning-lab/hap-ibd#output-files>
+#' @references <https://github.com/williamslab/ped-sim#output-ibd-segments-file>
 #'
+#' @examples
+#' hapibd_fp <- system.file("extdata", "GBR.sim.ibd.gz", package="skater", mustWork=TRUE)
+#' hapibd_seg <- read_ibd(hapibd_fp, source = "hapibd")
+#' pedsim_fp <- system.file("extdata", "GBR.sim.seg.gz", package="skater", mustWork=TRUE)
+#' pedsim_seg <- read_ibd(pedsim_fp, source = "pedsim")
 #' @export
 read_ibd <- function(file, source) {
 

@@ -50,6 +50,14 @@ If read a \code{pedsim} segment file, the input data should have the following c
 \item Genetic length (end - start)
 }
 }
+\examples{
+hapibd_fp <- system.file("extdata", "GBR.sim.ibd.gz", package="skater", mustWork=TRUE)
+hapibd_seg <- read_ibd(hapibd_fp, source = "hapibd")
+pedsim_fp <- system.file("extdata", "GBR.sim.seg.gz", package="skater", mustWork=TRUE)
+pedsim_seg <- read_ibd(pedsim_fp, source = "pedsim")
+}
 \references{
 \url{https://github.com/browning-lab/hap-ibd#output-files}
+
+\url{https://github.com/williamslab/ped-sim#output-ibd-segments-file}
 }
