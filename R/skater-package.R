@@ -40,4 +40,8 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data",
                                                         "totallength",
                                                         "type",
                                                         "value",
+                                                        "Target",
+                                                        "Predicted",
+                                                        "n",
+                                                        "rmse",
                                                         "."))
