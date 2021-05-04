@@ -211,8 +211,10 @@ read_ibd <- function(file, source) {
 #'
 #' This function reads in the content from a genetic map file to translate physical distance to genetic units (i.e. cM).
 #'
-#' The genetic map could come from different sources. However, the only is the map file based on HapMap and distributed by the Browning Lab ([documentation](http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/)). If this map file is used, the non-sex chromosomes should be concatentated to a single file as follows:
+#' The genetic map could come from different sources. However, the only is the map file based on HapMap and distributed by the Browning Lab ([documentation](http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/)). If this map file is used, the non-sex chromosomes can be downloaded and concatentated to a single file as follows:
 #'
+#' `wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip`
+#' `unzip plink.GRCh37.map.zip`
 #' `cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map`
 #'
 #' @param file Input file path
