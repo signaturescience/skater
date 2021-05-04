@@ -192,7 +192,9 @@ read_ibd <- function(file, source) {
                     col_types="ccciicddd",
                     col_names=c("id1", "id2", "chr", "pstart", "pend", "type", "gstart", "gend", "glength")) %>%
       dplyr::filter(type == "IBD1" | type == "IBD2") %>%
-      dplyr::select(id1, id2, chr, start = pstart, end = pend, length = glength)
+      dplyr::select(id1, id2, chr, start = pstart, end = pend, length = glength) %>%
+      ## make sure ids are ordered
+      arrange_ids(id1,id2)
 
   } else {
     stop("The 'source' argument must be one of 'hapibd' or 'pedsim'.")
