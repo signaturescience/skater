@@ -78,6 +78,8 @@ ibd2kin <- function(.ibd_data, .map) {
   }
 
   ## use ibd data and total chromlength as denominator above to get the kinship value
+  ## NOTE: the total length of genome is multiplied by 4 to get the kinship coefficient "units"
+  ## ... i.e. the probability that a randomly selected allele will be shared between two individuals
   .ibd_data %>%
     dplyr::group_by(id1,id2) %>%
     dplyr::summarise(totallength = sum(length), .groups = "drop") %>%
