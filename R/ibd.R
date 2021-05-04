@@ -34,6 +34,24 @@ ibd2kin <- function(.ibd_data, .map) {
 
   ## loop over each chromosome to get length
   ## this will be summed up and serve as denominator for kinship coefficient calculations
+
+  ## some preprocessing on map for computational efficiency ...
+  ## group_by and group_split on chr
+  ## do that separately so you can get the chr names for indexing
+  tmp <-
+    .map %>%
+    dplyr::group_by(chr)
+
+  tmp_l <-
+    tmp %>%
+    dplyr::group_split() %>%
+    ## get name for each list element from corresponding group key
+    ## NOTE: group_key returns a tibble so you need to get chr column out as vec
+    purrr::set_names(dplyr::group_keys(tmp)$chr)
+
+  ## cleanup
+  rm(tmp)
+
   totalchromlength <- vector()
   for(i in 1:length(unique(ibd_min_bp$chr))) {
 
@@ -48,9 +66,7 @@ ibd2kin <- function(.ibd_data, .map) {
       ibd_max_bp %>%
       dplyr::filter(chr == chrom)
 
-    tmp_chromgpos <-
-      .map %>%
-      dplyr::filter(chr == chrom)
+    tmp_chromgpos <- tmp_l[[chrom]]
 
     ## use interpolate to get centimorgan lengths
     mincm <- interpolate(ibd_bp = tmp_ibd_min_bp$bp, chromgpos = tmp_chromgpos)
