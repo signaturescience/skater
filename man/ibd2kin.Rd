@@ -24,6 +24,17 @@ This function is used to retrieve a relatedness measure from IBD segments. The r
 
 The input data should be pairwise IBD segments prepared via \link[skater]{read_ibd}. The function will internally loop over each chromosome, and use a specified genetic map to convert shared segments to genetic units. After doing so, the function converts the shared length to a kinship coefficient.
 }
+\examples{
+\dontrun{
+pedsim_fp <- system.file("extdata", "GBR.sim.seg.gz", package="skater", mustWork=TRUE)
+pedsim_seg <- read_ibd(pedsim_fp, source = "pedsim")
+# See help for [read_map] for downloading/creating the map file.
+# This is not reproducible unless plink.allchr.GRCh37.map is in your ~.
+map <- read_map("~/plink.allchr.GRCh37.map", source="hapmap")
+ibd2kin(pedsim_seg, map)
+}
+
+}
 \references{
 http://faculty.washington.edu/sguy/ibd_relatedness.html
 }

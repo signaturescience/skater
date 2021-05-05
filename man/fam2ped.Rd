@@ -13,7 +13,7 @@ fam2ped(fam)
 A tibble with new listcol \code{ped} containing pedigrees from \code{kinship2::pedigree}.
 }
 \description{
-\ifelse{html}{\out{<a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a>}}{\strong{Experimental}}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
 Converts a \href{https://www.cog-genomics.org/plink/1.9/formats#fam}{PLINK-formatted fam file} to a pedigree object using \link[kinship2:pedigree]{kinship2::pedigree}.
 }
