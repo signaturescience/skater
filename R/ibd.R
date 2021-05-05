@@ -16,6 +16,16 @@
 #'
 #' @export
 #'
+#' @examples
+#' \dontrun{
+#' pedsim_fp <- system.file("extdata", "GBR.sim.seg.gz", package="skater", mustWork=TRUE)
+#' pedsim_seg <- read_ibd(pedsim_fp, source = "pedsim")
+#' # See help for [read_map] for downloading/creating the map file.
+#' # This is not reproducible unless plink.allchr.GRCh37.map is in your ~.
+#' map <- read_map("~/plink.allchr.GRCh37.map", source="hapmap")
+#' ibd2kin(pedsim_seg, map)
+#' }
+#'
 #' @references http://faculty.washington.edu/sguy/ibd_relatedness.html
 #'
 ibd2kin <- function(.ibd_data, .map) {
