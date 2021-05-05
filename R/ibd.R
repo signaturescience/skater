@@ -94,7 +94,8 @@ ibd2kin <- function(.ibd_data, .map) {
     dplyr::group_by(id1,id2) %>%
     dplyr::summarise(totallength = sum(length), .groups = "drop") %>%
     dplyr::mutate(kinship = totallength/(4*sum(totalchromlength))) %>%
-    dplyr::select(id1,id2,kinship)
+    dplyr::select(id1,id2,kinship) %>%
+    arrange_ids(id1, id2)
 }
 
 #' Interpolate over segments
