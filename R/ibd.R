@@ -7,6 +7,7 @@
 #'
 #' @param .ibd_data Tibble with IBD segments created using the \link[skater]{read_ibd} function
 #' @param .map Tibble with the genetic map data created using the \link[skater]{read_map} function
+#' @param type Type of IBD to use for kinship coefficient calculation; must be `'IBD1'`, `'IBD2'`, or `NULL` (both IBD1 and IBD2 will be treated the same); default is `NULL`
 #'
 #' @return Tibble with three columns:
 #'
@@ -28,7 +29,7 @@
 #'
 #' @references http://faculty.washington.edu/sguy/ibd_relatedness.html
 #'
-ibd2kin <- function(.ibd_data, .map) {
+ibd2kin <- function(.ibd_data, .map, type = NULL) {
 
   ## get the min base pair for each chr
   ibd_min_bp <-
@@ -88,14 +89,34 @@ ibd2kin <- function(.ibd_data, .map) {
   }
 
   ## use ibd data and total chromlength as denominator above to get the kinship value
-  ## NOTE: the total length of genome is multiplied by 4 to get the kinship coefficient "units"
+  ## NOTE: the total length of genome is multiplied by either 2 or 4 (depending on IBD type) to get the kinship coefficient "units"
   ## ... i.e. the probability that a randomly selected allele will be shared between two individuals
-  .ibd_data %>%
+  tmp <-
+    .ibd_data %>%
     dplyr::group_by(id1,id2) %>%
-    dplyr::summarise(totallength = sum(length), .groups = "drop") %>%
-    dplyr::mutate(kinship = totallength/(4*sum(totalchromlength))) %>%
-    dplyr::select(id1,id2,kinship) %>%
-    arrange_ids(id1, id2)
+    dplyr::summarise(totallength = sum(length), .groups = "drop")
+
+  ## the type argument switches the multiplier used to calculate denominator
+  if(!is.null(type)) {
+    if (toupper(type) == "IBD1") {
+      tmp %>%
+        dplyr::mutate(kinship = totallength/(4*sum(totalchromlength))) %>%
+        dplyr::select(id1,id2,kinship) %>%
+        arrange_ids(id1, id2)
+    } else if (toupper(type) == "IBD2") {
+      tmp %>%
+        dplyr::mutate(kinship = totallength/(2*sum(totalchromlength))) %>%
+        dplyr::select(id1,id2,kinship) %>%
+        arrange_ids(id1, id2)
+    } else {
+      stop("If the 'type' argument is not NULL then it should be either 'IBD1' or 'IBD2'.")
+    }
+  } else {
+    tmp %>%
+      dplyr::mutate(kinship = totallength/(4*sum(totalchromlength))) %>%
+      dplyr::select(id1,id2,kinship) %>%
+      arrange_ids(id1, id2)
+  }
 }
 
 #' Interpolate over segments

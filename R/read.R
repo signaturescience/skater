@@ -152,6 +152,7 @@ read_plink2_king <- function(file) {
 #'
 #' @param file Input file path
 #' @param source Source of the input file; must be one of `"hapibd"` or `"pedsim"`
+#' @param split Logical as to whether or not the segments should be split by IBD1 and IBD2; only used of source = `"pedsim"`; default is `TRUE`
 #'
 #' @return A tibble containing 6 columns:
 #'
@@ -162,6 +163,8 @@ read_plink2_king <- function(file) {
 #' 5. end (segment bp end coordinate)
 #' 6. length (shared segement length in genetic units)
 #'
+#' If the "split" argument is set `TRUE` then the return object will be a named list with two tibbles containing IBD1 and IBD2 segments respectively.
+#'
 #' @references <https://github.com/browning-lab/hap-ibd#output-files>
 #' @references <https://github.com/williamslab/ped-sim#output-ibd-segments-file>
 #'
@@ -171,7 +174,7 @@ read_plink2_king <- function(file) {
 #' pedsim_fp <- system.file("extdata", "GBR.sim.seg.gz", package="skater", mustWork=TRUE)
 #' pedsim_seg <- read_ibd(pedsim_fp, source = "pedsim")
 #' @export
-read_ibd <- function(file, source) {
+read_ibd <- function(file, source, split = TRUE) {
 
   if(source == "hapibd") {
 
@@ -210,14 +213,41 @@ read_ibd <- function(file, source) {
     }
   } else if (source == "pedsim") {
 
-    seg <-
-      readr::read_tsv(file,
-                    col_types="ccciicddd",
-                    col_names=c("id1", "id2", "chr", "pstart", "pend", "type", "gstart", "gend", "glength")) %>%
-      dplyr::filter(type == "IBD1" | type == "IBD2") %>%
-      dplyr::select(id1, id2, chr, start = pstart, end = pend, length = glength) %>%
-      ## make sure ids are ordered
-      arrange_ids(id1,id2)
+    ## if the split arg is set to TRUE ...
+    ## then return a list with ibd1 and ibd2 elements separate
+    if(split) {
+      tmp <-
+        readr::read_tsv(file,
+                        col_types="ccciicddd",
+                        col_names=c("id1", "id2", "chr", "pstart", "pend", "type", "gstart", "gend", "glength")) %>%
+        dplyr::filter(type == "IBD1" | type == "IBD2")
+
+      ibd1 <-
+        tmp %>%
+        dplyr::filter(type == "IBD1") %>%
+        dplyr::select(id1, id2, chr, start = pstart, end = pend, length = glength) %>%
+        ## make sure ids are ordered
+        arrange_ids(id1,id2)
+
+      ibd2 <-
+        tmp %>%
+        dplyr::filter(type == "IBD2") %>%
+        dplyr::select(id1, id2, chr, start = pstart, end = pend, length = glength) %>%
+        ## make sure ids are ordered
+        arrange_ids(id1,id2)
+
+      seg <- list(IBD1 = ibd1, IBD2 = ibd2)
+
+    } else {
+      seg <-
+        readr::read_tsv(file,
+                        col_types="ccciicddd",
+                        col_names=c("id1", "id2", "chr", "pstart", "pend", "type", "gstart", "gend", "glength")) %>%
+        dplyr::filter(type == "IBD1" | type == "IBD2") %>%
+        dplyr::select(id1, id2, chr, start = pstart, end = pend, length = glength) %>%
+        ## make sure ids are ordered
+        arrange_ids(id1,id2)
+    }
 
   } else {
     stop("The 'source' argument must be one of 'hapibd' or 'pedsim'.")

@@ -4,12 +4,14 @@
 \alias{ibd2kin}
 \title{Compute kinship coefficient from IBD segments}
 \usage{
-ibd2kin(.ibd_data, .map)
+ibd2kin(.ibd_data, .map, type = NULL)
 }
 \arguments{
 \item{.ibd_data}{Tibble with IBD segments created using the \link[skater]{read_ibd} function}
 
 \item{.map}{Tibble with the genetic map data created using the \link[skater]{read_map} function}
+
+\item{type}{Type of IBD to use for kinship coefficient calculation; must be \code{'IBD1'}, \code{'IBD2'}, or \code{NULL} (both IBD1 and IBD2 will be treated the same); default is \code{NULL}}
 }
 \value{
 Tibble with three columns:
