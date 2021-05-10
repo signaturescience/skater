@@ -174,17 +174,40 @@ read_plink2_king <- function(file) {
 read_ibd <- function(file, source) {
 
   if(source == "hapibd") {
-    seg <-
+
+    ## is the hap ibd input empty?
+    ind <-
       readr::read_delim(file,
-                      delim = "\t",
-                      col_names = FALSE,
-                      col_types = "cdcddddd") %>%
-      ## select columns by indices
-      dplyr::select(1,3,5,6,7,8) %>%
-      ## set names
-      purrr::set_names(c("id1","id2","chr","start","end","length")) %>%
-      ## make sure ids are ordered
-      arrange_ids(id1,id2)
+                        delim = "\t",
+                        col_names = FALSE) %>%
+      nrow(.) > 0
+
+    ## nest all the hapibd IBD reading in a condition ...
+    ## ... checks that hapibd file has data in it (i.e. at least 1 row)
+    if(ind) {
+      seg <-
+        readr::read_delim(file,
+                          delim = "\t",
+                          col_names = FALSE,
+                          col_types = "cdcddddd") %>%
+        ## select columns by indices
+        dplyr::select(1,3,5,6,7,8) %>%
+        ## set names
+        purrr::set_names(c("id1","id2","chr","start","end","length")) %>%
+        ## make sure ids are ordered
+        arrange_ids(id1,id2)
+
+    } else {
+      ## create an empty tibble for segments if the hapibd input is empty
+      seg <-
+        dplyr::tibble(id1 = NULL,
+                      id2 = NULL,
+                      chr = NULL,
+                      start = NULL,
+                      end = NULL,
+                      length = NULL)
+      message("The hapibd input appears empty. Creating empty IBD tibble.")
+    }
   } else if (source == "pedsim") {
 
     seg <-
