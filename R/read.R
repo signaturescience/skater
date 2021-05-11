@@ -272,7 +272,7 @@ read_ibd <- function(file, source, split = TRUE) {
 #' cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map
 #' ```
 #'
-#' Another source is a sex-specific map ("behrer") originally published by Behrer et al and recommended by the developers of `ped-sim` ([documentation](https://github.com/williamslab/ped-sim#map-file)). To retrieve and prep this map file:
+#' Another source is a sex-specific map ("bherer") originally published by Bherer et al and recommended by the developers of `ped-sim` ([documentation](https://github.com/williamslab/ped-sim#map-file)). To retrieve and prep this map file:
 #'
 #' ```
 #' wget https://github.com/cbherer/Bherer_etal_SexualDimorphismRecombination/raw/master/Refined_genetic_map_b37.tar.gz
@@ -284,10 +284,10 @@ read_ibd <- function(file, source, split = TRUE) {
 #' | sed 's/^chr//' >> refined_mf.simmap;
 #' done
 #' ```
-#' Note that if the "behrer" map file is specified as source, then the sex-specific cM lengths will be averaged.
+#' Note that if the "bherer" map file is specified as source, then the sex-specific cM lengths will be averaged.
 #'
 #' @param file Input file path
-#' @param source Source of the input file; must be one of `"hapmap"` or `"behrer"`; default is `"hapmap"`
+#' @param source Source of the input file; must be one of `"hapmap"` or `"bherer"`; default is `"hapmap"`
 #'
 #' @return A tibble containing 3 columns:
 #'
@@ -315,14 +315,14 @@ read_map <- function(file, source = "hapmap") {
       dplyr::select(1,3,4) %>%
       ## set column names
       purrr::set_names(c("chr", "value", "bp"))
-  } else if (source == "behrer") {
+  } else if (source == "bherer") {
     gmap <-
       readr::read_delim(file,
                         delim = "\t") %>%
       dplyr::mutate(cm = (male_cM + female_cM) / 2) %>%
       dplyr::select(chr = 1, value = cm, bp = pos)
   } else {
-    stop("The only supported values for the 'source' argument are 'hapmap' or 'behrer'.")
+    stop("The only supported values for the 'source' argument are 'hapmap' or 'bherer'.")
   }
 
   return(gmap)

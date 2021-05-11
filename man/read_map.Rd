@@ -9,7 +9,7 @@ read_map(file, source = "hapmap")
 \arguments{
 \item{file}{Input file path}
 
-\item{source}{Source of the input file; must be one of \code{"hapmap"} or \code{"behrer"}; default is \code{"hapmap"}}
+\item{source}{Source of the input file; must be one of \code{"hapmap"} or \code{"bherer"}; default is \code{"hapmap"}}
 }
 \value{
 A tibble containing 3 columns:
@@ -27,7 +27,7 @@ unzip plink.GRCh37.map.zip
 cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map
 }
 
-Another source is a sex-specific map ("behrer") originally published by Behrer et al and recommended by the developers of \code{ped-sim} (\href{https://github.com/williamslab/ped-sim#map-file}{documentation}). To retrieve and prep this map file:\preformatted{wget https://github.com/cbherer/Bherer_etal_SexualDimorphismRecombination/raw/master/Refined_genetic_map_b37.tar.gz
+Another source is a sex-specific map ("bherer") originally published by Bherer et al and recommended by the developers of \code{ped-sim} (\href{https://github.com/williamslab/ped-sim#map-file}{documentation}). To retrieve and prep this map file:\preformatted{wget https://github.com/cbherer/Bherer_etal_SexualDimorphismRecombination/raw/master/Refined_genetic_map_b37.tar.gz
 tar xvzf Refined_genetic_map_b37.tar.gz
 printf "#chr\\tpos\\tmale_cM\\tfemale_cM\\n" > refined_mf.simmap
 for chr in \{1..22\}; do
@@ -37,7 +37,7 @@ paste Refined_genetic_map_b37/male_chr$chr.txt Refined_genetic_map_b37/female_ch
 done
 }
 
-Note that if the "behrer" map file is specified as source, then the sex-specific cM lengths will be averaged.
+Note that if the "bherer" map file is specified as source, then the sex-specific cM lengths will be averaged.
 }
 \references{
 \url{http://zzz.bwh.harvard.edu/plink/data.shtml#map}
