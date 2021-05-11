@@ -203,12 +203,12 @@ read_ibd <- function(file, source, split = TRUE) {
     } else {
       ## create an empty tibble for segments if the hapibd input is empty
       seg <-
-        dplyr::tibble(id1 = NULL,
-                      id2 = NULL,
-                      chr = NULL,
-                      start = NULL,
-                      end = NULL,
-                      length = NULL)
+        dplyr::tibble(id1 = NA,
+                      id2 = NA,
+                      chr = NA,
+                      start = NA,
+                      end = NA,
+                      length = NA)
       message("The hapibd input appears empty. Creating empty IBD tibble.")
     }
   } else if (source == "pedsim") {
@@ -264,14 +264,30 @@ read_ibd <- function(file, source, split = TRUE) {
 #'
 #' This function reads in the content from a genetic map file to translate physical distance to genetic units (i.e. cM).
 #'
-#' The genetic map could come from different sources. However, the only is the map file based on HapMap and distributed by the Browning Lab ([documentation](http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/)). If this map file is used, the non-sex chromosomes can be downloaded and concatentated to a single file as follows:
+#' The genetic map could come from different sources. One source is "hapmap", which is a map based on HapMap and distributed by the Browning Lab ([documentation](http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/)). If this map file is used, the non-sex chromosomes can be downloaded and concatentated to a single file as follows:
 #'
-#' `wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip`
-#' `unzip plink.GRCh37.map.zip`
-#' `cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map`
+#' ```
+#' wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
+#' unzip plink.GRCh37.map.zip
+#' cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map
+#' ```
+#'
+#' Another source is a sex-specific map ("behrer") originally published by Behrer et al and recommended by the developers of `ped-sim` ([documentation](https://github.com/williamslab/ped-sim#map-file)). To retrieve and prep this map file:
+#'
+#' ```
+#' wget https://github.com/cbherer/Bherer_etal_SexualDimorphismRecombination/raw/master/Refined_genetic_map_b37.tar.gz
+#' tar xvzf Refined_genetic_map_b37.tar.gz
+#' printf "#chr\tpos\tmale_cM\tfemale_cM\n" > refined_mf.simmap
+#' for chr in {1..22}; do
+#' paste Refined_genetic_map_b37/male_chr$chr.txt Refined_genetic_map_b37/female_chr$chr.txt \
+#' | awk -v OFS="\t" 'NR > 1 && $2 == $6 {print $1,$2,$4,$8}' \
+#' | sed 's/^chr//' >> refined_mf.simmap;
+#' done
+#' ```
+#' Note that if the "behrer" map file is specified as source, then the sex-specific cM lengths will be averaged.
 #'
 #' @param file Input file path
-#' @param source Source of the input file; currently only `"hapmap"` supported (and set to default)
+#' @param source Source of the input file; must be one of `"hapmap"` or `"behrer"`; default is `"hapmap"`
 #'
 #' @return A tibble containing 3 columns:
 #'
@@ -281,6 +297,8 @@ read_ibd <- function(file, source, split = TRUE) {
 #'
 #' @references <http://zzz.bwh.harvard.edu/plink/data.shtml#map>
 #' @references <http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/>
+#' @references <https://github.com/williamslab/ped-sim#map-file>
+#' @references <http://dx.doi.org/10.1038/ncomms14994>
 #'
 #' @export
 #'
@@ -297,8 +315,14 @@ read_map <- function(file, source = "hapmap") {
       dplyr::select(1,3,4) %>%
       ## set column names
       purrr::set_names(c("chr", "value", "bp"))
+  } else if (source == "behrer") {
+    gmap <-
+      readr::read_delim(file,
+                        delim = "\t") %>%
+      dplyr::mutate(cm = (male_cM + female_cM) / 2) %>%
+      dplyr::select(chr = 1, value = cm, bp = pos)
   } else {
-    stop("The only supported value for the 'source' argument is 'hapmap'.")
+    stop("The only supported values for the 'source' argument are 'hapmap' or 'behrer'.")
   }
 
   return(gmap)
