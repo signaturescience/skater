@@ -264,7 +264,7 @@ read_ibd <- function(file, source, split = TRUE) {
 #'
 #' This function reads in the content from a genetic map file to translate physical distance to genetic units (i.e. cM).
 #'
-#' The genetic map could come from different sources. One source is "hapmap", which is a map based on HapMap and distributed by the Browning Lab ([documentation](http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/)). If this map file is used, the non-sex chromosomes can be downloaded and concatentated to a single file as follows:
+#' The genetic map could come from different sources. One source is the HapMap map distributed by the Browning Lab ([documentation](http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/)). If this map file is used, the non-sex chromosomes can be downloaded and concatentated to a single file as follows:
 #'
 #' ```
 #' wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
@@ -284,10 +284,16 @@ read_ibd <- function(file, source, split = TRUE) {
 #' | sed 's/^chr//' >> refined_mf.simmap;
 #' done
 #' ```
-#' Note that if the "bherer" map file is specified as source, then the sex-specific cM lengths will be averaged.
+#' Regardless of the source, the input file must be sex-averaged and in a tab-separated "Plink" format ([documentation](<http://zzz.bwh.harvard.edu/plink/data.shtml#map>)) with the following four columns and no header (i.e. no column names):
+#'
+#' 1. Chromosome
+#' 2. Identifier (ignored in `read_map()`)
+#' 3. Length (genetic length within the physical position boundary)
+#' 4. Position (physical position boundary)
+#'
+#' The columns must be in the order above. Note that only the first, third, and fourth columns are used in the function.
 #'
 #' @param file Input file path
-#' @param source Source of the input file; must be one of `"hapmap"` or `"bherer"`; default is `"hapmap"`
 #'
 #' @return A tibble containing 3 columns:
 #'
@@ -302,30 +308,18 @@ read_ibd <- function(file, source, split = TRUE) {
 #'
 #' @export
 #'
-read_map <- function(file, source = "hapmap") {
+read_map <- function(file) {
 
-
-  if(source == "hapmap") {
-    gmap <-
-      readr::read_delim(file,
-                        delim = "\t",
-                        col_names = FALSE,
-                        col_types = "dcdd") %>%
-      ## select column indices
-      dplyr::select(1,3,4) %>%
-      ## set column names
-      purrr::set_names(c("chr", "value", "bp"))
-  } else if (source == "bherer") {
-    gmap <-
-      readr::read_delim(file,
-                        delim = "\t") %>%
-      dplyr::mutate(cm = (male_cM + female_cM) / 2) %>%
-      dplyr::select(chr = 1, value = cm, bp = pos)
-  } else {
-    stop("The only supported values for the 'source' argument are 'hapmap' or 'bherer'.")
-  }
+  gmap <-
+    readr::read_delim(file,
+                    delim = "\t",
+                    col_names = FALSE,
+                    col_types = "dcdd") %>%
+    ## select column indices
+    dplyr::select(1,3,4) %>%
+    ## set column names
+    purrr::set_names(c("chr", "value", "bp"))
 
   return(gmap)
-
 
 }

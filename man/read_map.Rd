@@ -4,12 +4,10 @@
 \alias{read_map}
 \title{Read genetic map file}
 \usage{
-read_map(file, source = "hapmap")
+read_map(file)
 }
 \arguments{
 \item{file}{Input file path}
-
-\item{source}{Source of the input file; must be one of \code{"hapmap"} or \code{"bherer"}; default is \code{"hapmap"}}
 }
 \value{
 A tibble containing 3 columns:
@@ -22,7 +20,7 @@ A tibble containing 3 columns:
 \description{
 This function reads in the content from a genetic map file to translate physical distance to genetic units (i.e. cM).
 
-The genetic map could come from different sources. One source is "hapmap", which is a map based on HapMap and distributed by the Browning Lab (\href{http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/}{documentation}). If this map file is used, the non-sex chromosomes can be downloaded and concatentated to a single file as follows:\preformatted{wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
+The genetic map could come from different sources. One source is the HapMap map distributed by the Browning Lab (\href{http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/}{documentation}). If this map file is used, the non-sex chromosomes can be downloaded and concatentated to a single file as follows:\preformatted{wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
 unzip plink.GRCh37.map.zip
 cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map
 }
@@ -37,7 +35,15 @@ paste Refined_genetic_map_b37/male_chr$chr.txt Refined_genetic_map_b37/female_ch
 done
 }
 
-Note that if the "bherer" map file is specified as source, then the sex-specific cM lengths will be averaged.
+Regardless of the source, the input file must be sex-averaged and in a tab-separated "Plink" format (\href{http://zzz.bwh.harvard.edu/plink/data.shtml#map}{documentation}) with the following four columns and no header (i.e. no column names):
+\enumerate{
+\item Chromosome
+\item Identifier (ignored in \code{read_map()})
+\item Length (genetic length within the physical position boundary)
+\item Position (physical position boundary)
+}
+
+The columns must be in the order above. Note that only the first, third, and fourth columns are used in the function.
 }
 \references{
 \url{http://zzz.bwh.harvard.edu/plink/data.shtml#map}

@@ -44,8 +44,4 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data",
                                                         "Predicted",
                                                         "n",
                                                         "rmse",
-                                                        "pos",
-                                                        "cm",
-                                                        "female_cM",
-                                                        "male_cM",
                                                         "."))
