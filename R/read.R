@@ -203,12 +203,12 @@ read_ibd <- function(file, source, split = TRUE) {
     } else {
       ## create an empty tibble for segments if the hapibd input is empty
       seg <-
-        dplyr::tibble(id1 = NA,
-                      id2 = NA,
-                      chr = NA,
-                      start = NA,
-                      end = NA,
-                      length = NA)
+        dplyr::tibble(id1 = character(),
+                      id2 = character(),
+                      chr = character(),
+                      start = character(),
+                      end = character(),
+                      length = character())
       message("The hapibd input appears empty. Creating empty IBD tibble.")
     }
   } else if (source == "pedsim") {
