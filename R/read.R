@@ -153,7 +153,9 @@ read_plink2_king <- function(file) {
 #' @param file Input file path
 #' @param source Source of the input file; must be one of `"hapibd"` or `"pedsim"`
 #'
-#' @return A tibble containing 6 columns:
+#' @return if `source="hapibd"`, a tibble is returned.
+#' If `source="pedsim"`, a list with two tibble elements, `IBD1` and `IBD2` is returned.
+#' Both the `hapibd` tibble, and the two `pedsim` tibbles contain six columns:
 #'
 #' 1. id1 (sample identifier 1)
 #' 2. id2 (sample identifier 2)
