@@ -12,14 +12,16 @@ read_ibd(file, source)
 \item{source}{Source of the input file; must be one of \code{"hapibd"} or \code{"pedsim"}}
 }
 \value{
-A tibble containing 6 columns:
+if \code{source="hapibd"}, a tibble is returned.
+If \code{source="pedsim"}, a list with two tibble elements, \code{IBD1} and \code{IBD2} is returned.
+Both the \code{hapibd} tibble, and the two \code{pedsim} tibbles contain six columns:
 \enumerate{
 \item id1 (sample identifier 1)
 \item id2 (sample identifier 2)
 \item chr (chromosome)
 \item start (segment bp start coordinate)
 \item end (segment bp end coordinate)
-\item length (shared segement length in genetic units)
+\item length (shared segment length in genetic units, cM)
 }
 }
 \description{

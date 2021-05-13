@@ -4,12 +4,10 @@
 \alias{read_map}
 \title{Read genetic map file}
 \usage{
-read_map(file, source = "hapmap")
+read_map(file)
 }
 \arguments{
 \item{file}{Input file path}
-
-\item{source}{Source of the input file; currently only \code{"hapmap"} supported (and set to default)}
 }
 \value{
 A tibble containing 3 columns:
@@ -22,14 +20,37 @@ A tibble containing 3 columns:
 \description{
 This function reads in the content from a genetic map file to translate physical distance to genetic units (i.e. cM).
 
-The genetic map could come from different sources. However, the only is the map file based on HapMap and distributed by the Browning Lab (\href{http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/}{documentation}). If this map file is used, the non-sex chromosomes can be downloaded and concatentated to a single file as follows:
+The genetic map could come from different sources. One source is the HapMap map distributed by the Browning Lab (\href{http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/}{documentation}). If this map file is used, the non-sex chromosomes can be downloaded and concatentated to a single file as follows:\preformatted{wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
+unzip plink.GRCh37.map.zip
+cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map
+}
 
-\verb{wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip}
-\verb{unzip plink.GRCh37.map.zip}
-\verb{cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map}
+Another source is a sex-specific map ("bherer") originally published by Bherer et al and recommended by the developers of \code{ped-sim} (\href{https://github.com/williamslab/ped-sim#map-file}{documentation}). To retrieve and prep this map file:\preformatted{wget https://github.com/cbherer/Bherer_etal_SexualDimorphismRecombination/raw/master/Refined_genetic_map_b37.tar.gz
+tar xvzf Refined_genetic_map_b37.tar.gz
+printf "#chr\\tpos\\tmale_cM\\tfemale_cM\\n" > refined_mf.simmap
+for chr in \{1..22\}; do
+paste Refined_genetic_map_b37/male_chr$chr.txt Refined_genetic_map_b37/female_chr$chr.txt \\
+| awk -v OFS="\\t" 'NR > 1 && $2 == $6 \{print $1,$2,$4,$8\}' \\
+| sed 's/^chr//' >> refined_mf.simmap;
+done
+}
+
+Regardless of the source, the input file must be sex-averaged and in a tab-separated "Plink" format (\href{http://zzz.bwh.harvard.edu/plink/data.shtml#map}{documentation}) with the following four columns and no header (i.e. no column names):
+\enumerate{
+\item Chromosome
+\item Identifier (ignored in \code{read_map()})
+\item Length (genetic length within the physical position boundary)
+\item Position (physical position boundary)
+}
+
+The columns must be in the order above. Note that only the first, third, and fourth columns are used in the function.
 }
 \references{
 \url{http://zzz.bwh.harvard.edu/plink/data.shtml#map}
 
 \url{http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/}
+
+\url{https://github.com/williamslab/ped-sim#map-file}
+
+\url{http://dx.doi.org/10.1038/ncomms14994}
 }

@@ -153,14 +153,17 @@ read_plink2_king <- function(file) {
 #' @param file Input file path
 #' @param source Source of the input file; must be one of `"hapibd"` or `"pedsim"`
 #'
-#' @return A tibble containing 6 columns:
+#' @return if `source="hapibd"`, a tibble is returned.
+#' If `source="pedsim"`, a list with two tibble elements, `IBD1` and `IBD2` is returned.
+#' Both the `hapibd` tibble, and the two `pedsim` tibbles contain six columns:
 #'
 #' 1. id1 (sample identifier 1)
 #' 2. id2 (sample identifier 2)
 #' 3. chr (chromosome)
 #' 4. start (segment bp start coordinate)
 #' 5. end (segment bp end coordinate)
-#' 6. length (shared segement length in genetic units)
+#' 6. length (shared segment length in genetic units, cM)
+#'
 #'
 #' @references <https://github.com/browning-lab/hap-ibd#output-files>
 #' @references <https://github.com/williamslab/ped-sim#output-ibd-segments-file>
@@ -174,27 +177,59 @@ read_plink2_king <- function(file) {
 read_ibd <- function(file, source) {
 
   if(source == "hapibd") {
-    seg <-
-      readr::read_delim(file,
-                      delim = "\t",
-                      col_names = FALSE,
-                      col_types = "cdcddddd") %>%
-      ## select columns by indices
-      dplyr::select(1,3,5,6,7,8) %>%
-      ## set names
-      purrr::set_names(c("id1","id2","chr","start","end","length")) %>%
-      ## make sure ids are ordered
-      arrange_ids(id1,id2)
+
+    ## Does the hap ibd input contain any lines?
+    ind <- suppressWarnings(length(readr::read_delim(file, n_max=1L, delim = "\t", col_types = readr::cols())) > 0)
+
+    ## nest all the hapibd IBD reading in a condition ...
+    ## ... checks that hapibd file has data in it (i.e. at least 1 row)
+    if(ind) {
+      seg <-
+        readr::read_delim(file,
+                          delim = "\t",
+                          col_names = FALSE,
+                          col_types = "cdcddddd") %>%
+        ## select columns by indices
+        dplyr::select(1,3,5,6,7,8) %>%
+        ## set names
+        purrr::set_names(c("id1","id2","chr","start","end","length")) %>%
+        ## make sure ids are ordered
+        arrange_ids(id1,id2)
+
+    } else {
+      ## create an empty tibble for segments if the hapibd input is empty
+      seg <-
+        dplyr::tibble(id1 = character(),
+                      id2 = character(),
+                      chr = character(),
+                      start = character(),
+                      end = character(),
+                      length = character())
+      message("The hapibd input appears empty. Creating empty IBD tibble.")
+    }
   } else if (source == "pedsim") {
 
-    seg <-
+    tmp <-
       readr::read_tsv(file,
-                    col_types="ccciicddd",
-                    col_names=c("id1", "id2", "chr", "pstart", "pend", "type", "gstart", "gend", "glength")) %>%
-      dplyr::filter(type == "IBD1" | type == "IBD2") %>%
+                      col_types="ccciicddd",
+                      col_names=c("id1", "id2", "chr", "pstart", "pend", "type", "gstart", "gend", "glength")) %>%
+      dplyr::filter(type == "IBD1" | type == "IBD2")
+
+    ibd1 <-
+      tmp %>%
+      dplyr::filter(type == "IBD1") %>%
       dplyr::select(id1, id2, chr, start = pstart, end = pend, length = glength) %>%
       ## make sure ids are ordered
       arrange_ids(id1,id2)
+
+    ibd2 <-
+      tmp %>%
+      dplyr::filter(type == "IBD2") %>%
+      dplyr::select(id1, id2, chr, start = pstart, end = pend, length = glength) %>%
+      ## make sure ids are ordered
+      arrange_ids(id1,id2)
+
+    seg <- list(IBD1 = ibd1, IBD2 = ibd2)
 
   } else {
     stop("The 'source' argument must be one of 'hapibd' or 'pedsim'.")
@@ -211,14 +246,36 @@ read_ibd <- function(file, source) {
 #'
 #' This function reads in the content from a genetic map file to translate physical distance to genetic units (i.e. cM).
 #'
-#' The genetic map could come from different sources. However, the only is the map file based on HapMap and distributed by the Browning Lab ([documentation](http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/)). If this map file is used, the non-sex chromosomes can be downloaded and concatentated to a single file as follows:
+#' The genetic map could come from different sources. One source is the HapMap map distributed by the Browning Lab ([documentation](http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/)). If this map file is used, the non-sex chromosomes can be downloaded and concatentated to a single file as follows:
 #'
-#' `wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip`
-#' `unzip plink.GRCh37.map.zip`
-#' `cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map`
+#' ```
+#' wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
+#' unzip plink.GRCh37.map.zip
+#' cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map
+#' ```
+#'
+#' Another source is a sex-specific map ("bherer") originally published by Bherer et al and recommended by the developers of `ped-sim` ([documentation](https://github.com/williamslab/ped-sim#map-file)). To retrieve and prep this map file:
+#'
+#' ```
+#' wget https://github.com/cbherer/Bherer_etal_SexualDimorphismRecombination/raw/master/Refined_genetic_map_b37.tar.gz
+#' tar xvzf Refined_genetic_map_b37.tar.gz
+#' printf "#chr\tpos\tmale_cM\tfemale_cM\n" > refined_mf.simmap
+#' for chr in {1..22}; do
+#' paste Refined_genetic_map_b37/male_chr$chr.txt Refined_genetic_map_b37/female_chr$chr.txt \
+#' | awk -v OFS="\t" 'NR > 1 && $2 == $6 {print $1,$2,$4,$8}' \
+#' | sed 's/^chr//' >> refined_mf.simmap;
+#' done
+#' ```
+#' Regardless of the source, the input file must be sex-averaged and in a tab-separated "Plink" format ([documentation](<http://zzz.bwh.harvard.edu/plink/data.shtml#map>)) with the following four columns and no header (i.e. no column names):
+#'
+#' 1. Chromosome
+#' 2. Identifier (ignored in `read_map()`)
+#' 3. Length (genetic length within the physical position boundary)
+#' 4. Position (physical position boundary)
+#'
+#' The columns must be in the order above. Note that only the first, third, and fourth columns are used in the function.
 #'
 #' @param file Input file path
-#' @param source Source of the input file; currently only `"hapmap"` supported (and set to default)
 #'
 #' @return A tibble containing 3 columns:
 #'
@@ -228,27 +285,23 @@ read_ibd <- function(file, source) {
 #'
 #' @references <http://zzz.bwh.harvard.edu/plink/data.shtml#map>
 #' @references <http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/>
+#' @references <https://github.com/williamslab/ped-sim#map-file>
+#' @references <http://dx.doi.org/10.1038/ncomms14994>
 #'
 #' @export
 #'
-read_map <- function(file, source = "hapmap") {
+read_map <- function(file) {
 
-
-  if(source == "hapmap") {
-    gmap <-
-      readr::read_delim(file,
-                        delim = "\t",
-                        col_names = FALSE,
-                        col_types = "dcdd") %>%
-      ## select column indices
-      dplyr::select(1,3,4) %>%
-      ## set column names
-      purrr::set_names(c("chr", "value", "bp"))
-  } else {
-    stop("The only supported value for the 'source' argument is 'hapmap'.")
-  }
+  gmap <-
+    readr::read_delim(file,
+                    delim = "\t",
+                    col_names = FALSE,
+                    col_types = "dcdd") %>%
+    ## select column indices
+    dplyr::select(1,3,4) %>%
+    ## set column names
+    purrr::set_names(c("chr", "value", "bp"))
 
   return(gmap)
-
 
 }
