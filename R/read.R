@@ -160,7 +160,7 @@ read_plink2_king <- function(file) {
 #' 3. chr (chromosome)
 #' 4. start (segment bp start coordinate)
 #' 5. end (segment bp end coordinate)
-#' 6. length (shared segement length in genetic units)
+#' 6. length (shared segment length in genetic units, cM)
 #'
 #'
 #' @references <https://github.com/browning-lab/hap-ibd#output-files>
