@@ -182,7 +182,8 @@ read_ibd <- function(file, source) {
     ind <-
       readr::read_delim(file,
                         delim = "\t",
-                        col_names = FALSE) %>%
+                        col_names = FALSE,
+                        col_types = "cdcddddd") %>%
       nrow(.) > 0
 
     ## nest all the hapibd IBD reading in a condition ...
