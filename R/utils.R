@@ -67,7 +67,13 @@ kin2degree <- function(k, max_degree=3L) {
   stopifnot(all(k %>% dplyr::between(-1, 1)))
   stopifnot(is.numeric(max_degree))
   d <- dibble(max_degree)
-  vapply(k, function(k) as.integer(d$degree[which(purrr::map2_lgl(d$l, d$u, ~dplyr::between(k, .x, .y)))]), FUN.VALUE=1L)
+  ## slow
+  # degree <- vapply(k, function(k) as.integer(d$degree[which(purrr::map2_lgl(d$l, d$u, ~dplyr::between(k, .x, .y)))]), FUN.VALUE=1L)
+  ## Fast
+  d.lowerbound <- sort(d$l)
+  d.degree <- rev(d$degree)
+  degree <- d.degree[findInterval(k, d.lowerbound)]
+  return(degree)
 }
 
 
