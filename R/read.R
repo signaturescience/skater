@@ -181,9 +181,6 @@ read_ibd <- function(file, source) {
     ## Does the hap ibd input contain any lines?
     ind <- suppressWarnings(length(readr::read_delim(file, n_max=1L, delim = "\t", col_types = readr::cols())) > 0)
 
-    #ind <- length(readr::read_delim(file, n_max=1L, delim = "\t")) > 0
-
-    #ind <- TRUE
     ## nest all the hapibd IBD reading in a condition ...
     ## ... checks that hapibd file has data in it (i.e. at least 1 row)
     if(ind) {
