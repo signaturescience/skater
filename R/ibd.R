@@ -1,9 +1,21 @@
 #' Compute kinship coefficient from IBD segments
 #'
 #' @description
-#' This function is used to retrieve a relatedness measure from IBD segments. The relatedness value returned is the kinship coefficent.
+#' This function is used to retrieve a relatedness measure from IBD segments.
+#' The relatedness value returned is the kinship coefficent.
 #'
-#' The input data should be pairwise IBD segments prepared via \link[skater]{read_ibd}. The function will internally loop over each chromosome, and use a specified genetic map to convert shared segments to genetic units. After doing so, the function converts the shared length to a kinship coefficient.
+#' @details
+#' The input data should be pairwise IBD segments prepared via
+#' \link[skater]{read_ibd}. The function will internally loop over each
+#' chromosome, and use a specified genetic map to convert shared segments to
+#' genetic units. After doing so, the function converts the shared length to a
+#' kinship coefficient.
+#'
+#' Note that the data read in by [read_ibd] when `source="pedsim"` returns a
+#' list with separate tibbles for IBD1 and IBD2 segments. The current
+#' implementation of this function requires running this function independently
+#' on IBD1 and IBD2 segments, then summarizing (adding) the corresponding
+#' proportions. See examples.
 #'
 #' @param .ibd_data Tibble with IBD segments created using the \link[skater]{read_ibd} function
 #' @param .map Tibble with the genetic map data created using the \link[skater]{read_map} function
@@ -18,14 +30,15 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' pedsim_fp <- system.file("extdata", "GBR.sim.seg.gz", package="skater", mustWork=TRUE)
 #' pedsim_seg <- read_ibd(pedsim_fp, source = "pedsim")
-#' # See help for [read_map] for downloading/creating the map file.
-#' # This is not reproducible unless plink.allchr.GRCh37.map is in your ~.
-#' map <- read_map("~/plink.allchr.GRCh37.map", source="hapmap")
-#' ibd2kin(pedsim_seg, map)
-#' }
+#' gmapfile <- system.file("extdata", "sexspec-avg-min.plink.map", package="skater", mustWork=TRUE)
+#' gmap <- read_map(gmapfile)
+#' ibd1_dat <- ibd2kin(.ibd_data=pedsim_seg$IBD1, .map=gmap, type="IBD1")
+#' ibd2_dat <- ibd2kin(.ibd_data=pedsim_seg$IBD2, .map=gmap, type="IBD2")
+#' dplyr::bind_rows(ibd1_dat,ibd2_dat) %>%
+#'   dplyr::group_by(id1,id2) %>%
+#'   dplyr::summarise(kinship = sum(kinship), .groups = "drop")
 #'
 #' @references http://faculty.washington.edu/sguy/ibd_relatedness.html
 #'
