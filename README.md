@@ -11,7 +11,7 @@
 <!-- badges: end -->
 
 **S**NP-based **K**inship **A**nalysis **T**esting and **E**valuation:
-miscellaneous **R** utilties.
+miscellaneous **R** data analysis utilties.
 
 ## Installation
 
@@ -379,6 +379,9 @@ confusion_matrix(prediction = kinpairs_inferred$degree_inferred,
 #>   2          0  3 40  1         4
 #>   3          8  4  0  6         6
 #>   unrelated  3  3  2  0        82
+#> 
+#> $recip_rmse
+#> [1] 0.4665971
 ```
 
 Pluck out just the contingency table:
