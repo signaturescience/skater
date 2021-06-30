@@ -1,6 +1,8 @@
 ---
-title: "Basic Usage"
-output: rmarkdown::html_vignette
+title: "`skater`: Basic Usage"
+output: 
+  rmarkdown::html_vignette:
+      toc: true
 vignette: >
   %\VignetteIndexEntry{Basic Usage}
   %\VignetteEngine{knitr::rmarkdown}
@@ -15,13 +17,13 @@ knitr::opts_chunk$set(
 ```
 
 
+## Overview
+
+The `skater` package provides a collection of analysis and utility functions for **S**NP-based **k**inship **a**nalysis, **t**esting, and **e**valuation as an **R** package. Functions in the package include tools for working with pedigree data, performing relationship degree inference, assessing classification accuracy, and summarizing IBD segment data.
+
 ```{r}
 library(skater)
 ```
-
-## Overview
-
-The `skater` package provides a collection of utilities for SNP-based kinship analysis. Functions in the package include tools for working with pedigree data, performing relationship degree inference, assessing classification accuracy, and summarizing IBD segment data.
 
 ## Pedigrees
 
