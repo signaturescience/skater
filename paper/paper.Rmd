@@ -1,9 +1,24 @@
 ---
-title_full: "`skater`: An R package for SNP-based Kinship Analysis and Benchmarking"
+# title_full: "skater: An R package for SNP-based Kinship Analysis and Benchmarking"
+title_full: "skater: An R package for SNP-based Kinship Analysis, Testing, and Evaluation"
 title_short: "skater package for kinship analysis"
 
-# one of `Original Paper`, `Discovery Note`, `Application Note`, `Review`, `Letter to the Editor`, `Conference Paper`    
-subject_section: "Application Note"
+# One of the following below. See https://academic.oup.com/bioinformatics/pages/instructions_for_authors#Types%20of%20Manuscript
+# one of `Original Paper`, `Discovery Note`, `Applications Note`, `Review`, `Letter to the Editor`, `Conference Paper`    
+manuscript_type: Applications Note
+
+# One of the following below. See https://academic.oup.com/bioinformatics/pages/instructions_for_authors#Detailed%20Scope%20Guidelines
+# Genome analysis
+# Sequence analysis
+# Phylogenetics
+# Structural bioinformatics
+# Gene expression
+# Genetic and population analysis
+# Systems biology
+# Data and text mining
+# Databases and ontologies
+# Bioimage informatics
+subject_section:  Genetics and Population Analysis
 
 access_date:
   - day: DD
@@ -59,10 +74,9 @@ bibliography: bibliography.bib
 
 # Introduction
 
-Introduce your topic. Lorem ipsum ad nauseum. Introduce your topic. Lorem ipsum ad nauseum. Introduce your topic. Lorem ipsum ad nauseum. Introduce your topic. Lorem ipsum ad nauseum. Introduce your topic. Lorem ipsum ad nauseum.
+Inferring familial relationships between individuals using genetic data is a common problem in population genetics, medical genetics, and forensics. There are multiple approaches to estimating the relatedness between samples, including genome-wide relatedness measures such as those implemented in Plink [@purcell2007] or KING [@manichaikul2010], and methods that rely on identity by descent (IBD) segment detection such as GERMLINE [@gusev2009], hap-IBD [@zhou2020], and IBIS [@seidman2020]. Recent efforts have focused on benchmarking these methods [@ramstetter2017; @vries2021] aided by tools for simulating pedigrees and genome-wide SNP data [@caballero2019]. Analyzing results from genome-wide SNP-based kinship analysis or comparing analyses to simulated data for benchmarking have to this point required writing one-off analysis functions or utility scripts that are rarely shared, poorly documented, and at best, have an inconsistent design and API across multiple developers and programming languages. Here we present the skater R package for **S**NP-based **k**inship **a**nalysis, **t**esting, and **e**valuation.
 
 # The skater package
-
 
 Describe the approach. Lorem ipsum ad nauseum. Introduce your topic. Lorem ipsum ad nauseum. Introduce your topic. Lorem ipsum ad nauseum. Introduce your topic. Lorem ipsum ad nauseum. Introduce your topic. Lorem ipsum ad nauseum.
 
