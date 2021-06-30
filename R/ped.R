@@ -1,7 +1,6 @@
 #' Fam to pedigree
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
 #'
 #' Converts a [PLINK-formatted fam file](https://www.cog-genomics.org/plink/1.9/formats#fam) to a pedigree object using [kinship2::pedigree].
 #'
