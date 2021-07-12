@@ -26,11 +26,11 @@ The `skater` package provides a collection of analysis and utility functions for
 library(skater)
 ```
 
-## Pedigrees
+## Pedigree parsing and manipulation
 
 Pedigrees define familial relationships in a hierarchical structure. Many genomics tools for working with pedigrees start with a "fam" file, which is a tabular format with one row per individual and columns for unique IDs of the mother, father, and the family unit.
 
-One of the output formats used by `PLINK` is the `.fam` file[^plink-fam]. The package includes `read_fam()` to read files in this format:
+One of the formats used by PLINK and other genetic analysis tools is the `.fam` file.[^plink-fam] The package includes `read_fam()` to read files in this format:
 
 [^plink-fam]: https://www.cog-genomics.org/plink/1.9/formats#fam
 
@@ -40,7 +40,7 @@ fam <- read_fam(famfile)
 fam
 ```
 
-Family structures in the "fam" format can then be translated to the `pedigree` structure used by the `kinship2` package[^kinship2-vignette]. The "fam" format could include multiple families, and the `fam2ped()` function will collapse them all into a `tibble` with one row per family:
+Family structures in the "fam" format can then be translated to the `pedigree` structure used by the `kinship2` package.[^kinship2-vignette] The "fam" format could include multiple families, and the `fam2ped()` function will collapse them all into a `tibble` with one row per family:
 
 [^kinship2-vignette]: https://cran.r-project.org/web/packages/kinship2/vignettes/pedigree.html
 
@@ -75,7 +75,7 @@ The `plot_pedigree()` function from `skater` will walk over a list of pedigree o
 plot_pedigree(peds$ped, file="3gens.ped.pdf")
 ```
 
-The `ped2kinpair()` function takes a pedigree object and produces a pairwise list of relationships with expected kinship coefficients for each pair.
+The `ped2kinpair()` function takes a pedigree object and produces a pairwise list of relationships between all individuals in the data with the expected kinship coefficients for each pair.
 
 The function can be run on a single family:
 
@@ -100,7 +100,7 @@ Note that this maps `ped2kinpair()` over all `ped` objects in the input `tibble`
 
 The `skater` package includes functions to translate kinship coefficients to relationship degrees. The kinship coefficients could come from `ped2kinpair()` or other kinship estimation software.
 
-The `dibble()` function creates a **d**egree **i**nference `tibble`, with degrees up to the specified `max_degree` (default=3), expected kinship coefficient, and lower (`l`) and upper (`u`) inference ranges defined by Manichaikul[^manichaikul]. Degree 0 corresponds to self / identity / MZ twins, with an expected kinship coefficient of 0.5, with inference range >=0.354. Anything beyond the maximum degree resolution is considered unrelated (degree `NA`), with expected kinship coefficient of 0.
+The `dibble()` function creates a **d**egree **i**nference `tibble`, with degrees up to the specified `max_degree` (default=3), expected kinship coefficient, and lower (`l`) and upper (`u`) inference ranges as defined in the KING paper.[^manichaikul] Degree 0 corresponds to self / identity / monozygotic twins, with an expected kinship coefficient of 0.5, with inference range >=0.354. Anything beyond the maximum degree resolution is considered unrelated (degree `NA`), with expected kinship coefficient of 0.
 
 [^manichaikul]: Manichaikul, A., Mychaleckyj, J. C., Rich, S. S., Daly, K., Sale, M., & Chen, W. M. (2010). Robust relationship inference in genome-wide association studies. Bioinformatics (Oxford, England), 26(22), 2867–2873. https://doi.org/10.1093/bioinformatics/btq559
 
@@ -149,7 +149,7 @@ kinpairs_subset %>%
   dplyr::mutate(degree=kin2degree(k, max_degree=3))
 ```
 
-## Degree Classification Accuracy
+## Benchmarking Degree Classification
 
 Once estimated kinship is converted to degree, it may be of interest to compare the inferred degree to truth. When aggregated over many relationships and inferences, this method can help benchmark performance of a particular kinship analysis method.
 
@@ -177,10 +177,7 @@ The `confusion_matrix()` function on its own outputs a list with three objects:
     - False Positive Rate = 1 - Specificity
     - False Negative Rate = 1 - Sensitivity
 3. A `matrix` with the contingency table object itself.
-4. A `vector` with the reciprocal RMSE[^recip-rmse]
-
-
-[^recip-rmse]: `sqrt(mean((1/(Target+.5)-1/(Predicted+.5))^2)))`
+4. A `vector` with the reciprocal RMSE (R-RMSE). The R-RMSE is calculated as `sqrt(mean((1/(Target+.5)-1/(Predicted+.5))^2)))`, and is a superior measure to classification accuracy when benchmarking relationship degree estimation. Taking the reciprocal of the target and predicted degree results in larger penalties for more egregious misclassifications (e.g., classifying a first-degree relative pair as second degree) than misclassifications at more distant relationships (e.g., misclassifying a fourth-degree relative pair as fifth-degree). The +0.5 adjustment prevents division-by-zero when a 0th-degree (identical) relative pair is introduced.
 
 To illustrate the usage, first take the `kinpairs` data from above and randomly flip ~20% of the true relationship degrees.
 
@@ -225,12 +222,12 @@ confusion_matrix(prediction = kinpairs_inferred$degree_inferred,
 
 ## IBD Segment Analysis
 
-Tools such as `hap-ibd`[^hap-ibd] are capable of inferring shared IBD segments between individuals. The `skater` package includes functionality to take those IBD segments, compute shared genomic centimorgan (cM) length, and convert that shared cM to a kinship coefficient. In addition to inferred segments, these functions can estimate "truth" kinship from data simulated by `ped-sim`[^ped-sim].
+Tools such as `hap-ibd`[^hap-ibd] are capable of inferring shared IBD segments between individuals. The `skater` package includes functionality to take those IBD segments, compute shared genomic centimorgan (cM) length, and convert that shared cM to a kinship coefficient. In addition to inferred segments, these functions can estimate "truth" kinship from data simulated by `ped-sim`.[^ped-sim]
 
 [^hap-ibd]: https://github.com/browning-lab/hap-ibd#output-files
 [^ped-sim]: https://github.com/williamslab/ped-sim#output-ibd-segments-file
 
-The `read_ibd()` function reads in the pairwise IBD segment format. Input to this function can either be inferred IBD segments (`source="hapibd"`) or simulated segments (`source="pedsim"`). The first example below uses data in the `hap-ibd` output format:
+The `read_ibd()` function reads in the pairwise IBD segment format. Input to this function can either be inferred IBD segments from hap-IBD (`source="hapibd"`) or simulated segments (`source="pedsim"`). The first example below uses data in the `hap-ibd` output format:
 
 ```{r}
 hapibd_fp <- system.file("extdata", "GBR.sim.ibd.gz", package="skater", mustWork=TRUE)
