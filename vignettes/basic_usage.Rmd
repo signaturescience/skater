@@ -1,5 +1,5 @@
 ---
-title: "`skater`: Basic Usage"
+title: "Basic Usage"
 output: 
   rmarkdown::html_vignette:
       toc: true
