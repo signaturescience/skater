@@ -72,6 +72,27 @@ output:
 bibliography: bibliography.bib
 ---
 
+```{r, echo=FALSE, eval=FALSE}
+## Run this chunk interactively if you update the package vignette.
+## This renders the vignette as a PDF with a new title.
+
+# Where is the package vignette?
+vpath <- here::here("vignettes/basic_usage.Rmd")
+# Where do you want to save the new modified vignette rmarkdown?
+spath <- here::here("paper/supplement-vignette.Rmd")
+# Read in the vignette rmarkdown text
+vtext <- readLines(vpath)
+# Create the supplemental material rmarkdown by replacing the title YAML
+stext <- sub(pattern='title: "Basic Usage"', 
+             replacement = 'title: |\n    | Supplementary Material for:\n    | skater: An R package for SNP-based Kinship Analysis, Testing, and Evaluation\n    | _(skater v0.1.0 package vignette)_', 
+             x=vtext)
+# Write out that modified yaml to the supplementary material rmarkdown
+writeLines(text=stext, con=spath)
+# Render it to PDF
+rmarkdown::render(spath, output_format="pdf_document")
+```
+
+
 # Introduction
 
 Inferring familial relationships between individuals using genetic data is a common problem in population genetics, medical genetics, and forensics. There are multiple approaches to estimating the relatedness between samples, including genome-wide relatedness measures such as those implemented in Plink [@purcell2007] or KING [@manichaikul2010], and methods that rely on identity by descent (IBD) segment detection such as GERMLINE [@gusev2009], hap-IBD [@zhou2020], and IBIS [@seidman2020]. Recent efforts have focused on benchmarking these methods [@ramstetter2017; @vries2021] aided by tools for simulating pedigrees and genome-wide SNP data [@caballero2019]. Analyzing results from genome-wide SNP-based kinship analysis or comparing analyses to simulated data for benchmarking have to this point required writing one-off analysis functions or utility scripts that are rarely shared and/or poorly documented. There is a need in the field for a well-documented software package with a consistent design and API that contains functions to assist with downstream manipulation, benchmarking, and analysis of SNP-based kinship assessment methods. Here we present the skater R package for **S**NP-based **k**inship **a**nalysis, **t**esting, and **e**valuation.
