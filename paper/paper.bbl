@@ -64,6 +64,23 @@ Seidman, D.~N., Shenoy, S.~A., Kim, M., Babu, R., Woods, I.~G., Dyer, T.~D.,
   Segments Enables Effective Relationship Classification}}.
 \newblock {\em American Journal of Human Genetics\/}, {\bf 106}(4), 453--466.
 
+\bibitem[Sinnwell and Therneau(2020)Sinnwell and Therneau]{kinship2}
+Sinnwell, J. and Therneau, T. (2020).
+\newblock {\em kinship2: Pedigree Functions\/}.
+\newblock R package version 1.8.5.
+
+\bibitem[Wickham {\em et~al.}(2019)Wickham, Averick, Bryan, Chang, McGowan,
+  François, Grolemund, Hayes, Henry, Hester, Kuhn, Pedersen, Miller, Bache,
+  Müller, Ooms, Robinson, Seidel, Spinu, Takahashi, Vaughan, Wilke, Woo, and
+  Yutani]{Wickham2019}
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L.~D., François, R.,
+  Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T.~L.,
+  Miller, E., Bache, S.~M., Müller, K., Ooms, J., Robinson, D., Seidel, D.~P.,
+  Spinu, V., Takahashi, K., Vaughan, D., Wilke, C., Woo, K., and Yutani, H.
+  (2019).
+\newblock Welcome to the tidyverse.
+\newblock {\em Journal of Open Source Software\/}, {\bf 4}(43), 1686.
+
 \bibitem[Zhou {\em et~al.}(2020)Zhou, Browning, and Browning]{zhou2020}
 Zhou, Y., Browning, S.~R., and Browning, B.~L. (2020).
 \newblock A {{Fast}} and {{Simple Method}} for {{Detecting
