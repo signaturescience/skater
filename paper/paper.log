@@ -1,179 +1,171 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2021.7.13)  13 JUL 2021 13:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  13 JUL 2021 14:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **paper.tex
 (./paper.tex
-LaTeX2e <2021-06-01> patch level 1
-L3 programming layer <2021-06-18> (./bioinfo.cls
+LaTeX2e <2020-02-02> patch level 5
+L3 programming layer <2020-03-06> (./bioinfo.cls
 Document Class: bioinfo 2003/02/08 0.1
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/base/inputenc.sty
-Package: inputenc 2021/02/14 v1.3d Input encoding file
-\inpenc@prehook=\toks16
-\inpenc@posthook=\toks17
-) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/crop/crop.sty
-Package: crop 2017/11/19 1.10 crop marks (mf)
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/generic/iftex/ifluatex.sty
-Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
-Package: iftex 2020/03/06 v1.0d TeX engine tests
-))
-\stockwidth=\dimen138
-\stockheight=\dimen139
-\CROP@index=\count182
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/graphics/color.sty
-Package: color 2020/02/24 v1.2b Standard LaTeX Color (DPC)
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(/usr/local/texlive/2020/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/08/11 v1.3c Input encoding file
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/crop/crop.sty
+Package: crop 2003/05/20 v1.9 crop marks (mf)
+\stockwidth=\dimen134
+\stockheight=\dimen135
+\CROP@index=\count167
+(/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2019/11/23 v1.2a Standard LaTeX Color (DPC)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
-Package color Info: Driver file: pdftex.def on input line 149.
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
-)) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package color Info: Driver file: pdftex.def on input line 147.
+(/usr/local/texlive/2020/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
+)) (/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2019/11/30 v1.4a Standard LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cf
-g
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: pdftex.def on input line 107.
+Package graphics Info: Driver file: pdftex.def on input line 105.
 )
-\CROP@offset=\count183
-Package crop Info: Local config file crop.cfg used on input line 622.
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/xelatex/xetexconfig/crop.cfg)) (
-/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+\CROP@offset=\count168
+Package crop Info: Local config file crop.cfg used on input line 605.
+(/usr/local/texlive/2020/texmf-dist/tex/xelatex/xetexconfig/crop.cfg)) (/usr/lo
+cal/texlive/2020/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
+(/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks18
+\KV@toks@=\toks17
 )
-\Gin@req@height=\dimen140
-\Gin@req@width=\dimen141
-) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2021/04/20 v2.17j AMS math features
+\Gin@req@height=\dimen136
+\Gin@req@width=\dimen137
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2020/01/20 v2.17e AMS math features
 \@mathmargin=\skip47
 For additional information on amsmath, use the `?' option.
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+(/usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks19
-\ex@=\dimen142
-)) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+\@emptytoks=\toks18
+\ex@=\dimen138
+)) (/usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen143
-) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+\pmbraise@=\dimen139
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
-\inf@bad=\count184
-LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count185
-\leftroot@=\count186
-LaTeX Info: Redefining \overline on input line 399.
-\classnum@=\count187
-\DOTSCASE@=\count188
-LaTeX Info: Redefining \ldots on input line 496.
-LaTeX Info: Redefining \dots on input line 499.
-LaTeX Info: Redefining \cdots on input line 620.
-\Mathstrutbox@=\box50
-\strutbox@=\box51
-\big@size=\dimen144
-LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count189
-\c@MaxMatrixCols=\count190
+\inf@bad=\count169
+LaTeX Info: Redefining \frac on input line 227.
+\uproot@=\count170
+\leftroot@=\count171
+LaTeX Info: Redefining \overline on input line 389.
+\classnum@=\count172
+\DOTSCASE@=\count173
+LaTeX Info: Redefining \ldots on input line 486.
+LaTeX Info: Redefining \dots on input line 489.
+LaTeX Info: Redefining \cdots on input line 610.
+\Mathstrutbox@=\box45
+\strutbox@=\box46
+\big@size=\dimen140
+LaTeX Font Info:    Redeclaring font encoding OML on input line 733.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 734.
+\macc@depth=\count174
+\c@MaxMatrixCols=\count175
 \dotsspace@=\muskip16
-\c@parentequation=\count191
-\dspbrk@lvl=\count192
-\tag@help=\toks20
-\row@=\count193
-\column@=\count194
-\maxfields@=\count195
-\andhelp@=\toks21
-\eqnshift@=\dimen145
-\alignsep@=\dimen146
-\tagshift@=\dimen147
-\tagwidth@=\dimen148
-\totwidth@=\dimen149
-\lineht@=\dimen150
-\@envbody=\toks22
+\c@parentequation=\count176
+\dspbrk@lvl=\count177
+\tag@help=\toks19
+\row@=\count178
+\column@=\count179
+\maxfields@=\count180
+\andhelp@=\toks20
+\eqnshift@=\dimen141
+\alignsep@=\dimen142
+\tagshift@=\dimen143
+\tagwidth@=\dimen144
+\totwidth@=\dimen145
+\lineht@=\dimen146
+\@envbody=\toks21
 \multlinegap=\skip48
 \multlinetaggap=\skip49
-\mathdisplay@stack=\toks23
-LaTeX Info: Redefining \[ on input line 2923.
-LaTeX Info: Redefining \] on input line 2924.
-) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/tools/array.sty
-Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
-\col@sep=\dimen151
-\ar@mcellbox=\box52
-\extrarowheight=\dimen152
-\NC@list=\toks24
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2859.
+LaTeX Info: Redefining \] on input line 2860.
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/tools/array.sty
+Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
+\col@sep=\dimen147
+\ar@mcellbox=\box47
+\extrarowheight=\dimen148
+\NC@list=\toks23
 \extratabsurround=\skip50
 \backup@length=\skip51
-\ar@cellbox=\box53
-) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+\ar@cellbox=\box48
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/sttools/flushend.sty
-Package: flushend 2020/10/16 v3.5 Balancing columns in twocolumn mode
+)) (/usr/local/texlive/2020/texmf-dist/tex/latex/sttools/flushend.sty
+Package: flushend 2017/03/27 v3.3 Balancing columns in twocolumn mode
 \flushend@@lastskip@a=\skip52
 \flushend@@lastskip@b=\skip53
 \flushend@@lastskip@c=\skip54
-\flushend@@penalty@a=\count196
-\var@@loop@iter=\count197
-\flushend@@lastkern@a=\dimen153
-\var@@temp@spread=\dimen154
-\var@@temp@a=\dimen155
-\var@@temp@loop=\dimen156
-\flushend@@page@rule=\dimen157
-\flushend@@varbox@a=\box54
-\flushend@@varbox@c=\box55
-\flushend@@tempbox@a=\box56
-\flushend@@tempbox@c=\box57
-\@viper=\box58
-\hold@viper=\box59
-\atColsBreak=\toks25
-\atColsEnd=\toks26
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count198
-)) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/sttools/stfloats.sty
+\flushend@@penalty@a=\count181
+\flushend@@lastkern@a=\dimen149
+\var@@temp@spread=\dimen150
+\var@@temp@a=\dimen151
+\flushend@@page@rule=\dimen152
+\flushend@@varbox@a=\box49
+\flushend@@varbox@c=\box50
+\flushend@@tempbox@a=\box51
+\flushend@@tempbox@c=\box52
+\@viper=\box53
+\hold@viper=\box54
+\atColsBreak=\toks24
+\atColsEnd=\toks25
+(/usr/local/texlive/2020/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count182
+)) (/usr/local/texlive/2020/texmf-dist/tex/latex/sttools/stfloats.sty
 Package: stfloats 2017/03/27 v3.3 Improve float mechanism and baselineskip sett
 ings
-\@dblbotnum=\count199
-\c@dblbotnumber=\count266
-) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/amscls/amsthm.sty
-Package: amsthm 2020/05/29 v2.20.6
-\thm@style=\toks27
-\thm@bodyfont=\toks28
-\thm@headfont=\toks29
-\thm@notefont=\toks30
-\thm@headpunct=\toks31
+\@dblbotnum=\count183
+\c@dblbotnumber=\count184
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2017/10/31 v2.20.4
+\thm@style=\toks26
+\thm@bodyfont=\toks27
+\thm@headfont=\toks28
+\thm@notefont=\toks29
+\thm@headpunct=\toks30
 \thm@preskip=\skip55
 \thm@postskip=\skip56
 \thm@headsep=\skip57
-\dth@everypar=\toks32
-) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/changepage/chngpage.sty
+\dth@everypar=\toks31
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/changepage/chngpage.sty
 Package: chngpage 2009/10/20 v1.2b change page layout
-\c@cp@cnt=\count267
-\c@cp@tempcnt=\count268
-) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/psnfss/times.sty
-Package: times 2020/03/25 PSNFSS-v9.3 (SPQR) 
-) (/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/ly1/ly1enc.def
+\c@cp@cnt=\count185
+\c@cp@tempcnt=\count186
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2020/02/11 v2.0o Standard LaTeX package
+(/usr/local/texlive/2020/texmf-dist/tex/latex/ly1/ly1enc.def
 File: ly1enc.def 2009/07/22 v0.7 TeX 'n ANSI encoding (DPC/KB)
 Now handling font encoding LY1 ...
 ... processing UTF-8 mapping file for font encoding LY1
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/base/ly1enc.dfu
-File: ly1enc.dfu 2021/01/27 v1.2l UTF-8 support for inputenc
+(/usr/local/texlive/2020/texmf-dist/tex/latex/base/ly1enc.dfu
+File: ly1enc.dfu 2019/11/14 v1.2k UTF-8 support for inputenc
    defining Unicode char U+00A0 (decimal 160)
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A2 (decimal 162)
@@ -302,36 +294,35 @@ File: ly1enc.dfu 2021/01/27 v1.2l UTF-8 support for inputenc
 ))
 LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 1
 12.
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/ly1/ly1ptm.fd
+(/usr/local/texlive/2020/texmf-dist/tex/latex/ly1/ly1ptm.fd
 File: ly1ptm.fd 2001/02/01 font definitions for LY1/ptm using Berry names.
 ))
-\c@section=\count269
-\c@subsection=\count270
-\c@subsubsection=\count271
-\c@paragraph=\count272
-\c@subparagraph=\count273
-\c@figure=\count274
-\c@table=\count275
+\c@section=\count187
+\c@subsection=\count188
+\c@subsubsection=\count189
+\c@paragraph=\count190
+\c@subparagraph=\count191
+\c@figure=\count192
+\c@table=\count193
 \dropfromtop=\skip58
 \extraspace=\skip59
 \aboveskipchk=\skip60
 \abovecaptionskip=\skip61
 \belowcaptionskip=\skip62
-\rotdimen=\dimen158
-\tempdime=\dimen159
-\temptbox=\box60
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
+\rotdimen=\dimen153
+\tempdime=\dimen154
+\temptbox=\box55
+(/usr/local/texlive/2020/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip63
 \bibsep=\skip64
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count276
-))
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex
-.def
-File: l3backend-pdftex.def 2021-05-07 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count277
-\l__pdf_internal_box=\box61
+\c@NAT@ctr=\count194
+)) (/usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.de
+f
+File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
+\l__kernel_color_stack_int=\count195
+\l__pdf_internal_box=\box56
 ) (./paper.aux)
 \openout1 = `paper.aux'.
 
@@ -351,15 +342,24 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
 LaTeX Font Info:    ... okay on input line 20.
 LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 20.
 LaTeX Font Info:    ... okay on input line 20.
-
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base
-.sty
+(/usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count196
+\scratchdimen=\dimen155
+\scratchbox=\box57
+\nofMPsegments=\count197
+\nofMParguments=\count198
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count199
+\MPscratchDim=\dimen156
+\MPnumerator=\count266
+\makeMPintoPDFobject=\count267
+\everyMPtoPDFconversion=\toks33
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
-
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/latexconfig/epstopdf-sys.c
-fg
+(/usr/local/texlive/2020/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
@@ -368,7 +368,7 @@ Package crop Info: detected driver: `pdftex' on input line 20.
 Package crop Info: using `pdftex' graphics driver on input line 20.
 LaTeX Font Info:    Trying to load font information for LY1+phv on input line 7
 0.
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/ly1/ly1phv.fd
+(/usr/local/texlive/2020/texmf-dist/tex/latex/ly1/ly1phv.fd
 File: ly1phv.fd 2001/02/01 scalable font definitions for LY1/phv using Berry na
 mes.
 
@@ -393,11 +393,11 @@ LaTeX Warning: Font shape declaration has incorrect series value `mc'.
 
 )
 Package epstopdf Info: Source file: <OUP_First_SBk_Bot_8401.eps>
-(epstopdf)                    date: 2021-06-28 17:09:44
+(epstopdf)                    date: 2021-06-28 12:54:40
 (epstopdf)                    size: 407286 bytes
 (epstopdf)             Output file: <OUP_First_SBk_Bot_8401-eps-converted-to.pd
 f>
-(epstopdf)                    date: 2021-06-28 17:09:44
+(epstopdf)                    date: 2021-06-28 12:59:11
 (epstopdf)                    size: 9530 bytes
 (epstopdf)             Command: <repstopdf --outfile=OUP_First_SBk_Bot_8401-eps
 -converted-to.pdf OUP_First_SBk_Bot_8401.eps>
@@ -411,12 +411,12 @@ nput line 70.
 (pdftex.def)             Requested size: 54.20236pt x 54.20236pt.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 70.
 
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+(/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 70.
 
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+(/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
@@ -459,14 +459,14 @@ a,
 
 LaTeX Font Info:    Trying to load font information for LY1+pcr on input line 1
 15.
-(/Users/pnagraj/Library/TinyTeX/texmf-dist/tex/latex/ly1/ly1pcr.fd
+(/usr/local/texlive/2020/texmf-dist/tex/latex/ly1/ly1pcr.fd
 File: ly1pcr.fd 2001/02/01 font definitions for LY1/pcr using Berry names.
 )
 Overfull \hbox (1.12001pt too wide) has occurred while \output is active
  []
  []
 
-[1{/Users/pnagraj/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+[1{/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
 
@@ -502,29 +502,28 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 4016 strings out of 480477
- 53368 string characters out of 5898251
- 369501 words of memory out of 5000000
- 21639 multiletter control sequences out of 15000+600000
- 440012 words of font info for 89 fonts, out of 8000000 for 9000
- 18 hyphenation exceptions out of 8191
- 73i,10n,80p,303b,298s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/Users/pnagraj/Library/TinyTeX/texmf-dist/fonts/enc/dvips/ly1/texnansi.enc}<
-/Users/pnagraj/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.
-pfb></Users/pnagraj/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/latx
-font/lcircle1.pfb></Users/pnagraj/Library/TinyTeX/texmf-dist/fonts/type1/urw/co
-urier/ucrr8a.pfb></Users/pnagraj/Library/TinyTeX/texmf-dist/fonts/type1/urw/hel
-vetic/uhvb8a.pfb></Users/pnagraj/Library/TinyTeX/texmf-dist/fonts/type1/urw/hel
-vetic/uhvr8a.pfb></Users/pnagraj/Library/TinyTeX/texmf-dist/fonts/type1/urw/hel
-vetic/uhvr8ac.pfb></Users/pnagraj/Library/TinyTeX/texmf-dist/fonts/type1/urw/he
-lvetic/uhvro8a.pfb></Users/pnagraj/Library/TinyTeX/texmf-dist/fonts/type1/urw/h
-elvetic/uhvro8ac.pfb></Users/pnagraj/Library/TinyTeX/texmf-dist/fonts/type1/urw
-/times/utmb8a.pfb></Users/pnagraj/Library/TinyTeX/texmf-dist/fonts/type1/urw/ti
-mes/utmr8a.pfb></Users/pnagraj/Library/TinyTeX/texmf-dist/fonts/type1/urw/times
-/utmri8a.pfb>
-Output written on paper.pdf (3 pages, 136515 bytes).
+ 4090 strings out of 480608
+ 52112 string characters out of 5903631
+ 302351 words of memory out of 5000000
+ 19900 multiletter control sequences out of 15000+600000
+ 568920 words of font info for 86 fonts, out of 8000000 for 9000
+ 1145 hyphenation exceptions out of 8191
+ 39i,10n,35p,854b,290s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/ly1/texnansi.enc}</usr/lo
+cal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/loca
+l/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcircle1.pfb></u
+sr/local/texlive/2020/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local
+/texlive/2020/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texliv
+e/2020/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2020/
+texmf-dist/fonts/type1/urw/helvetic/uhvr8ac.pfb></usr/local/texlive/2020/texmf-
+dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/local/texlive/2020/texmf-dist/f
+onts/type1/urw/helvetic/uhvro8ac.pfb></usr/local/texlive/2020/texmf-dist/fonts/
+type1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/
+times/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr
+i8a.pfb>
+Output written on paper.pdf (3 pages, 128161 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
+ 64 PDF objects out of 1000 (max. 8388607)
  45 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
