@@ -33,7 +33,7 @@ library(skater)
 
 Pedigrees define familial relationships in a hierarchical structure. 
 
-One of the formats used by PLINK and other genetic analysis tools is the `.fam` file,[^plink-fam] which is a tabular format with one row per individual and columns for unique IDs of the mother, father, and the family unit. The package includes `read_fam()` to read files in this format:
+One of the formats used by PLINK and other genetic analysis tools is the `.fam` file.[^plink-fam] A `.fam` file is a tabular format with one row per individual and columns for unique IDs of the mother, father, and the family unit. The package includes `read_fam()` to read files in this format:
 
 [^plink-fam]: https://www.cog-genomics.org/plink/1.9/formats#fam
 
@@ -43,7 +43,7 @@ fam <- read_fam(famfile)
 fam
 ```
 
-Family structures imported from "fam" formated files can then be translated to the `pedigree` structure used by the `kinship2` package.[^kinship2-vignette] The "fam" format may include multiple families, and the `fam2ped()` function will collapse them all into a `tibble` with one row per family:
+Family structures imported from ".fam" formated files can then be translated to the `pedigree` structure used by the `kinship2` package.[^kinship2-vignette] The "fam" format may include multiple families, and the `fam2ped()` function will collapse them all into a `tibble` with one row per family:
 
 [^kinship2-vignette]: https://cran.r-project.org/web/packages/kinship2/vignettes/pedigree.html
 
@@ -72,7 +72,7 @@ Or plot that pedigree:
 plot(peds$ped[[1]], mar=c(1,4,1,4))
 ```
 
-The `plot_pedigree()` function from `skater` will iterate over a list of pedigree objects, writing a multi-page PDF, with each page containing a pedigree from each family:
+The `plot_pedigree()` function from `skater` will iterate over a list of pedigree objects, writing a multi-page PDF, with each page containing a pedigree from family:
 
 ```{r, eval=FALSE}
 plot_pedigree(peds$ped, file="3gens.ped.pdf")

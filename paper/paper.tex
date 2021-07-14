@@ -72,7 +72,7 @@ Bioinformatics Online.}
 \section{Introduction}
 
 Inferring familial relationships between individuals using genetic data
-is a common problem in population genetics, medical genetics, and
+is a common practice in population genetics, medical genetics, and
 forensics. There are multiple approaches to estimating relatedness
 between samples, including genome-wide measures such as those
 implemented in Plink \citep{purcell2007} or KING
@@ -129,29 +129,29 @@ to relationship degrees. The kinship coefficients could come from
 \texttt{ped2kinpair()} or other kinship estimation software.
 
 The \texttt{dibble()} function creates a \textbf{d}egree
-\textbf{i}nference \textbf{t}ibble, with degrees up to the specified
+\textbf{i}nference t\textbf{ibble}, with degrees up to the specified
 maximum degree resolution, expected kinship coefficient, and lower and
 upper inference ranges as defined in \citet{manichaikul2010}. The
 \texttt{kin2degree()} function infers the relationship degree given a
 kinship coefficient and a maximum degree resolution (e.g., 7th-degree
-relatives) up to which anything more distant is treated as unrelated.
+relatives) up to which anything more distant is classified as unrelated.
 
 Once estimated kinship is converted to degree, it may be of interest to
-compare the inferred degree to truth. When aggregated over many
-relationships and inferences, this can help benchmark performance of a
-particular kinship analysis method. The skater package adapts a
-\texttt{confusion\_matrix()} function from \citet{clark2021} to provide
-standard contingency table metrics (e.g.~sensitivity, specificity, PPV,
-precision, recall, F1, etc.) with a new reciprocal RMSE (R-RMSE) metric.
-The R-RMSE metric is defined more thoroughly in the skater package
-vignette (see Supplementary Material), and may be a preferrable measure
-of classification accuracy when benchmarking relationship degree
-estimation. Taking the reciprocal of the target and predicted degree in
-a typical RMSE calculation results in larger penalties for more
-egregious misclassifications (e.g., classifying a first-degree relative
-pair as second degree) than misclassifications at more distant
-relationships (e.g., classifying a fourth-degree relative pair as
-fifth-degree).
+compare the inferred degree to known degrees of relatedness. When
+aggregated over many relationships and inferences, this can help
+benchmark performance of a particular kinship analysis method. The
+skater package adapts a \texttt{confusion\_matrix()} function from
+\citet{clark2021} to provide standard contingency table metrics
+(e.g.~sensitivity, specificity, PPV, precision, recall, F1, etc.) with a
+new reciprocal RMSE (R-RMSE) metric. The R-RMSE metric is defined more
+thoroughly in the skater package vignette (see Supplementary Material),
+and may be a preferrable measure of classification accuracy when
+benchmarking relationship degree estimation. Taking the reciprocal of
+the target and predicted degree in a typical RMSE calculation results in
+larger penalties for more egregious misclassifications (e.g.,
+classifying a first-degree relative pair as second degree) than
+misclassifications at more distant relationships (e.g., classifying a
+fourth-degree relative pair as fifth-degree).
 
 \subsection{IBD segment analysis}
 
