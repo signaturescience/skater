@@ -37,17 +37,19 @@ author:
   - name: Carlos Acevedo
     affiliation: "1"
   - name: Jianye Ge
-    affiliation: "2"
+    affiliation: "2,3"
   - name: August Woener
-    affiliation: "2"
+    affiliation: "2,3"
   - name: Bruce Budowle
-    affiliation: "2"
+    affiliation: "2,3"
 
 address:
   - code: 1
     address: Signature Science, LLC., Charlottesville, Virginia, 22911, USA.
   - code: 2
-    address: University of North Texas Health Science Center, Fort Worth, Texas, 76107, USA.
+    address: Center for Human Identification, University of North Texas Health Science Center, 3500 Camp Bowie Blvd., Fort Worth, TX, 76107, USA
+  - code: 3
+    address: Department of Microbiology, Immunology, and Genetics, University of North Texas Health Science Center, 3500 Camp Bowie Blvd., Fort Worth, TX, 76107, USA
  
 # Full email address to be given, preferably an institution email address.  
 corresponding_author_text: "To whom correspondence should be addressed. E-mail: sturner\\@signaturescience.com"
