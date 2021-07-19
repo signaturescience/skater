@@ -31,7 +31,7 @@ Install from GitHub:
 remotes::install_github("signaturescience/skater", build_vignettes=TRUE)
 ```
 
-A GitHub [personal access token](https://github.com/settings/tokens) must be in the environment variable `GITHUB_PAT` or supplied as a string to `auth_token`. See `?remotes::install_github`. 
+<!-- A GitHub [personal access token](https://github.com/settings/tokens) must be in the environment variable `GITHUB_PAT` or supplied as a string to `auth_token`. See `?remotes::install_github`.  -->
 
 ## Usage
 
