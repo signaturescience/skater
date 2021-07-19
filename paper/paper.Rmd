@@ -38,7 +38,7 @@ author:
     affiliation: "1"
   - name: Jianye Ge
     affiliation: "2,3"
-  - name: August Woerner
+  - name: August E. Woerner
     affiliation: "2,3"
   - name: Bruce Budowle
     affiliation: "2,3"
