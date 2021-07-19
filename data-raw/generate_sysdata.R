@@ -31,6 +31,7 @@ ped1kg %>% filter(id %in% relatives)
 # Get all samples unrelated to anyone who also has sequencing data
 ped1kg_unrel <- ped1kg %>% filter(!(id %in% relatives))
 
+## NOTE: use_data commented out because we don't need to save this data for now ... uncomment if needed
 # save objects as internal sysdata.rda
-usethis::use_data(ped1kg, ped1kg_unrel, internal = TRUE, overwrite = TRUE)
+#usethis::use_data(ped1kg, ped1kg_unrel, internal = TRUE, overwrite = TRUE)
 

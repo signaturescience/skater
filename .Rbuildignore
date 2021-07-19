@@ -7,3 +7,5 @@
 ^pkgdown$
 ^LICENSE\.md$
 ^\.github$
+^paper$
+^doc$

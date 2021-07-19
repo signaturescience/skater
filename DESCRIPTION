@@ -36,6 +36,10 @@ Imports:
     tibble,
     rlang
 Suggests: 
+    rmarkdown,
+    markdown,
+    knitr,
     testthat (>= 3.0.0)
 Roxygen: list(markdown = TRUE)
 Config/testthat/edition: 3
+VignetteBuilder: knitr
