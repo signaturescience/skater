@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  15 JUL 2021 15:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  19 JUL 2021 09:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -471,24 +471,27 @@ Overfull \hbox (1.12001pt too wide) has occurred while \output is active
 
 
  <./OUP_First_SBk_Bot_8401-eps-converted-to.pdf>]
-Underfull \hbox (badness 1117) in paragraph at lines 131--134
+Underfull \hbox (badness 1117) in paragraph at lines 132--135
 \LY1/ptm/m/n/8 to relationship degrees. The kinship coefficients could come fro
 m
  []
 
 
-Underfull \hbox (badness 1424) in paragraph at lines 143--159
+Underfull \hbox (badness 1424) in paragraph at lines 144--163
 []\LY1/ptm/m/n/8 Once estimated kinship is converted to degree, it may be of
  []
 
 
-Underfull \hbox (badness 1648) in paragraph at lines 191--198
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \hbox (badness 1648) in paragraph at lines 195--202
 \LY1/ptm/m/n/8 DNA Data for Enhanced Missing Persons Identification) to B.B.,
  []
 
 (./paper.bbl
 LaTeX Font Info:    Font shape `LY1/phv/m/it' in size <8> not available
-(Font)              Font shape `LY1/phv/m/sl' tried instead on input line 84.
+(Font)              Font shape `LY1/phv/m/sl' tried instead on input line 83.
 
 Overfull \hbox (252.0pt too wide) has occurred while \output is active
 [][] 
@@ -496,9 +499,9 @@ Overfull \hbox (252.0pt too wide) has occurred while \output is active
 
 [2])
 - LAST -
-Extra skip:55.64pt
-Left:54.0pt/1.64pt
-Right:0.0pt/0.0pt
+Extra skip:11.096pt
+Left:54.0pt/1.736pt
+Right:43.0pt/1.64pt
 Output:54.0pt
 
 Overfull \hbox (252.0pt too wide) has occurred while \output is active
@@ -514,7 +517,7 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  4089 strings out of 480608
  52099 string characters out of 5903631
- 302351 words of memory out of 5000000
+ 303350 words of memory out of 5000000
  19899 multiletter control sequences out of 15000+600000
  567836 words of font info for 85 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
@@ -530,7 +533,7 @@ f-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/local/texlive/2020/texmf-dist
 s/type1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/ut
 mri8a.pfb>
-Output written on paper.pdf (3 pages, 118667 bytes).
+Output written on paper.pdf (3 pages, 118851 bytes).
 PDF statistics:
  60 PDF objects out of 1000 (max. 8388607)
  42 compressed objects within 1 object stream

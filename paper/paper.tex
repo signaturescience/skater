@@ -30,7 +30,7 @@ Stephen D. Turner\,\textsuperscript{1}, V.P.
 Nagraj\,\textsuperscript{1}, Matthew
 Scholz\,\textsuperscript{1}, Shakeel Jessa\,\textsuperscript{1}, Carlos
 Acevedo\,\textsuperscript{1}, Jianye Ge\,\textsuperscript{2,3}, August
-Woerner\,\textsuperscript{2,3}, Bruce Budowle\,\textsuperscript{2,3}
+E. Woerner\,\textsuperscript{2,3}, Bruce Budowle\,\textsuperscript{2,3}
 }
 
 \address{
@@ -124,7 +124,8 @@ kinship2 package \citep{kinship2}. Further functions such as
 \texttt{plot\_pedigree()} produce a multi-page PDF drawing a diagram of
 the pedigree for each family, while \texttt{ped2kinpair()} produces a
 pairwise list of relationships between all individuals in the data with
-the expected kinship coefficients for each pair.
+the expected kinship coefficients for each pair (see Supplementary
+Material).
 
 \subsection{Relationship degree inference and benchmarking}
 
@@ -150,12 +151,15 @@ skater package adapts a \texttt{confusion\_matrix()} function from
 new reciprocal RMSE (R-RMSE) metric. The R-RMSE metric is defined more
 thoroughly in the skater package vignette (see Supplementary Material)
 and may be a preferable measure of classification accuracy when
-benchmarking relationship degree estimation. Taking the reciprocal of
-the target and predicted degree in a typical RMSE calculation results in
-larger penalties for more egregious misclassifications (e.g.,
-classifying a first-degree relative pair as second-degree) than
-misclassifications at more distant relationships (e.g., classifying a
-fourth-degree relative pair as fifth-degree).
+benchmarking relationship degree estimation. In many kinship
+benchmarking analyses, classification error is treated in a categorical
+manner (exact match plus or minus one degree), neglecting the true
+amount of sharing as a real number. Taking the reciprocal of the target
+and predicted degree in a typical RMSE calculation results in larger
+penalties for more egregious misclassifications (e.g., classifying a
+first-degree relative pair as second-degree) than misclassifications at
+more distant relationships (e.g., classifying a fourth-degree relative
+pair as fifth-degree).
 
 \subsection{IBD segment analysis}
 
