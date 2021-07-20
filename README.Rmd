@@ -35,8 +35,10 @@ remotes::install_github("signaturescience/skater", build_vignettes=TRUE)
 
 ## Usage
 
-The "Basic Usage" vignette steps through the primary functionality of the `skater` package:
+The ["Basic Usage" vignette](https://signaturescience.github.io/skater/articles/basic_usage.html) steps through the primary functionality of the `skater` package:
 
 ``` r
 vignette("basic_usage", package = "skater")
 ```
+
+Full documentation: <https://signaturescience.github.io/skater/>.
