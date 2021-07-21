@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  19 JUL 2021 09:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  21 JUL 2021 04:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -367,7 +367,7 @@ Package crop Info: requested driver: `' on input line 20.
 Package crop Info: detected driver: `pdftex' on input line 20.
 Package crop Info: using `pdftex' graphics driver on input line 20.
 LaTeX Font Info:    Trying to load font information for LY1+phv on input line 7
-4.
+2.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/ly1/ly1phv.fd
 File: ly1phv.fd 2001/02/01 scalable font definitions for LY1/phv using Berry na
 mes.
@@ -393,58 +393,58 @@ LaTeX Warning: Font shape declaration has incorrect series value `mc'.
 
 )
 Package epstopdf Info: Source file: <OUP_First_SBk_Bot_8401.eps>
-(epstopdf)                    date: 2021-06-28 12:54:40
+(epstopdf)                    date: 2021-07-19 09:51:08
 (epstopdf)                    size: 407286 bytes
 (epstopdf)             Output file: <OUP_First_SBk_Bot_8401-eps-converted-to.pd
 f>
-(epstopdf)                    date: 2021-06-28 12:59:11
+(epstopdf)                    date: 2021-07-19 09:51:08
 (epstopdf)                    size: 9530 bytes
 (epstopdf)             Command: <repstopdf --outfile=OUP_First_SBk_Bot_8401-eps
 -converted-to.pdf OUP_First_SBk_Bot_8401.eps>
-(epstopdf)             \includegraphics on input line 74.
+(epstopdf)             \includegraphics on input line 72.
 Package epstopdf Info: Output file is already uptodate.
 <OUP_First_SBk_Bot_8401-eps-converted-to.pdf, id=1, 54.2025pt x 54.2025pt>
 File: OUP_First_SBk_Bot_8401-eps-converted-to.pdf Graphic file (type pdf)
 <use OUP_First_SBk_Bot_8401-eps-converted-to.pdf>
 Package pdftex.def Info: OUP_First_SBk_Bot_8401-eps-converted-to.pdf  used on i
-nput line 74.
+nput line 72.
 (pdftex.def)             Requested size: 54.20236pt x 54.20236pt.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 74.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 72.
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 74.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 72.
 
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <6.5> not available
-(Font)              size <6> substituted on input line 74.
+(Font)              size <6> substituted on input line 72.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <6.5> not available
-(Font)              size <6> substituted on input line 74.
+(Font)              size <6> substituted on input line 72.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <6.5> not available
-(Font)              size <6> substituted on input line 74.
+(Font)              size <6> substituted on input line 72.
 
 
-Underfull \hbox (badness 3199) in paragraph at lines 74--74
+Underfull \hbox (badness 3199) in paragraph at lines 72--72
 \LY1/phv/b/n/9 Availability: \LY1/phv/m/n/9 The skater package is implemented a
 s an R package and is released under
  []
 
 
-Underfull \hbox (badness 7759) in paragraph at lines 74--74
+Underfull \hbox (badness 7759) in paragraph at lines 72--72
 \LY1/phv/m/n/9 the MIT license at https://github.com/signaturescience/skater. D
 ocumentation is available at
  []
 
 
-Underfull \hbox (badness 10000) detected at line 74
+Underfull \hbox (badness 10000) detected at line 72
 []
  []
 
@@ -452,16 +452,19 @@ Underfull \hbox (badness 10000) detected at line 74
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \hbox (badness 1009) in paragraph at lines 102--110
+Underfull \hbox (badness 1009) in paragraph at lines 100--108
 \LY1/ptm/m/n/8 include tools for importing, parsing, and analyzing pedigree dat
 a,
  []
 
 LaTeX Font Info:    Trying to load font information for LY1+pcr on input line 1
-19.
+17.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/ly1/ly1pcr.fd
 File: ly1pcr.fd 2001/02/01 font definitions for LY1/pcr using Berry names.
 )
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 Overfull \hbox (1.12001pt too wide) has occurred while \output is active
  []
  []
@@ -471,13 +474,13 @@ Overfull \hbox (1.12001pt too wide) has occurred while \output is active
 
 
  <./OUP_First_SBk_Bot_8401-eps-converted-to.pdf>]
-Underfull \hbox (badness 1117) in paragraph at lines 132--135
+Underfull \hbox (badness 1117) in paragraph at lines 130--133
 \LY1/ptm/m/n/8 to relationship degrees. The kinship coefficients could come fro
 m
  []
 
 
-Underfull \hbox (badness 1424) in paragraph at lines 144--163
+Underfull \hbox (badness 1424) in paragraph at lines 142--161
 []\LY1/ptm/m/n/8 Once estimated kinship is converted to degree, it may be of
  []
 
@@ -485,7 +488,7 @@ Underfull \hbox (badness 1424) in paragraph at lines 144--163
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \hbox (badness 1648) in paragraph at lines 195--202
+Underfull \hbox (badness 1648) in paragraph at lines 193--200
 \LY1/ptm/m/n/8 DNA Data for Enhanced Missing Persons Identification) to B.B.,
  []
 
@@ -533,7 +536,7 @@ f-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/local/texlive/2020/texmf-dist
 s/type1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/ut
 mri8a.pfb>
-Output written on paper.pdf (3 pages, 118851 bytes).
+Output written on paper.pdf (3 pages, 118862 bytes).
 PDF statistics:
  60 PDF objects out of 1000 (max. 8388607)
  42 compressed objects within 1 object stream
