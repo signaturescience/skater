@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  21 JUL 2021 09:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.4.7)  22 JUL 2021 10:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -452,13 +452,13 @@ Underfull \hbox (badness 10000) detected at line 72
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \hbox (badness 1009) in paragraph at lines 100--108
+Underfull \hbox (badness 1009) in paragraph at lines 100--107
 \LY1/ptm/m/n/8 include tools for importing, parsing, and analyzing pedigree dat
 a,
  []
 
 LaTeX Font Info:    Trying to load font information for LY1+pcr on input line 1
-17.
+16.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/ly1/ly1pcr.fd
 File: ly1pcr.fd 2001/02/01 font definitions for LY1/pcr using Berry names.
 )
@@ -474,13 +474,13 @@ Overfull \hbox (1.12001pt too wide) has occurred while \output is active
 
 
  <./OUP_First_SBk_Bot_8401-eps-converted-to.pdf>]
-Underfull \hbox (badness 1117) in paragraph at lines 130--133
+Underfull \hbox (badness 1117) in paragraph at lines 129--132
 \LY1/ptm/m/n/8 to relationship degrees. The kinship coefficients could come fro
 m
  []
 
 
-Underfull \hbox (badness 1424) in paragraph at lines 142--161
+Underfull \hbox (badness 1424) in paragraph at lines 141--160
 []\LY1/ptm/m/n/8 Once estimated kinship is converted to degree, it may be of
  []
 
@@ -488,43 +488,37 @@ Underfull \hbox (badness 1424) in paragraph at lines 142--161
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Underfull \hbox (badness 1648) in paragraph at lines 193--200
+Underfull \hbox (badness 1648) in paragraph at lines 192--199
 \LY1/ptm/m/n/8 DNA Data for Enhanced Missing Persons Identification) to B.B.,
  []
 
-(./paper.bbl
-LaTeX Font Info:    Font shape `LY1/phv/m/it' in size <8> not available
-(Font)              Font shape `LY1/phv/m/sl' tried instead on input line 83.
-
-Overfull \hbox (252.0pt too wide) has occurred while \output is active
-[][] 
- []
-
-[2])
+(./paper.bbl)
 - LAST -
-Extra skip:11.096pt
-Left:54.0pt/1.736pt
-Right:43.0pt/1.64pt
-Output:54.0pt
+Extra skip:13.32802pt
+Left:654.96802pt/0.0pt
+Right:640.0pt/1.64pt
+Output:655.92601pt
+LaTeX Font Info:    Font shape `LY1/phv/m/it' in size <8> not available
+(Font)              Font shape `LY1/phv/m/sl' tried instead on input line 205.
 
 Overfull \hbox (252.0pt too wide) has occurred while \output is active
 [][] 
  []
 
-[3] (./paper.aux)
+[2] (./paper.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 4089 strings out of 480608
- 52099 string characters out of 5903631
- 303084 words of memory out of 5000000
- 19899 multiletter control sequences out of 15000+600000
+ 4082 strings out of 480608
+ 51992 string characters out of 5903631
+ 328747 words of memory out of 5000000
+ 19892 multiletter control sequences out of 15000+600000
  567836 words of font info for 85 fonts, out of 8000000 for 9000
  1145 hyphenation exceptions out of 8191
- 39i,10n,35p,854b,296s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,10n,56p,854b,270s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/ly1/texnansi.enc}</usr/lo
 cal/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/latxfont/lcircle1.pfb><
 /usr/local/texlive/2020/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/loc
@@ -536,10 +530,10 @@ f-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/local/texlive/2020/texmf-dist
 s/type1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/ut
 mri8a.pfb>
-Output written on paper.pdf (3 pages, 118174 bytes).
+Output written on paper.pdf (2 pages, 113131 bytes).
 PDF statistics:
- 60 PDF objects out of 1000 (max. 8388607)
- 42 compressed objects within 1 object stream
+ 57 PDF objects out of 1000 (max. 8388607)
+ 40 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

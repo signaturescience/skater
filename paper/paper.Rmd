@@ -94,18 +94,19 @@ writeLines(text=stext, con=spath)
 rmarkdown::render(spath, output_format="pdf_document")
 ```
 
-
 # Introduction
 
-Inferring familial relationships between individuals using genetic data is a common practice in population genetics, medical genetics, and forensics. There are multiple approaches to estimating relatedness between samples, including genome-wide measures, such as those implemented in Plink [@purcell2007] or KING [@manichaikul2010], and methods that rely on identity by descent (IBD) segment detection, such as GERMLINE [@gusev2009], hap-IBD [@zhou2020], and IBIS [@seidman2020]. Recent efforts focusing on benchmarking these methods [@ramstetter2017; @vries2021] have been aided by tools for simulating pedigrees and genome-wide SNP data [@caballero2019]. Analyzing results from genome-wide SNP-based kinship analysis or comparing analyses to simulated data for benchmarking have to this point required writing one-off analysis functions or utility scripts that are seldom distributed with robust documentation, test suites, or narrative examples of usage. There is a need in the field for a well-documented software package with a consistent design and API that contains functions to assist with downstream manipulation, benchmarking, and analysis of SNP-based kinship assessment methods. Here we present the skater package for **S**NP-based **k**inship **a**nalysis, **t**esting, and **e**valuation with **R**.
+Inferring familial relationships between individuals using genetic data is a common practice in population genetics, medical genetics, and forensics. There are multiple approaches to estimating relatedness between samples, including genome-wide measures, such as those implemented in Plink [@purcell2007] or KING [@manichaikul2010], and methods that rely on identity by descent (IBD) segment detection, such as GERMLINE [@gusev2009], hap-IBD [@zhou2020], and IBIS [@seidman2020]. Recent efforts focusing on benchmarking these methods [@ramstetter2017] have been aided by tools for simulating pedigrees and genome-wide SNP data [@caballero2019]. Analyzing results from genome-wide SNP-based kinship analysis or comparing analyses to simulated data for benchmarking have to this point required writing one-off analysis functions or utility scripts that are seldom distributed with robust documentation, test suites, or narrative examples of usage. There is a need in the field for a well-documented software package with a consistent design and API that contains functions to assist with downstream manipulation, benchmarking, and analysis of SNP-based kinship assessment methods. Here we present the skater package for **S**NP-based **k**inship **a**nalysis, **t**esting, and **e**valuation with **R**.
 
 # The skater package
 
-The skater package provides an intuitive collection of analysis and utility functions for SNP-based kinship analysis. Functions in the package include tools for importing, parsing, and analyzing pedigree data, performing relationship degree inference, benchmarking relationship degree classification, and summarizing IBD segment data. The package is designed to adhere to "tidy" data analysis principles, and builds upon the tools released under the tidyverse R ecosystem [@Wickham2019].
+<!-- The skater package provides an intuitive collection of analysis and utility functions for SNP-based kinship analysis. Functions in the package include tools for importing, parsing, and analyzing pedigree data, performing relationship degree inference, benchmarking relationship degree classification, and summarizing IBD segment data. The package is designed to adhere to "tidy" data analysis principles, and builds upon the tools released under the tidyverse R ecosystem [@Wickham2019]. -->
+
+The skater package provides an intuitive collection of analysis and utility functions for SNP-based kinship analysis. Functions in the package include tools for importing, parsing, and analyzing pedigree data, performing relationship degree inference, benchmarking relationship degree classification, and summarizing IBD segment data. The package is designed to adhere to "tidy" data analysis principles, and builds upon the tools released under the tidyverse R ecosystem.
 
 ## Pedigree parsing, manipulation, and analysis
 
-The skater package has several functions for importing, parsing, and analyzing pedigree data. Pedigrees define familial relationships in a hierarchical structure. Many genomics tools for working with pedigrees start with a .fam file, which is a tabular format with one row per individual and columns for unique IDs of the mother, father, and the family unit. The skater package contains the function `read_fam()` to read in a PLINK-formatted .fam file and another function `fam2ped()` to convert the content into a pedigree object as a nested tibble with one row per family. All pedigree processing from skater internally leverages a data structure from the kinship2 package [@kinship2]. Further functions such as `plot_pedigree()` produce a multi-page PDF drawing a diagram of the pedigree for each family, while `ped2kinpair()` produces a pairwise list of relationships between all individuals in the data with the expected kinship coefficients for each pair (see Supplementary Material).
+The skater package has several functions for importing, parsing, and analyzing pedigree data. Pedigrees define familial relationships in a hierarchical structure. Many genomics tools for working with pedigrees start with a .fam file, which is a tabular format with one row per individual and columns for unique IDs of the mother, father, and the family unit. The skater package contains the function `read_fam()` to read in a PLINK-formatted .fam file and another function `fam2ped()` to convert the content into a pedigree object as a nested tibble with one row per family. All pedigree processing from skater internally leverages a data structure from the kinship2 package [@sinnwell2014]. Further functions such as `plot_pedigree()` produce a multi-page PDF drawing a diagram of the pedigree for each family, while `ped2kinpair()` produces a pairwise list of relationships between all individuals in the data with the expected kinship coefficients for each pair (see Supplementary Material).
 
 ## Relationship degree inference and benchmarking
 
@@ -131,14 +132,18 @@ The skater R package provides a robust software package for data import, manipul
 
 # Funding {.unnumbered}
 
-This work was supported in part by award 2019-DU-BX-0046 (Dense DNA Data for Enhanced Missing Persons Identification) to B.B., awarded by the National Institute of Justice, Office of Justice Programs, U.S. Department of Justice and by internal funds from the Center for Human Identification. The opinions, findings, and conclusions
-or recommendations expressed are those of the authors and do not necessarily reflect those of the U.S. Department of Justice.
+This work was supported in part by award 2019-DU-BX-0046 (Dense DNA Data for Enhanced Missing Persons Identification) to B.B., awarded by the National Institute of Justice, Office of Justice Programs, U.S. Department of Justice and by internal funds from the Center for Human Identification. The opinions, findings, and conclusions or recommendations expressed are those of the authors and do not necessarily reflect those of the U.S. Department of Justice.
 
 <!-- -   The sentence should begin: 'This work was supported by ...' - -->
+
 <!-- -   The full official funding agency name should be given, i.e. 'National Institutes of Health', not 'NIH' (full RIN-approved list of UK funding agencies) -->
+
 <!-- -   Grant numbers should be given in brackets as follows: '[grant number xxxx]' -->
+
 <!-- -   Multiple grant numbers should be separated by a comma as follows: '[grant numbers xxxx, yyyy]' -->
+
 <!-- -   Agencies should be separated by a semi-colon (plus 'and' before the last funding agency) -->
+
 <!-- -   Where individuals need to be specified for certain sources of funding the following text should be added after the relevant agency or grant number 'to [author initials]'. -->
 
 <!-- An example is given here: 'This work was supported by the National Institutes of Health [AA123456 to C.S., BB765432 to M.H.]; and the Alcohol & Education Research Council [hfygr667789].' -->

@@ -81,8 +81,8 @@ implemented in Plink \citep{purcell2007} or KING
 \citep{manichaikul2010}, and methods that rely on identity by descent
 (IBD) segment detection, such as GERMLINE \citep{gusev2009}, hap-IBD
 \citep{zhou2020}, and IBIS \citep{seidman2020}. Recent efforts focusing
-on benchmarking these methods \citep{ramstetter2017, vries2021} have
-been aided by tools for simulating pedigrees and genome-wide SNP data
+on benchmarking these methods \citep{ramstetter2017} have been aided by
+tools for simulating pedigrees and genome-wide SNP data
 \citep{caballero2019}. Analyzing results from genome-wide SNP-based
 kinship analysis or comparing analyses to simulated data for
 benchmarking have to this point required writing one-off analysis
@@ -103,8 +103,7 @@ package include tools for importing, parsing, and analyzing pedigree
 data, performing relationship degree inference, benchmarking
 relationship degree classification, and summarizing IBD segment data.
 The package is designed to adhere to ``tidy'' data analysis principles,
-and builds upon the tools released under the tidyverse R ecosystem
-\citep{Wickham2019}.
+and builds upon the tools released under the tidyverse R ecosystem.
 
 \subsection{Pedigree parsing, manipulation, and analysis}
 
@@ -118,7 +117,7 @@ family unit. The skater package contains the function
 function \texttt{fam2ped()} to convert the content into a pedigree
 object as a nested tibble with one row per family. All pedigree
 processing from skater internally leverages a data structure from the
-kinship2 package \citep{kinship2}. Further functions such as
+kinship2 package \citep{sinnwell2014}. Further functions such as
 \texttt{plot\_pedigree()} produce a multi-page PDF drawing a diagram of
 the pedigree for each family, while \texttt{ped2kinpair()} produces a
 pairwise list of relationships between all individuals in the data with
