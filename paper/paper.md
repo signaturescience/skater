@@ -22,8 +22,10 @@ authors:
     orcid: 0000-0003-3686-1227
     affiliation: "1"
   - name: Shakeel Jessa
+    orcid: 0000-0002-1953-6839
     affiliation: "1"
   - name: Carlos Acevedo
+    orcid: 0000-0002-1953-6839
     affiliation: "1"
   - name: Jianye Ge
     orcid: 0000-0001-8724-075X
@@ -88,30 +90,9 @@ Tools such as hap-IBD [@zhou2020], and IBIS [@seidman2020] detect shared IBD seg
 
 The skater R package provides a robust software package for data import, manipulation, and analysis tasks typically encountered when working with SNP-based kinship analysis tools. All package functions are internally documented with examples, and the package contains a vignette demonstrating usage, inputs, outputs, and interpretation of all key functions. The package contains internal tests that are automatically run with continuous integration via GitHub Actions whenever the package code is updated. The skater package is permissively licensed (MIT) and is easily extensible to accommodate outputs from new genome-wide relatedness and IBD segment methods as they become available.
 
-<!-- # Acknowledgements {.unnumbered} -->
-
-<!-- These should be included at the end of the text and not in footnotes. Please ensure you acknowledge all sources of funding, see funding section below. -->
-
-<!-- Details of all funding sources for the work in question should be given in a separate section entitled 'Funding'. This should appear before the 'Acknowledgements' section. -->
 
 # Acknowledgements
 
 This work was supported in part by award 2019-DU-BX-0046 (Dense DNA Data for Enhanced Missing Persons Identification) to B.B., awarded by the National Institute of Justice, Office of Justice Programs, U.S. Department of Justice and by internal funds from the Center for Human Identification. The opinions, findings, and conclusions or recommendations expressed are those of the authors and do not necessarily reflect those of the U.S. Department of Justice.
-
-<!-- -   The sentence should begin: 'This work was supported by ...' - -->
-
-<!-- -   The full official funding agency name should be given, i.e. 'National Institutes of Health', not 'NIH' (full RIN-approved list of UK funding agencies) -->
-
-<!-- -   Grant numbers should be given in brackets as follows: '[grant number xxxx]' -->
-
-<!-- -   Multiple grant numbers should be separated by a comma as follows: '[grant numbers xxxx, yyyy]' -->
-
-<!-- -   Agencies should be separated by a semi-colon (plus 'and' before the last funding agency) -->
-
-<!-- -   Where individuals need to be specified for certain sources of funding the following text should be added after the relevant agency or grant number 'to [author initials]'. -->
-
-<!-- An example is given here: 'This work was supported by the National Institutes of Health [AA123456 to C.S., BB765432 to M.H.]; and the Alcohol & Education Research Council [hfygr667789].' -->
-
-<!-- Oxford Journals will deposit all NIH-funded articles in PubMed Central. See Depositing articles in repositories -- information for authors for details. Authors must ensure that manuscripts are clearly indicated as NIH-funded using the guidelines above. -->
 
 # References
