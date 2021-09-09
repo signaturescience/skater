@@ -54,25 +54,7 @@ journal: JOSS
 
 ---
 
-```{r, echo=FALSE, eval=FALSE}
-## Run this chunk interactively if you update the package vignette as supplementary material.
-## This renders the vignette as a PDF with a new title.
 
-# Where is the package vignette?
-vpath <- here::here("vignettes/basic_usage.Rmd")
-# Where do you want to save the new modified vignette rmarkdown?
-spath <- here::here("paper/supplement-vignette.Rmd")
-# Read in the vignette rmarkdown text
-vtext <- readLines(vpath)
-# Create the supplemental material rmarkdown by replacing the title YAML
-stext <- sub(pattern='title: "Basic Usage"', 
-             replacement = 'title: |\n    | Supplementary Material for:\n    | skater: An R package for SNP-based Kinship Analysis, Testing, and Evaluation\n    | _(skater v0.1.0 package vignette)_', 
-             x=vtext)
-# Write out that modified yaml to the supplementary material rmarkdown
-writeLines(text=stext, con=spath)
-# Render it to PDF
-rmarkdown::render(spath, output_format="pdf_document")
-```
 
 # Summary
 
