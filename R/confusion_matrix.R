@@ -97,7 +97,7 @@ calc_accuracy <- function(tabble) {
 #' \deqn{False Positive Rate = 1 - Specificity}
 #' \deqn{False Negative Rate = 1 - Sensitivity}
 #' \deqn{D' = qnorm(Sensitivity) - qnorm(1 - Specificity)}
-#' \deqn{AUC ≈ pnorm(D'/sqrt(2))}
+#' \deqn{AUC ~= pnorm(D'/sqrt(2))}
 #'
 #' See the references for discussions of the first five formulas.
 #' Abbreviations:
@@ -115,8 +115,8 @@ calc_accuracy <- function(tabble) {
 #'   \item{Sensitivity: True Positive Rate, Recall, Hit Rate, Power}{}
 #'   \item{Specificity: True Negative Rate}{}
 #'   \item{Positive Predictive Value: Precision}{}
-#'   \item{False Negative Rate: Miss Rate, Type II error rate, β}{}
-#'   \item{False Positive Rate: Fallout, Type I error rate, α}{}
+#'   \item{False Negative Rate: Miss Rate, Type II error rate, beta}{}
+#'   \item{False Positive Rate: Fallout, Type I error rate, alpha}{}
 #' }
 #'
 #' This function is called by \code{confusion_matrix}, but if this is all you
