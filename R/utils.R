@@ -80,7 +80,6 @@ kin2degree <- function(k, max_degree=3L) {
 #' Kinship coefficient to cM
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
 #'
 #' "Converts" a kinship coefficient to put on the same scale as shared cM using the formula
 #' \eqn{cm <- pmin(3560, 4*pmax(0, k)*3560)}.

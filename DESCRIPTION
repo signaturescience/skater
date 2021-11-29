@@ -32,7 +32,6 @@ Imports:
     kinship2,
     corrr,
     grDevices,
-    lifecycle,
     tibble,
     rlang
 Suggests: 

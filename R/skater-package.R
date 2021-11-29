@@ -7,9 +7,6 @@
 ## usethis namespace: end
 NULL
 
-# Suppress R CMD check note
-#' @importFrom lifecycle badge
-
 # Quiet CRAN check notes for unbound global variables
 if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data",
                                                         "data",
