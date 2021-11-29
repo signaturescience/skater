@@ -330,7 +330,7 @@ read_ibd <- function(file, source) {
 #' @references <http://zzz.bwh.harvard.edu/plink/data.shtml#map>
 #' @references <http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/>
 #' @references <https://github.com/williamslab/ped-sim#map-file>
-#' @references <http://dx.doi.org/10.1038/ncomms14994>
+#' @references <https://www.nature.com/articles/ncomms14994>
 #' @references <https://www.nature.com/articles/ncomms14994>
 #' @references <https://github.com/cbherer/Bherer_etal_SexualDimorphismRecombination>
 #'
