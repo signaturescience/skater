@@ -352,7 +352,7 @@ The skater R package provides a robust software package for data import, manipul
 
 # Author information
 
-SDT and VPN developed the R package.
+SDT, VPN, and MBS developed the R package.
 
 All authors contributed to method development.
 
