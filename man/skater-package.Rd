@@ -4,7 +4,7 @@
 \name{skater-package}
 \alias{skater}
 \alias{skater-package}
-\title{skater: Utilities for SNP-based kinship analysis}
+\title{skater: Utilities for SNP-based Kinship Analysis}
 \description{
 Utilities for SNP-based kinship analysis testing and evaluation (SKATE).
 }

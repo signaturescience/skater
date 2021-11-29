@@ -94,7 +94,7 @@ gmap <- read_map(gmapfile)
 
 \url{https://github.com/williamslab/ped-sim#map-file}
 
-\url{http://dx.doi.org/10.1038/ncomms14994}
+\url{https://www.nature.com/articles/ncomms14994}
 
 \url{https://www.nature.com/articles/ncomms14994}
 
