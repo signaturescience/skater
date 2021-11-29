@@ -9,3 +9,4 @@
 ^\.github$
 ^paper$
 ^doc$
+cran-comments.md
