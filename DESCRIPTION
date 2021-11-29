@@ -1,5 +1,5 @@
 Package: skater
-Title: Utilities for SNP-based kinship analysis
+Title: Utilities for SNP-based Kinship Analysis
 Description: Utilities for SNP-based kinship analysis testing and evaluation (SKATE).
 Version: 0.1.0
 Authors@R: 
