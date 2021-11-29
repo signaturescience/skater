@@ -88,6 +88,12 @@ A comprehensive reference for all the functions in the skater package is availab
 
 # Use Cases 
 
+The `skater` package provides a collection of analysis and utility functions for **S**NP-based **k**inship **a**nalysis, **t**esting, and **e**valuation as an **R** package. Functions in the package include tools for working with pedigree data, performing relationship degree inference, assessing classification accuracy, and summarizing IBD segment data.
+
+```{r}
+library(skater)
+```
+
 <!-- Optional - only if NO new datasets are included -->
 
 <!-- This section is required if the paper does not include novel data or analyses.  -->
@@ -95,20 +101,209 @@ A comprehensive reference for all the functions in the skater package is availab
 
 ## Pedigree parsing, manipulation, and analysis
 
-The skater package has several functions for importing, parsing, and analyzing pedigree data. Pedigrees define familial relationships in a hierarchical structure. Many genomics tools for working with pedigrees start with a .fam file, which is a tabular format with one row per individual and columns for unique IDs of the mother, father, and the family unit. The skater package contains the function `read_fam()` to read in a PLINK-formatted .fam file and another function `fam2ped()` to convert the content into a pedigree object as a nested tibble with one row per family. All pedigree processing from skater internally leverages a data structure from the kinship2 package [@sinnwell2014]. Further functions such as `plot_pedigree()` produce a multi-page PDF drawing a diagram of the pedigree for each family, while `ped2kinpair()` produces a pairwise list of relationships between all individuals in the data with the expected kinship coefficients for each pair (see skater package vignette).
+<!-- The commented line below was used in the shorter JOSS/Bioinformatics submission, expanded here -->
+<!-- The skater package has several functions for importing, parsing, and analyzing pedigree data. Pedigrees define familial relationships in a hierarchical structure. Many genomics tools for working with pedigrees start with a .fam file, which is a tabular format with one row per individual and columns for unique IDs of the mother, father, and the family unit. The skater package contains the function `read_fam()` to read in a PLINK-formatted .fam file and another function `fam2ped()` to convert the content into a pedigree object as a nested tibble with one row per family. All pedigree processing from skater internally leverages a data structure from the kinship2 package [@sinnwell2014]. Further functions such as `plot_pedigree()` produce a multi-page PDF drawing a diagram of the pedigree for each family, while `ped2kinpair()` produces a pairwise list of relationships between all individuals in the data with the expected kinship coefficients for each pair (see skater package vignette). -->
+
+Pedigrees define familial relationships in a hierarchical structure. One of the common formats used by PLINK [@purcell2007] and other genetic analysis tools is the `.fam` file. A `.fam` file is a tabular format with one row per individual and columns for unique IDs of the mother, father, and the family unit. The package includes `read_fam()` to read files in this format:
+
+```{r}
+famfile <- system.file("extdata", "3gens.fam", package="skater", mustWork=TRUE)
+fam <- read_fam(famfile)
+fam
+```
+
+Family structures imported from `.fam` formated files can then be translated to the `pedigree` structure used by the `kinship2` package [@sinnwell2014]. The "fam" format may include multiple families, and the `fam2ped()` function will collapse them all into a `tibble` with one row per family:
+
+```{r}
+peds <- fam2ped(fam)
+peds
+```
+
+In the example above, the resulting `tibble` is nested by family ID. The `data` column contains the individual family information, while the `ped` column contains the pedigree object for that family. Using standard tidyverse operations, the resulting tibble can be unnested for any particular family:
+
+```{r}
+peds %>% 
+  dplyr::filter(fid=="testped1") %>% 
+  tidyr::unnest(cols=data)
+```
+
+A single pedigree can also be inspected or visualized (standard base R plot arguments such as `mar` or `cex` can be used to adjust aesthetics):
+
+```{r}
+peds$ped[[1]]
+```
+
+```{r plotped, fig.width=6, fig.height=3}
+plot(peds$ped[[1]], mar=c(1,4,1,4), cex=.7)
+```
+
+The `plot_pedigree()` function from `skater` will iterate over a list of pedigree objects, writing a multi-page PDF, with each page containing a pedigree from family:
+
+```{r, eval=FALSE}
+plot_pedigree(peds$ped, file="3gens.ped.pdf")
+```
+
+The `ped2kinpair()` function takes a pedigree object and produces a pairwise list of relationships between all individuals in the data with the expected kinship coefficients for each pair.
+
+The function can be run on a single family:
+
+```{r}
+ped2kinpair(peds$ped[[1]])
+```
+
+This function can also be mapped over all families in the pedigree:
+
+```{r}
+kinpairs <- 
+  peds %>% 
+  dplyr::mutate(pairs=purrr::map(ped, ped2kinpair)) %>% 
+  dplyr::select(fid, pairs) %>% 
+  tidyr::unnest(cols=pairs)
+kinpairs
+```
+
+Note that this maps `ped2kinpair()` over all `ped` objects in the input `tibble`, and that relationships are not shown for between-family relationships.
 
 ## Relationship degree inference and benchmarking
 
 The skater package includes functions to translate kinship coefficients to relationship degrees. The kinship coefficients could come from `ped2kinpair()` or other kinship estimation software.
 
-The `dibble()` function creates a **d**egree **i**nference t**ibble**, with degrees up to the specified maximum degree resolution, expected kinship coefficient, and lower and upper inference ranges as defined in @manichaikul2010. The `kin2degree()` function infers the relationship degree given a kinship coefficient and a maximum degree resolution (e.g., 7th-degree relatives) up to which anything more distant is classified as unrelated.
+<!-- The commented line below was used in the shorter JOSS/Bioinformatics submission, expanded here -->
+<!-- The `dibble()` function creates a **d**egree **i**nference t**ibble**, with degrees up to the specified maximum degree resolution, expected kinship coefficient, and lower and upper inference ranges as defined in @manichaikul2010. The `kin2degree()` function infers the relationship degree given a kinship coefficient and a maximum degree resolution (e.g., 7th-degree relatives) up to which anything more distant is classified as unrelated. -->
 
-Once estimated kinship is converted to degree, it may be of interest to compare the inferred degree to known degrees of relatedness. When aggregated over many relationships and inferences, this can help benchmark performance of a particular kinship analysis method. The skater package adapts a `confusion_matrix()` function from @clark2021 to provide standard contingency table metrics (e.g. sensitivity, specificity, PPV, precision, recall, F1, etc.) with a new reciprocal RMSE (R-RMSE) metric. The R-RMSE metric is defined more thoroughly in the skater package vignette and may be a preferable measure of classification accuracy when benchmarking relationship degree estimation. In many kinship benchmarking analyses, classification error is treated in a categorical manner (exact match plus or minus one degree), neglecting the true amount of sharing as a real number. Taking the reciprocal of the target and predicted degree in a typical RMSE calculation results in larger penalties for more egregious misclassifications (e.g., classifying a first-degree relative pair as second-degree) than misclassifications at more distant relationships (e.g., classifying a fourth-degree relative pair as fifth-degree).
+The `dibble()` function creates a **d**egree **i**nference `tibble`, with degrees up to the specified `max_degree` (default=3), expected kinship coefficient, and lower (`l`) and upper (`u`) inference ranges as defined in @manichaikul2010. Degree 0 corresponds to self / identity / monozygotic twins, with an expected kinship coefficient of 0.5, with inference range >=0.354. Anything beyond the maximum degree resolution is considered unrelated (degree `NA`).
+
+```{r}
+dibble()
+```
+
+The degree inference `max_degree` default is 3. Change this argument to allow more granular degree inference ranges:
+
+```{r}
+dibble(max_degree = 5)
+```
+
+Note that the distance between relationship degrees becomes smaller as the relationship degree becomes more distant. The `dibble()` function will emit a warning with `max_degree` >=10, and will stop with an error at >=12.
+
+The `kin2degree()` function infers the relationship degree given a kinship coefficient and a `max_degree` up to which anything more distant is treated as unrelated. Example first degree relative:
+
+```{r}
+kin2degree(.25, max_degree=3)
+```
+
+Example 4th degree relative, but using the default max_degree resolution of 3:
+
+```{r}
+kin2degree(.0312, max_degree=3)
+```
+
+Example 4th degree relative, but increasing the degree resolution:
+
+```{r}
+kin2degree(.0312, max_degree=5)
+```
+
+The `kin2degree()` function is vectorized over values of `k`, so it can be used inside of a `mutate` on a `tibble` of kinship coefficients:
+
+```{r}
+# Get two pairs from each type of relationship we have in kinpairs:
+kinpairs_subset <- 
+  kinpairs %>% 
+  dplyr::group_by(k) %>% 
+  dplyr::slice(1:2)
+kinpairs_subset
+
+# Infer degree out to third degree relatives:
+kinpairs_subset %>% 
+  dplyr::mutate(degree=kin2degree(k, max_degree=3))
+```
+
+
+
+## Benchmarking Degree Classification
+
+<!-- The commented line below was used in the shorter JOSS/Bioinformatics submission, expanded here -->
+<!-- Once estimated kinship is converted to degree, it may be of interest to compare the inferred degree to known degrees of relatedness. When aggregated over many relationships and inferences, this can help benchmark performance of a particular kinship analysis method. The skater package adapts a `confusion_matrix()` function from @clark2021 to provide standard contingency table metrics (e.g. sensitivity, specificity, PPV, precision, recall, F1, etc.) with a new reciprocal RMSE (R-RMSE) metric. The R-RMSE metric is defined more thoroughly in the skater package vignette and may be a preferable measure of classification accuracy when benchmarking relationship degree estimation. In many kinship benchmarking analyses, classification error is treated in a categorical manner (exact match plus or minus one degree), neglecting the true amount of sharing as a real number. Taking the reciprocal of the target and predicted degree in a typical RMSE calculation results in larger penalties for more egregious misclassifications (e.g., classifying a first-degree relative pair as second-degree) than misclassifications at more distant relationships (e.g., classifying a fourth-degree relative pair as fifth-degree). -->
+
+Once estimated kinship is converted to degree, it may be of interest to compare the inferred degree to truth. When aggregated over many relationships and inferences, this method can help benchmark performance of a particular kinship analysis method.
+
+The skater package adapts a `confusion_matrix()` function from @clark2021 to provide standard contingency table metrics (e.g. sensitivity, specificity, PPV, precision, recall, F1, etc.) with a new reciprocal RMSE (R-RMSE) metric. The `confusion_matrix()` function on its own outputs a list with four objects:
+
+1. A `tibble` with calculated accuracy, lower and upper bounds, the guessing rate and p-value of the accuracy vs. the guessing rate. 
+2. A `tibble` with contingency table statistics calculated for each class. Details on the statistics calculated for each class can be reviewed on the help page for `?confusion_matrix`.
+3. A `matrix` with the contingency table object itself.
+4. A `vector` with the reciprocal RMSE (R-RMSE). The R-RMSE is calculated as `sqrt(mean((1/(Target+.5)-1/(Predicted+.5))^2)))`, and represents an alternative to classification accuracy when benchmarking relationship degree estimation. Taking the reciprocal of the target and predicted degree results in larger penalties for more egregious misclassifications (e.g., classifying a first-degree relative pair as second degree) than misclassifications at more distant relationships (e.g., misclassifying a fourth-degree relative pair as fifth-degree). The +0.5 adjustment prevents division-by-zero when a 0th-degree (identical) relative pair is introduced.
+
+To illustrate the usage, this example will start with the `kinpairs` data from above and randomly flip ~20% of the true relationship degrees.
+
+```{r}
+# Function to randomly flip levels of a factor (at 20%, by default)
+randomflip <- function(x, p=.2) ifelse(runif(length(x))<p, sample(unique(x)), x)
+
+# Infer degree (truth/target) using kin2degree, then randomly flip 20% of them
+set.seed(42)
+kinpairs_inferred <- kinpairs %>% 
+  dplyr::mutate(degree_truth=kin2degree(k, max_degree=3)) %>% 
+  dplyr::mutate(degree_truth=tidyr::replace_na(degree_truth, "unrelated")) %>% 
+  dplyr::mutate(degree_inferred=randomflip(degree_truth))
+kinpairs_inferred
+```
+
+Next, running the `confusion_matrix()` function will return all four objects noted above.
+
+```{r}
+confusion_matrix(prediction = kinpairs_inferred$degree_inferred, 
+                 target = kinpairs_inferred$degree_truth)
+```
+
+Standard tidyverse functions such as `purrr::pluck()` can be used to isolate just the contingency table:
+
+```{r}
+confusion_matrix(prediction = kinpairs_inferred$degree_inferred, 
+                 target = kinpairs_inferred$degree_truth) %>% 
+  purrr::pluck("Table")
+```
+
+The `confusion_matrix()` function includes an argument to output in a tidy (`longer=TRUE`) format, and the example below illustrates how to spread contingency table statistics by class:
+
+```{r}
+confusion_matrix(prediction = kinpairs_inferred$degree_inferred, 
+                 target = kinpairs_inferred$degree_truth, 
+                 longer = TRUE) %>% 
+  purrr::pluck("Other") %>% 
+  tidyr::spread(Class, Value) %>% 
+  dplyr::relocate(Average, .after=dplyr::last_col()) %>% 
+  dplyr::mutate_if(rlang::is_double, signif, 2)
+```
 
 ## IBD segment analysis
 
-Tools such as hap-IBD [@zhou2020], and IBIS [@seidman2020] detect shared IBD segments between individuals. The skater package includes functionality to take those IBD segments, compute shared genomic centimorgan (cM) length, and converts that shared cM to a kinship coefficient. In addition to inferred segments, these functions can estimate "truth" kinship from simulated IBD segments [@caballero2019]. The `read_ibd()` function reads pairwise IBD segments from IBD inference tools and from simulated IBD segments. The `read_map()` function reads in genetic map in a standard format which is required to translate the total centimorgans shared IBD to a kinship coefficient using the `ibd2kin()` function.
+Tools such as hap-IBD [@zhou2020], and IBIS [@seidman2020] detect shared IBD segments between individuals. The skater package includes functionality to take those IBD segments, compute shared genomic centimorgan (cM) length, and converts that shared cM to a kinship coefficient. In addition to inferred segments, these functions can estimate "truth" kinship from simulated IBD segments [@caballero2019]. The `read_ibd()` function reads pairwise IBD segments from IBD inference tools and from simulated IBD segments. The `read_map()` function reads in genetic map in a standard format which is required to translate the total centimorgans shared IBD to a kinship coefficient using the `ibd2kin()` function. See `?read_ibd` and `?read_map` for additional details on expected format.
 
+The `read_ibd()` function reads in the pairwise IBD segment format. Input to this function can either be inferred IBD segments from hap-IBD (`source="hapibd"`) or simulated segments (`source="pedsim"`). The first example below uses data in the `hap-ibd` output format:
+
+```{r, message=FALSE}
+hapibd_filepath <- system.file("extdata", "GBR.sim.ibd.gz", 
+                               package="skater")
+hapibd_seg <- read_ibd(hapibd_filepath, source = "hapibd")
+hapibd_seg
+```
+
+In order to translate the shared genomic cM length to a kinship coefficient, a genetic map must first be read in with `read_map()`. Software for IBD segment inference and simulation requires a genetic map. The map loaded for kinship estimation should be the same one used for creating the shared IBD segment output. The example below uses a minimal genetic map that ships with `skater`:
+
+```{r}
+gmap_filepath <- system.file("extdata", "sexspec-avg-min.plink.map", 
+                             package="skater")
+gmap <- read_map(gmap_filepath)
+gmap
+```
+
+The `ibd2kin()` function takes the segments and map file and outputs a `tibble` with one row per pair of individuals and columns for individual 1 ID, individual 2 ID, and the kinship coefficient for the pair:
+
+```{r}
+ibd_dat <- ibd2kin(.ibd_data=hapibd_seg, .map=gmap)
+ibd_dat
+```
 
 <!-- # Discussion  -->
 
