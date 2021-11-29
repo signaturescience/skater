@@ -13,8 +13,6 @@ ped2kinpair(ped)
 A tibble containing all pairwise kinship coefficients from the input pedigree.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
 Converts a pedigree class object from \link[=fam2ped]{fam2ped} to a pairwise list of relationships and their expected/theoretical kinship coefficient.
 }
 \examples{

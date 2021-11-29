@@ -141,7 +141,7 @@ The columns must be in the order above. Note that only the first, third, and fou
 <p>The columns must be in the order above. Note that only the first, third, and fourth columns are used in the function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_map</span>(<span class='no'>file</span>)</pre>
+    <pre class="usage"><span class='fu'>read_map</span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -164,7 +164,7 @@ The columns must be in the order above. Note that only the first, third, and fou
 
     <p>The genetic map could come from different sources. One source is the HapMap map distributed by the Browning Lab (<a href='http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/'>documentation</a>). If this map file is used, the non-sex chromosomes can be downloaded and concatenated to a single file as follows:</p><pre>wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
 unzip plink.GRCh37.map.zip
-cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort &amp;gt; plink.allchr.GRCh37.map
+cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort &gt; plink.allchr.GRCh37.map
 </pre>
 
 <p>Another source is a sex-specific map ("bherer") originally published by Bherer et al and recommended by the developers of <code>ped-sim</code> for simulating IBD segments (<a href='https://github.com/williamslab/ped-sim#map-file'>documentation</a>). To retrieve and prep this map file for simulation:</p><pre># Get the refined genetic map and extract
@@ -172,18 +172,18 @@ wget --no-check-certificate https://github.com/cbherer/Bherer_etal_SexualDimorph
 tar xvfpz Refined_genetic_map_b37.tar.gz
 
 # Format for ped-sim as per https://github.com/williamslab/ped-sim#map-file-
-printf "#chr\tpos\tmale_cM\tfemale_cM\n" &amp;gt; sexspec.pedsim.map
+printf "#chr\tpos\tmale_cM\tfemale_cM\n" &gt; sexspec.pedsim.map
 for chr in {1..22}; do
   paste Refined_genetic_map_b37/male_chr$chr.txt Refined_genetic_map_b37/female_chr$chr.txt \
-    | awk -v OFS="\t" 'NR &amp;gt; 1 &amp;amp;&amp;amp; $2 == $6 {print $1,$2,$4,$8}' \
-    | sed 's/^chr//' &amp;gt;&amp;gt; sexspec.pedsim.map;
+    | awk -v OFS="\t" 'NR &gt; 1 &amp;&amp; $2 == $6 {print $1,$2,$4,$8}' \
+    | sed 's/^chr//' &gt;&gt; sexspec.pedsim.map;
 done
 
 # Clean up
 rm -rf Refined_genetic_map_b37*
 </pre>
 
-<p>After this, the <code>sexspec.pedsim.map</code> file is ready for use in simulation. However, it must be averaged and reformatted to "Plink format" to use here:</p><pre>cat sexspec.pedsim.map | grep -v "^#" | awk -v OFS="\t" '{print $1,".",($3+$4)/2,$2}' &amp;gt; sexspec-avg.plink.map
+<p>After this, the <code>sexspec.pedsim.map</code> file is ready for use in simulation. However, it must be averaged and reformatted to "Plink format" to use here:</p><pre>cat sexspec.pedsim.map | grep -v "^#" | awk -v OFS="\t" '{print $1,".",($3+$4)/2,$2}' &gt; sexspec-avg.plink.map
 </pre>
 
 <p>#' The genetic maps created above are in the tens of megabytes size range. This is trivial to store for most systems but a reduced version would increase portability and ease testing. This "minimum viable genetic map" could be used for testing and as installed package data in an R package for example analysis. Read more about minimum viable genetic maps at:</p><ul>
@@ -195,18 +195,18 @@ rm -rf Refined_genetic_map_b37*
 wget https://raw.githubusercontent.com/williamslab/min_map/main/min_map.py
 
 # Create empty minmap
-echo -n &amp;gt; sexspec-avg-min.plink.map
+echo -n &gt; sexspec-avg-min.plink.map
 
 # For each autosome...
 for chr in {1..22}; do
   echo "Working on chromosome $chr..."
   # First pull out just one chromosome
-  grep "^${chr}[[:space:]]" sexspec-avg.plink.map &amp;gt; tmp.${chr}
+  grep "^${chr}[[:space:]]" sexspec-avg.plink.map &gt; tmp.${chr}
   # Run the python script on that chromosome.
   # The genetic map column is 3rd column (2nd in 0-start). Physical position is last column (3 in 0-based)
   python3 min_map.py -mapfile tmp.${chr} -chr ${chr} -genetcol 2 -physcol 3 -noheader -error 0.05
   # Strip out the header and reformat back to plink format, and append to minmap file
-  cat min_viable_map${chr}.txt | grep -v "^#" | awk -v OFS="\t" '{print $1,".",$4,$2}' &amp;gt;&amp;gt; sexspec-avg-min.plink.map
+  cat min_viable_map${chr}.txt | grep -v "^#" | awk -v OFS="\t" '{print $1,".",$4,$2}' &gt;&gt; sexspec-avg-min.plink.map
   # Clean up
   rm -f min_viable_map${chr}.txt tmp.${chr}
 done
@@ -218,13 +218,15 @@ done
     <p><a href='http://zzz.bwh.harvard.edu/plink/data.shtml#map'>http://zzz.bwh.harvard.edu/plink/data.shtml#map</a></p>
 <p><a href='http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/'>http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/</a></p>
 <p><a href='https://github.com/williamslab/ped-sim#map-file'>https://github.com/williamslab/ped-sim#map-file</a></p>
-<p><a href='http://dx.doi.org/10.1038/ncomms14994'>http://dx.doi.org/10.1038/ncomms14994</a></p>
+<p><a href='https://www.nature.com/articles/ncomms14994'>https://www.nature.com/articles/ncomms14994</a></p>
 <p><a href='https://www.nature.com/articles/ncomms14994'>https://www.nature.com/articles/ncomms14994</a></p>
 <p><a href='https://github.com/cbherer/Bherer_etal_SexualDimorphismRecombination'>https://github.com/cbherer/Bherer_etal_SexualDimorphismRecombination</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>gmapfile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"sexspec-avg-min.plink.map"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"skater"</span>, <span class='kw'>mustWork</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>gmap</span> <span class='kw'>&lt;-</span> <span class='fu'>read_map</span>(<span class='no'>gmapfile</span>)</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>gmapfile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"sexspec-avg-min.plink.map"</span>, package<span class='op'>=</span><span class='st'>"skater"</span>, mustWork<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>gmap</span> <span class='op'>&lt;-</span> <span class='fu'>read_map</span><span class='op'>(</span><span class='va'>gmapfile</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -240,7 +242,7 @@ done
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

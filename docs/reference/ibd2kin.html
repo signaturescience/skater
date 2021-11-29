@@ -129,7 +129,7 @@ The relatedness value returned is the kinship coefficent." />
 The relatedness value returned is the kinship coefficent.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ibd2kin</span>(<span class='no'>.ibd_data</span>, <span class='no'>.map</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>ibd2kin</span><span class='op'>(</span><span class='va'>.ibd_data</span>, <span class='va'>.map</span>, type <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -173,29 +173,31 @@ proportions. See examples.</p>
     <p>http://faculty.washington.edu/sguy/ibd_relatedness.html</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>pedsim_fp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"GBR.sim.seg.gz"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"skater"</span>, <span class='kw'>mustWork</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>pedsim_seg</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_ibd.html'>read_ibd</a></span>(<span class='no'>pedsim_fp</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"pedsim"</span>)
-<span class='no'>gmapfile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"sexspec-avg-min.plink.map"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"skater"</span>, <span class='kw'>mustWork</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>gmap</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_map.html'>read_map</a></span>(<span class='no'>gmapfile</span>)
-<span class='no'>ibd1_dat</span> <span class='kw'>&lt;-</span> <span class='fu'>ibd2kin</span>(<span class='kw'>.ibd_data</span><span class='kw'>=</span><span class='no'>pedsim_seg</span>$<span class='no'>IBD1</span>, <span class='kw'>.map</span><span class='kw'>=</span><span class='no'>gmap</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"IBD1"</span>)
-<span class='no'>ibd2_dat</span> <span class='kw'>&lt;-</span> <span class='fu'>ibd2kin</span>(<span class='kw'>.ibd_data</span><span class='kw'>=</span><span class='no'>pedsim_seg</span>$<span class='no'>IBD2</span>, <span class='kw'>.map</span><span class='kw'>=</span><span class='no'>gmap</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"IBD2"</span>)
-<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/bind.html'>bind_rows</a></span>(<span class='no'>ibd1_dat</span>,<span class='no'>ibd2_dat</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span>(<span class='no'>id1</span>,<span class='no'>id2</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span>(<span class='kw'>kinship</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span>(<span class='no'>kinship</span>), <span class='kw'>.groups</span> <span class='kw'>=</span> <span class='st'>"drop"</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 48 x 3</span><span>
-#&gt;    id1               id2               kinship
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> testped1_g1-b1-i1 testped1_g2-b1-i1   0.245
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> testped1_g1-b1-i1 testped1_g2-b2-i1   0.245
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> testped1_g1-b1-i1 testped1_g3-b1-i1   0.136
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> testped1_g1-b1-i1 testped1_g3-b2-i1   0.124
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> testped1_g1-b1-s1 testped1_g2-b1-i1   0.245
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> testped1_g1-b1-s1 testped1_g2-b2-i1   0.245
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> testped1_g1-b1-s1 testped1_g3-b1-i1   0.109
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> testped1_g1-b1-s1 testped1_g3-b2-i1   0.121
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> testped1_g2-b1-i1 testped1_g2-b2-i1   0.254
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> testped1_g2-b1-i1 testped1_g3-b1-i1   0.245
-#&gt; </span><span style='color: #949494;'># … with 38 more rows</span><span></div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>pedsim_fp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"GBR.sim.seg.gz"</span>, package<span class='op'>=</span><span class='st'>"skater"</span>, mustWork<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>pedsim_seg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_ibd.html'>read_ibd</a></span><span class='op'>(</span><span class='va'>pedsim_fp</span>, source <span class='op'>=</span> <span class='st'>"pedsim"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>gmapfile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"sexspec-avg-min.plink.map"</span>, package<span class='op'>=</span><span class='st'>"skater"</span>, mustWork<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>gmap</span> <span class='op'>&lt;-</span> <span class='fu'><a href='read_map.html'>read_map</a></span><span class='op'>(</span><span class='va'>gmapfile</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ibd1_dat</span> <span class='op'>&lt;-</span> <span class='fu'>ibd2kin</span><span class='op'>(</span>.ibd_data<span class='op'>=</span><span class='va'>pedsim_seg</span><span class='op'>$</span><span class='va'>IBD1</span>, .map<span class='op'>=</span><span class='va'>gmap</span>, type<span class='op'>=</span><span class='st'>"IBD1"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>ibd2_dat</span> <span class='op'>&lt;-</span> <span class='fu'>ibd2kin</span><span class='op'>(</span>.ibd_data<span class='op'>=</span><span class='va'>pedsim_seg</span><span class='op'>$</span><span class='va'>IBD2</span>, .map<span class='op'>=</span><span class='va'>gmap</span>, type<span class='op'>=</span><span class='st'>"IBD2"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/bind.html'>bind_rows</a></span><span class='op'>(</span><span class='va'>ibd1_dat</span>,<span class='va'>ibd2_dat</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>id1</span>,<span class='va'>id2</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>kinship <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>kinship</span><span class='op'>)</span>, .groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 48 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    id1               id2               kinship</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> testped1_g1-b1-i1 testped1_g2-b1-i1   0.245</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> testped1_g1-b1-i1 testped1_g2-b2-i1   0.245</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> testped1_g1-b1-i1 testped1_g3-b1-i1   0.136</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> testped1_g1-b1-i1 testped1_g3-b2-i1   0.124</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> testped1_g1-b1-s1 testped1_g2-b1-i1   0.245</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> testped1_g1-b1-s1 testped1_g2-b2-i1   0.245</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> testped1_g1-b1-s1 testped1_g3-b1-i1   0.109</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> testped1_g1-b1-s1 testped1_g3-b2-i1   0.121</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> testped1_g2-b1-i1 testped1_g2-b2-i1   0.254</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> testped1_g2-b1-i1 testped1_g3-b1-i1   0.245</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 38 more rows</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -211,7 +213,7 @@ proportions. See examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

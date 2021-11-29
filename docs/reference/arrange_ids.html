@@ -143,7 +143,7 @@ ensures that id1 is alphanumerically first while id2 is alphanumerically
 second. See examples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>arrange_ids</span>(<span class='no'>.data</span>, <span class='no'>.id1</span>, <span class='no'>.id2</span>)</pre>
+    <pre class="usage"><span class='fu'>arrange_ids</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>.id1</span>, <span class='va'>.id2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,46 +167,56 @@ second. See examples.</p>
     <p>A tibble with id1 and id2 rearranged alphanumerically.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>d1</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span>(
-  ~<span class='no'>id1</span>, ~<span class='no'>id2</span>, ~<span class='no'>results1</span>,
-  <span class='st'>"a"</span>,  <span class='st'>"b"</span>,       <span class='fl'>10L</span>,
-  <span class='st'>"a"</span>,  <span class='st'>"c"</span>,       <span class='fl'>20L</span>,
-  <span class='st'>"c"</span>,  <span class='st'>"b"</span>,       <span class='fl'>30L</span>
-)
-<span class='no'>d2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span>(
-  ~<span class='no'>id1</span>, ~<span class='no'>id2</span>,  ~<span class='no'>results2</span>,
-  <span class='st'>"b"</span>,  <span class='st'>"a"</span>,       <span class='fl'>101L</span>,
-  <span class='st'>"c"</span>,  <span class='st'>"a"</span>,       <span class='fl'>201L</span>,
-  <span class='st'>"b"</span>,  <span class='st'>"c"</span>,       <span class='fl'>301L</span>
-)
-<span class='co'># Inner join fails because id1!=id2.</span>
-<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>inner_join</a></span>(<span class='no'>d1</span>, <span class='no'>d2</span>, <span class='kw'>by</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"id1"</span>, <span class='st'>"id2"</span>))</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 0 x 4</span><span>
-#&gt; </span><span style='color: #949494;'># … with 4 variables: id1 &lt;chr&gt;, id2 &lt;chr&gt;, results1 &lt;int&gt;, results2 &lt;int&gt;</span><span></div><div class='input'><span class='co'># Arrange IDs</span>
-<span class='no'>d1</span> <span class='kw'>%&gt;%</span> <span class='fu'>arrange_ids</span>(<span class='no'>id1</span>, <span class='no'>id2</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 3</span><span>
-#&gt;   id1   id2   results1
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     b           10
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> a     c           20
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> b     c           30</div><div class='input'><span class='no'>d2</span> <span class='kw'>%&gt;%</span> <span class='fu'>arrange_ids</span>(<span class='no'>id1</span>, <span class='no'>id2</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 3</span><span>
-#&gt;   id1   id2   results2
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     b          101
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> a     c          201
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> b     c          301</div><div class='input'><span class='co'># Inner join</span>
-<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>inner_join</a></span>(<span class='fu'>arrange_ids</span>(<span class='no'>d1</span>, <span class='no'>id1</span>, <span class='no'>id2</span>), <span class='fu'>arrange_ids</span>(<span class='no'>d2</span>, <span class='no'>id1</span>, <span class='no'>id2</span>), <span class='kw'>by</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"id1"</span>, <span class='st'>"id2"</span>))</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 4</span><span>
-#&gt;   id1   id2   results1 results2
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     b           10      101
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> a     c           20      201
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> b     c           30      301</div><div class='input'><span class='co'># Recursively, if you had more than two tibbles</span>
-<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>d1</span>, <span class='no'>d2</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>arrange_ids</span>, <span class='no'>id1</span>, <span class='no'>id2</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/reduce.html'>reduce</a></span>(<span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='no'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>inner_join</a></span>, <span class='kw'>by</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"id1"</span>, <span class='st'>"id2"</span>))</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 3 x 4</span><span>
-#&gt;   id1   id2   results1 results2
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a     b           10      101
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> a     c           20      201
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> b     c           30      301</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>d1</span> <span class='op'>&lt;-</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='op'>~</span><span class='va'>id1</span>, <span class='op'>~</span><span class='va'>id2</span>, <span class='op'>~</span><span class='va'>results1</span>,</span>
+<span class='r-in'>  <span class='st'>"a"</span>,  <span class='st'>"b"</span>,       <span class='fl'>10L</span>,</span>
+<span class='r-in'>  <span class='st'>"a"</span>,  <span class='st'>"c"</span>,       <span class='fl'>20L</span>,</span>
+<span class='r-in'>  <span class='st'>"c"</span>,  <span class='st'>"b"</span>,       <span class='fl'>30L</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>d2</span> <span class='op'>&lt;-</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span><span class='op'>(</span></span>
+<span class='r-in'>  <span class='op'>~</span><span class='va'>id1</span>, <span class='op'>~</span><span class='va'>id2</span>,  <span class='op'>~</span><span class='va'>results2</span>,</span>
+<span class='r-in'>  <span class='st'>"b"</span>,  <span class='st'>"a"</span>,       <span class='fl'>101L</span>,</span>
+<span class='r-in'>  <span class='st'>"c"</span>,  <span class='st'>"a"</span>,       <span class='fl'>201L</span>,</span>
+<span class='r-in'>  <span class='st'>"b"</span>,  <span class='st'>"c"</span>,       <span class='fl'>301L</span></span>
+<span class='r-in'><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># Inner join fails because id1!=id2.</span></span>
+<span class='r-in'><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>inner_join</a></span><span class='op'>(</span><span class='va'>d1</span>, <span class='va'>d2</span>, by<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"id1"</span>, <span class='st'>"id2"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 0 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 4 variables: id1 &lt;chr&gt;, id2 &lt;chr&gt;, results1 &lt;int&gt;, results2 &lt;int&gt;</span></span>
+<span class='r-in'><span class='co'># Arrange IDs</span></span>
+<span class='r-in'><span class='va'>d1</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'>arrange_ids</span><span class='op'>(</span><span class='va'>id1</span>, <span class='va'>id2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 3 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   id1   id2   results1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> a     b           10</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span><span> a     c           20</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span><span> b     c           30</span></span>
+<span class='r-in'><span class='va'>d2</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'>arrange_ids</span><span class='op'>(</span><span class='va'>id1</span>, <span class='va'>id2</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 3 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   id1   id2   results2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> a     b          101</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span><span> a     c          201</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span><span> b     c          301</span></span>
+<span class='r-in'><span class='co'># Inner join</span></span>
+<span class='r-in'><span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>inner_join</a></span><span class='op'>(</span><span class='fu'>arrange_ids</span><span class='op'>(</span><span class='va'>d1</span>, <span class='va'>id1</span>, <span class='va'>id2</span><span class='op'>)</span>, <span class='fu'>arrange_ids</span><span class='op'>(</span><span class='va'>d2</span>, <span class='va'>id1</span>, <span class='va'>id2</span><span class='op'>)</span>, by<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"id1"</span>, <span class='st'>"id2"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 3 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   id1   id2   results1 results2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> a     b           10      101</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span><span> a     c           20      201</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span><span> b     c           30      301</span></span>
+<span class='r-in'><span class='co'># Recursively, if you had more than two tibbles</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>d1</span>, <span class='va'>d2</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>arrange_ids</span>, <span class='va'>id1</span>, <span class='va'>id2</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/reduce.html'>reduce</a></span><span class='op'>(</span><span class='fu'>dplyr</span><span class='fu'>::</span><span class='va'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>inner_join</a></span>, by<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"id1"</span>, <span class='st'>"id2"</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 3 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   id1   id2   results1 results2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> a     b           10      101</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span><span> a     c           20      201</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span><span> b     c           30      301</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -222,7 +232,7 @@ second. See examples.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

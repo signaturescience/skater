@@ -131,15 +131,15 @@ numerous statistics of interest. Modified from
 <a href='https://github.com/m-clark/confusionMatrix'>m-clark/confusion_matrix</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>confusion_matrix</span>(
-  <span class='no'>prediction</span>,
-  <span class='no'>target</span>,
-  <span class='kw'>positive</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>prevalence</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>dnn</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Predicted"</span>, <span class='st'>"Target"</span>),
-  <span class='kw'>longer</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>confusion_matrix</span><span class='op'>(</span>
+  <span class='va'>prediction</span>,
+  <span class='va'>target</span>,
+  positive <span class='op'>=</span> <span class='cn'>NULL</span>,
+  prevalence <span class='op'>=</span> <span class='cn'>NULL</span>,
+  dnn <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Predicted"</span>, <span class='st'>"Target"</span><span class='op'>)</span>,
+  longer <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,209 +198,227 @@ functions below to find out more. Originally inspired by the
 <code>confusion_matrix</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>prediction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>)
-<span class='no'>target</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>1</span>)
-<span class='fu'>confusion_matrix</span>(<span class='no'>prediction</span>, <span class='no'>target</span>, <span class='kw'>positive</span> <span class='kw'>=</span> <span class='st'>'1'</span>)</div><div class='output co'>#&gt; $Accuracy
-#&gt; <span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;   Accuracy `Accuracy LL` `Accuracy UL` `Accuracy Guessing` `Accuracy P-value`
-#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>      0.8         0.444         0.975                 0.6              0.167
-#&gt; 
-#&gt; $Other
-#&gt; </span><span style='color: #949494;'># A tibble: 1 x 17</span><span>
-#&gt;   Positive     N `N Positive` `N Negative` `Sensitivity/Recall… `Specificity/TN…
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>                </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 1           10            6            4                0.833             0.75
-#&gt; </span><span style='color: #949494;'># … with 11 more variables: PPV/Precision &lt;dbl&gt;, NPV &lt;dbl&gt;, F1/Dice &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   Prevalence &lt;dbl&gt;, Detection Rate &lt;dbl&gt;, Detection Prevalence &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   Balanced Accuracy &lt;dbl&gt;, FDR &lt;dbl&gt;, FOR &lt;dbl&gt;, FPR/Fallout &lt;dbl&gt;, FNR &lt;dbl&gt;</span><span>
-#&gt; </div><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>42</span>)
-<span class='no'>prediction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='fl'>250</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>)
-<span class='no'>target</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>4</span>], <span class='fl'>250</span>, <span class='kw'>replace</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>4</span>)
-<span class='fu'>confusion_matrix</span>(<span class='no'>prediction</span>, <span class='no'>target</span>)</div><div class='output co'>#&gt; <span class='message'>Reciprocal RMSE not calculated: more than one non-numeric class.</span></div><div class='output co'>#&gt; $Accuracy
-#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;   Accuracy `Accuracy LL` `Accuracy UL` `Accuracy Guessing` `Accuracy P-value`
-#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>    0.276         0.222         0.336               0.452               1.00
-#&gt; 
-#&gt; $Other
-#&gt; </span><span style='color: #949494;'># A tibble: 5 x 15</span><span>
-#&gt;   Class      N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> a       27              0.111            0.879           0.100 0.891     0.105
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> b       39              0.154            0.782           0.115 0.833     0.132
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> c       71              0.282            0.709           0.278 0.713     0.280
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> d      113              0.354            0.591           0.417 0.526     0.383
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> Avera…  62.5            0.225            0.740           0.227 0.741     0.225
-#&gt; </span><span style='color: #949494;'># … with 8 more variables: Prevalence &lt;dbl&gt;, Detection Rate &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   Detection Prevalence &lt;dbl&gt;, Balanced Accuracy &lt;dbl&gt;, FDR &lt;dbl&gt;, FOR &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   FPR/Fallout &lt;dbl&gt;, FNR &lt;dbl&gt;</span><span>
-#&gt; 
-#&gt; $Table
-#&gt;          Target
-#&gt; Predicted  a  b  c  d
-#&gt;         a  3  3  6 18
-#&gt;         b  5  6 21 20
-#&gt;         c  8  9 20 35
-#&gt;         d 11 21 24 40
-#&gt; 
-#&gt; $recip_rmse
-#&gt; [1] NA
-#&gt; </div><div class='input'>
-<span class='no'>prediction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fl'>50</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>2</span>, <span class='fl'>40</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>3</span>, <span class='fl'>60</span>))
-<span class='no'>target</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fl'>50</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>2</span>, <span class='fl'>50</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>3</span>, <span class='fl'>50</span>))
-<span class='fu'>confusion_matrix</span>(<span class='no'>prediction</span>, <span class='no'>target</span>)</div><div class='output co'>#&gt; $Accuracy
-#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;   Accuracy `Accuracy LL` `Accuracy UL` `Accuracy Guessing` `Accuracy P-value`
-#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>    0.933         0.881         0.968               0.333           3.36</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-54</span><span>
-#&gt; 
-#&gt; $Other
-#&gt; </span><span style='color: #949494;'># A tibble: 4 x 15</span><span>
-#&gt;   Class      N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 1         50            1                1               1     1         1    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 2         50            0.8              1               1     0.909     0.889
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 3         50            1                0.9             0.833 1         0.909
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> Avera…    50            0.933            0.967           0.944 0.970     0.933
-#&gt; </span><span style='color: #949494;'># … with 8 more variables: Prevalence &lt;dbl&gt;, Detection Rate &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   Detection Prevalence &lt;dbl&gt;, Balanced Accuracy &lt;dbl&gt;, FDR &lt;dbl&gt;, FOR &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   FPR/Fallout &lt;dbl&gt;, FNR &lt;dbl&gt;</span><span>
-#&gt; 
-#&gt; $Table
-#&gt;          Target
-#&gt; Predicted  1  2  3
-#&gt;         1 50  0  0
-#&gt;         2  0 40  0
-#&gt;         3  0 10 50
-#&gt; 
-#&gt; $recip_rmse
-#&gt; [1] 0.02950844
-#&gt; </div><div class='input'><span class='fu'>confusion_matrix</span>(<span class='no'>prediction</span>, <span class='no'>target</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='st'>"Table"</span>)</div><div class='output co'>#&gt;          Target
-#&gt; Predicted  1  2  3
-#&gt;         1 50  0  0
-#&gt;         2  0 40  0
-#&gt;         3  0 10 50</div><div class='input'><span class='fu'>confusion_matrix</span>(<span class='no'>prediction</span>, <span class='no'>target</span>, <span class='kw'>longer</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; $Accuracy
-#&gt; </span><span style='color: #949494;'># A tibble: 5 x 2</span><span>
-#&gt;   Statistic            Value
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> Accuracy          9.33</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> Accuracy LL       8.81</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> Accuracy UL       9.68</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> Accuracy Guessing 3.33</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> Accuracy P-value  3.36</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-54</span><span>
-#&gt; 
-#&gt; $Other
-#&gt; </span><span style='color: #949494;'># A tibble: 56 x 3</span><span>
-#&gt;    Class Statistic               Value
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 1     N                      50    
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 1     Sensitivity/Recall/TPR  1    
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 1     Specificity/TNR         1    
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 1     PPV/Precision           1    
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 1     NPV                     1    
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 1     F1/Dice                 1    
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 1     Prevalence              0.333
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 1     Detection Rate          0.333
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 1     Detection Prevalence    0.333
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 1     Balanced Accuracy       1    
-#&gt; </span><span style='color: #949494;'># … with 46 more rows</span><span>
-#&gt; 
-#&gt; $Table
-#&gt;          Target
-#&gt; Predicted  1  2  3
-#&gt;         1 50  0  0
-#&gt;         2  0 40  0
-#&gt;         3  0 10 50
-#&gt; 
-#&gt; $recip_rmse
-#&gt; [1] 0.02950844
-#&gt; </div><div class='input'><span class='fu'>confusion_matrix</span>(<span class='no'>prediction</span>, <span class='no'>target</span>, <span class='kw'>longer</span><span class='kw'>=</span><span class='fl'>TRUE</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span>(<span class='st'>"Other"</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>tidyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://tidyr.tidyverse.org/reference/spread.html'>spread</a></span>(<span class='no'>Class</span>, <span class='no'>Value</span>)</div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 14 x 5</span><span>
-#&gt;    Statistic                 `1`     `2`    `3` Average
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> Balanced Accuracy       1      0.9     0.95   0.95  
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> Detection Prevalence    0.333  0.267   0.4    0.333 
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> Detection Rate          0.333  0.267   0.333  0.311 
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> F1/Dice                 1      0.889   0.909  0.933 
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> FDR                     0      0       0.167  0.055</span><span style='text-decoration: underline;'>6</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> FNR                     0      0.200   0      0.066</span><span style='text-decoration: underline;'>7</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> FOR                     0      0.090</span><span style='text-decoration: underline;'>9</span><span>  0      0.030</span><span style='text-decoration: underline;'>3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> FPR/Fallout             0      0       0.100  0.033</span><span style='text-decoration: underline;'>3</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> N                      50     50      50     50     
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> NPV                     1      0.909   1      0.970 
-#&gt; </span><span style='color: #BCBCBC;'>11</span><span> PPV/Precision           1      1       0.833  0.944 
-#&gt; </span><span style='color: #BCBCBC;'>12</span><span> Prevalence              0.333  0.333   0.333  0.333 
-#&gt; </span><span style='color: #BCBCBC;'>13</span><span> Sensitivity/Recall/TPR  1      0.8     1      0.933 
-#&gt; </span><span style='color: #BCBCBC;'>14</span><span> Specificity/TNR         1      1       0.9    0.967 </div><div class='input'>
-<span class='co'># Prediction with an unrelated class</span>
-<span class='no'>prediction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fl'>50</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>2</span>, <span class='fl'>40</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>3</span>, <span class='fl'>60</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Unrelated"</span>, <span class='fl'>55</span>))
-<span class='no'>target</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fl'>50</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>2</span>, <span class='fl'>50</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>3</span>, <span class='fl'>55</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Unrelated"</span>, <span class='fl'>50</span>))
-<span class='fu'>confusion_matrix</span>(<span class='no'>prediction</span>, <span class='no'>target</span>)</div><div class='output co'>#&gt; $Accuracy
-#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;   Accuracy `Accuracy LL` `Accuracy UL` `Accuracy Guessing` `Accuracy P-value`
-#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>    0.927         0.882         0.958               0.268           5.56</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-89</span><span>
-#&gt; 
-#&gt; $Other
-#&gt; </span><span style='color: #949494;'># A tibble: 5 x 15</span><span>
-#&gt;   Class      N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 1       50              1                1               1     1         1    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 2       50              0.8              1               1     0.939     0.889
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> 3       55              0.909            0.933           0.833 0.966     0.870
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> Unrel…  50              1                0.968           0.909 1         0.952
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> Avera…  51.2            0.927            0.975           0.936 0.976     0.928
-#&gt; </span><span style='color: #949494;'># … with 8 more variables: Prevalence &lt;dbl&gt;, Detection Rate &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   Detection Prevalence &lt;dbl&gt;, Balanced Accuracy &lt;dbl&gt;, FDR &lt;dbl&gt;, FOR &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   FPR/Fallout &lt;dbl&gt;, FNR &lt;dbl&gt;</span><span>
-#&gt; 
-#&gt; $Table
-#&gt;            Target
-#&gt; Predicted    1  2  3 Unrelated
-#&gt;   1         50  0  0         0
-#&gt;   2          0 40  0         0
-#&gt;   3          0 10 50         0
-#&gt;   Unrelated  0  0  5        50
-#&gt; 
-#&gt; $recip_rmse
-#&gt; [1] 0.02711929
-#&gt; </div><div class='input'><span class='co'># Prediction with two unrelated classes</span>
-<span class='no'>prediction</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fl'>50</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>2</span>, <span class='fl'>40</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Third"</span>, <span class='fl'>60</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Unrelated"</span>, <span class='fl'>55</span>))
-<span class='no'>target</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fl'>50</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>2</span>, <span class='fl'>50</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Third"</span>, <span class='fl'>55</span>), <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='st'>"Unrelated"</span>, <span class='fl'>50</span>))
-<span class='fu'>confusion_matrix</span>(<span class='no'>prediction</span>, <span class='no'>target</span>)</div><div class='output co'>#&gt; <span class='message'>Reciprocal RMSE not calculated: more than one non-numeric class.</span></div><div class='output co'>#&gt; $Accuracy
-#&gt; </span><span style='color: #949494;'># A tibble: 1 x 5</span><span>
-#&gt;   Accuracy `Accuracy LL` `Accuracy UL` `Accuracy Guessing` `Accuracy P-value`
-#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>    0.927         0.882         0.958               0.268           5.56</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-89</span><span>
-#&gt; 
-#&gt; $Other
-#&gt; </span><span style='color: #949494;'># A tibble: 5 x 15</span><span>
-#&gt;   Class      N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span> 1       50              1                1               1     1         1    
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span> 2       50              0.8              1               1     0.939     0.889
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span> Third   55              0.909            0.933           0.833 0.966     0.870
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span> Unrel…  50              1                0.968           0.909 1         0.952
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span> Avera…  51.2            0.927            0.975           0.936 0.976     0.928
-#&gt; </span><span style='color: #949494;'># … with 8 more variables: Prevalence &lt;dbl&gt;, Detection Rate &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   Detection Prevalence &lt;dbl&gt;, Balanced Accuracy &lt;dbl&gt;, FDR &lt;dbl&gt;, FOR &lt;dbl&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   FPR/Fallout &lt;dbl&gt;, FNR &lt;dbl&gt;</span><span>
-#&gt; 
-#&gt; $Table
-#&gt;            Target
-#&gt; Predicted    1  2 Third Unrelated
-#&gt;   1         50  0     0         0
-#&gt;   2          0 40     0         0
-#&gt;   Third      0 10    50         0
-#&gt;   Unrelated  0  0     5        50
-#&gt; 
-#&gt; $recip_rmse
-#&gt; [1] NA
-#&gt; </div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>prediction</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>target</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>1</span>,<span class='fl'>0</span>,<span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>confusion_matrix</span><span class='op'>(</span><span class='va'>prediction</span>, <span class='va'>target</span>, positive <span class='op'>=</span> <span class='st'>'1'</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Accuracy</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Accuracy `Accuracy LL` `Accuracy UL` `Accuracy Guessing` `Accuracy P-value`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      <span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span>      0.8         0.444         0.975                 0.6              0.167</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Other</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 17</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Positive     N `N Positive` `N Negative` `Sensitivity/Recall… `Specificity/TN…</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>                </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> 1           10            6            4                0.833             0.75</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 11 more variables: PPV/Precision &lt;dbl&gt;, NPV &lt;dbl&gt;, F1/Dice &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   Prevalence &lt;dbl&gt;, Detection Rate &lt;dbl&gt;, Detection Prevalence &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   Balanced Accuracy &lt;dbl&gt;, FDR &lt;dbl&gt;, FOR &lt;dbl&gt;, FPR/Fallout &lt;dbl&gt;, FNR &lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>42</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>prediction</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fl'>250</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span>, prob <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>target</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fl'>250</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span>, prob <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>confusion_matrix</span><span class='op'>(</span><span class='va'>prediction</span>, <span class='va'>target</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Reciprocal RMSE not calculated: more than one non-numeric class.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Accuracy</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Accuracy `Accuracy LL` `Accuracy UL` `Accuracy Guessing` `Accuracy P-value`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      <span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span>    0.276         0.222         0.336               0.452               1.00</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Other</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 5 × 15</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Class       N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> a        27              0.111            0.879           0.1   0.891     0.105</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span><span> b        39              0.154            0.782           0.115 0.833     0.132</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span><span> c        71              0.282            0.709           0.278 0.713     0.280</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span><span> d       113              0.354            0.591           0.417 0.526     0.383</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span><span> Average  62.5            0.225            0.740           0.227 0.741     0.225</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 8 more variables: Prevalence &lt;dbl&gt;, Detection Rate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   Detection Prevalence &lt;dbl&gt;, Balanced Accuracy &lt;dbl&gt;, FDR &lt;dbl&gt;, FOR &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   FPR/Fallout &lt;dbl&gt;, FNR &lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Table</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Target</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Predicted  a  b  c  d</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         a  3  3  6 18</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         b  5  6 21 20</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         c  8  9 20 35</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         d 11 21 24 40</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $recip_rmse</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+<span class='r-in'><span class='va'>prediction</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>50</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>40</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>60</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>target</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>50</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>50</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>confusion_matrix</span><span class='op'>(</span><span class='va'>prediction</span>, <span class='va'>target</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Accuracy</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Accuracy `Accuracy LL` `Accuracy UL` `Accuracy Guessing` `Accuracy P-value`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      <span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span>    0.933         0.881         0.968               0.333           3.36</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-54</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Other</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 4 × 15</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Class       N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> 1          50            1                1               1     1         1    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span><span> 2          50            0.8              1               1     0.909     0.889</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span><span> 3          50            1                0.9             0.833 1         0.909</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span><span> Average    50            0.933            0.967           0.944 0.970     0.933</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 8 more variables: Prevalence &lt;dbl&gt;, Detection Rate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   Detection Prevalence &lt;dbl&gt;, Balanced Accuracy &lt;dbl&gt;, FDR &lt;dbl&gt;, FOR &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   FPR/Fallout &lt;dbl&gt;, FNR &lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Table</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Target</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Predicted  1  2  3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         1 50  0  0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         2  0 40  0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         3  0 10 50</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $recip_rmse</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.02950844</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'>confusion_matrix</span><span class='op'>(</span><span class='va'>prediction</span>, <span class='va'>target</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span><span class='op'>(</span><span class='st'>"Table"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Target</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Predicted  1  2  3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         1 50  0  0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         2  0 40  0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         3  0 10 50</span>
+<span class='r-in'><span class='fu'>confusion_matrix</span><span class='op'>(</span><span class='va'>prediction</span>, <span class='va'>target</span>, longer<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Accuracy</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 5 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Statistic            Value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> Accuracy          9.33</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span><span> Accuracy LL       8.81</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span><span> Accuracy UL       9.68</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span><span> Accuracy Guessing 3.33</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>- 1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span><span> Accuracy P-value  3.36</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-54</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Other</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 56 × 3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Class Statistic               Value</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> 1     N                      50    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> 1     Sensitivity/Recall/TPR  1    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> 1     Specificity/TNR         1    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> 1     PPV/Precision           1    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> 1     NPV                     1    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> 1     F1/Dice                 1    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> 1     Prevalence              0.333</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> 1     Detection Rate          0.333</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> 1     Detection Prevalence    0.333</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> 1     Balanced Accuracy       1    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 46 more rows</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Table</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>          Target</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Predicted  1  2  3</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         1 50  0  0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         2  0 40  0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         3  0 10 50</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $recip_rmse</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.02950844</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='fu'>confusion_matrix</span><span class='op'>(</span><span class='va'>prediction</span>, <span class='va'>target</span>, longer<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/pluck.html'>pluck</a></span><span class='op'>(</span><span class='st'>"Other"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>tidyr</span><span class='fu'>::</span><span class='fu'><a href='https://tidyr.tidyverse.org/reference/spread.html'>spread</a></span><span class='op'>(</span><span class='va'>Class</span>, <span class='va'>Value</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 14 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Statistic                 `1`     `2`    `3` Average</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> Balanced Accuracy       1      0.9     0.95   0.95  </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> Detection Prevalence    0.333  0.267   0.4    0.333 </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> Detection Rate          0.333  0.267   0.333  0.311 </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> F1/Dice                 1      0.889   0.909  0.933 </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> FDR                     0      0       0.167  0.055</span><span style='text-decoration: underline;'>6</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> FNR                     0      0.2     0      0.066</span><span style='text-decoration: underline;'>7</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> FOR                     0      0.090</span><span style='text-decoration: underline;'>9</span><span>  0      0.030</span><span style='text-decoration: underline;'>3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> FPR/Fallout             0      0       0.1    0.033</span><span style='text-decoration: underline;'>3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> N                      50     50      50     50     </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> NPV                     1      0.909   1      0.970 </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span><span> PPV/Precision           1      1       0.833  0.944 </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span><span> Prevalence              0.333  0.333   0.333  0.333 </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span><span> Sensitivity/Recall/TPR  1      0.8     1      0.933 </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span><span> Specificity/TNR         1      1       0.9    0.967 </span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># Prediction with an unrelated class</span></span>
+<span class='r-in'><span class='va'>prediction</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>50</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>40</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>60</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Unrelated"</span>, <span class='fl'>55</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>target</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>50</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>50</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>55</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Unrelated"</span>, <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>confusion_matrix</span><span class='op'>(</span><span class='va'>prediction</span>, <span class='va'>target</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Accuracy</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Accuracy `Accuracy LL` `Accuracy UL` `Accuracy Guessing` `Accuracy P-value`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      <span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span>    0.927         0.882         0.958               0.268           5.56</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-89</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Other</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 5 × 15</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Class         N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> 1          50              1                1               1     1         1    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span><span> 2          50              0.8              1               1     0.939     0.889</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span><span> 3          55              0.909            0.933           0.833 0.966     0.870</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span><span> Unrelated  50              1                0.968           0.909 1         0.952</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span><span> Average    51.2            0.927            0.975           0.936 0.976     0.928</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 8 more variables: Prevalence &lt;dbl&gt;, Detection Rate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   Detection Prevalence &lt;dbl&gt;, Balanced Accuracy &lt;dbl&gt;, FDR &lt;dbl&gt;, FOR &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   FPR/Fallout &lt;dbl&gt;, FNR &lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Table</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            Target</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Predicted    1  2  3 Unrelated</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1         50  0  0         0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   2          0 40  0         0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   3          0 10 50         0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Unrelated  0  0  5        50</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $recip_rmse</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0.02711929</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'><span class='co'># Prediction with two unrelated classes</span></span>
+<span class='r-in'><span class='va'>prediction</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>50</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>40</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Third"</span>, <span class='fl'>60</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Unrelated"</span>, <span class='fl'>55</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>target</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>50</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>50</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Third"</span>, <span class='fl'>55</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"Unrelated"</span>, <span class='fl'>50</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>confusion_matrix</span><span class='op'>(</span><span class='va'>prediction</span>, <span class='va'>target</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> Reciprocal RMSE not calculated: more than one non-numeric class.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Accuracy</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 1 × 5</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Accuracy `Accuracy LL` `Accuracy UL` `Accuracy Guessing` `Accuracy P-value`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      <span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>              </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span>    0.927         0.882         0.958               0.268           5.56</span><span style='color: #949494;'>e</span><span style='color: #BB0000;'>-89</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Other</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 5 × 15</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Class         N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span><span> 1          50              1                1               1     1         1    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span><span> 2          50              0.8              1               1     0.939     0.889</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span><span> Third      55              0.909            0.933           0.833 0.966     0.870</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span><span> Unrelated  50              1                0.968           0.909 1         0.952</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span><span> Average    51.2            0.927            0.975           0.936 0.976     0.928</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 8 more variables: Prevalence &lt;dbl&gt;, Detection Rate &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   Detection Prevalence &lt;dbl&gt;, Balanced Accuracy &lt;dbl&gt;, FDR &lt;dbl&gt;, FOR &lt;dbl&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   FPR/Fallout &lt;dbl&gt;, FNR &lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $Table</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            Target</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Predicted    1  2 Third Unrelated</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   1         50  0     0         0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   2          0 40     0         0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Third      0 10    50         0</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   Unrelated  0  0     5        50</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> $recip_rmse</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] NA</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -416,7 +434,7 @@ functions below to find out more. Originally inspired by the
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
