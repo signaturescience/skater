@@ -52,7 +52,6 @@ plot_pedigree <- function(ped, file=NULL, width=10, height=8) {
 #' Pedigree to pairwise kinship
 #'
 #' @description
-#' `r lifecycle::badge("experimental")`
 #'
 #' Converts a pedigree class object from [fam2ped][skater::fam2ped] to a pairwise list of relationships and their expected/theoretical kinship coefficient.
 #'

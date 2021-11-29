@@ -50,7 +50,7 @@ where \code{beta = 1} for this function.
 \deqn{False Positive Rate = 1 - Specificity}
 \deqn{False Negative Rate = 1 - Sensitivity}
 \deqn{D' = qnorm(Sensitivity) - qnorm(1 - Specificity)}
-\deqn{AUC ≈ pnorm(D'/sqrt(2))}
+\deqn{AUC ~= pnorm(D'/sqrt(2))}
 
 See the references for discussions of the first five formulas.
 Abbreviations:
@@ -69,8 +69,8 @@ Different names are used for the same statistics.
 \item{Sensitivity: True Positive Rate, Recall, Hit Rate, Power}{}
 \item{Specificity: True Negative Rate}{}
 \item{Positive Predictive Value: Precision}{}
-\item{False Negative Rate: Miss Rate, Type II error rate, β}{}
-\item{False Positive Rate: Fallout, Type I error rate, α}{}
+\item{False Negative Rate: Miss Rate, Type II error rate, beta}{}
+\item{False Positive Rate: Fallout, Type I error rate, alpha}{}
 }
 
 This function is called by \code{confusion_matrix}, but if this is all you
@@ -85,7 +85,7 @@ calc_stats(table(p, o), positive='a')
 \references{
 Kuhn, M. (2008), "Building predictive models in R using the
 caret package, " \emph{Journal of Statistical Software},
-(\url{https://www.jstatsoft.org/article/view/v028i05/v28i05.pdf}).
+(\url{https://www.jstatsoft.org/article/view/v028i05}).
 
 Altman, D.G., Bland, J.M. (1994) "Diagnostic tests 1: sensitivity and
 specificity", \emph{British Medical Journal}, vol 308, 1552.

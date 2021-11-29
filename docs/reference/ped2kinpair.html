@@ -40,8 +40,7 @@
 
 
 <meta property="og:title" content="Pedigree to pairwise kinship — ped2kinpair" />
-<meta property="og:description" content="
-Converts a pedigree class object from fam2ped to a pairwise list of relationships and their expected/theoretical kinship coefficient." />
+<meta property="og:description" content="Converts a pedigree class object from fam2ped to a pairwise list of relationships and their expected/theoretical kinship coefficient." />
 
 
 
@@ -125,11 +124,10 @@ Converts a pedigree class object from fam2ped to a pairwise list of relationship
     </div>
 
     <div class="ref-description">
-    <p><a href='https://lifecycle.r-lib.org/articles/stages.html#experimental'><img src='figures/lifecycle-experimental.svg' alt='[Experimental]' /></a></p>
-<p>Converts a pedigree class object from <a href='fam2ped.html'>fam2ped</a> to a pairwise list of relationships and their expected/theoretical kinship coefficient.</p>
+    <p>Converts a pedigree class object from <a href='fam2ped.html'>fam2ped</a> to a pairwise list of relationships and their expected/theoretical kinship coefficient.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ped2kinpair</span>(<span class='no'>ped</span>)</pre>
+    <pre class="usage"><span class='fu'>ped2kinpair</span><span class='op'>(</span><span class='va'>ped</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -145,26 +143,28 @@ Converts a pedigree class object from fam2ped to a pairwise list of relationship
     <p>A tibble containing all pairwise kinship coefficients from the input pedigree.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>famfile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"3gens.fam"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"skater"</span>, <span class='kw'>mustWork</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>famfile</span> <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='read_fam.html'>read_fam</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='fu'><a href='fam2ped.html'>fam2ped</a></span>() <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>kinpairs</span><span class='kw'>=</span><span class='kw pkg'>purrr</span><span class='kw ns'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span>(<span class='no'>ped</span>, <span class='no'>ped2kinpair</span>)) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span>(<span class='no'>fid</span>, <span class='no'>kinpairs</span>) <span class='kw'>%&gt;%</span>
-  <span class='kw pkg'>tidyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span>(<span class='kw'>cols</span><span class='kw'>=</span><span class='no'>kinpairs</span>)</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 288 x 4</span><span>
-#&gt;    fid      id1               id2                   k
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> testped1 testped1_g1-b1-s1 testped1_g1-b1-s1 0.5  
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> testped1 testped1_g1-b1-i1 testped1_g1-b1-s1 0    
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> testped1 testped1_g1-b1-s1 testped1_g2-b1-s1 0    
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> testped1 testped1_g1-b1-s1 testped1_g2-b1-i1 0.25 
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> testped1 testped1_g1-b1-s1 testped1_g2-b2-s1 0    
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> testped1 testped1_g1-b1-s1 testped1_g2-b2-i1 0.25 
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> testped1 testped1_g1-b1-s1 testped1_g3-b1-i1 0.125
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> testped1 testped1_g1-b1-s1 testped1_g3-b2-i1 0.125
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> testped1 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5  
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> testped1 testped1_g1-b1-i1 testped1_g2-b1-s1 0    
-#&gt; </span><span style='color: #949494;'># … with 278 more rows</span><span></div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>famfile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"3gens.fam"</span>, package<span class='op'>=</span><span class='st'>"skater"</span>, mustWork<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>famfile</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='read_fam.html'>read_fam</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'><a href='fam2ped.html'>fam2ped</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>kinpairs<span class='op'>=</span><span class='fu'>purrr</span><span class='fu'>::</span><span class='fu'><a href='https://purrr.tidyverse.org/reference/map.html'>map</a></span><span class='op'>(</span><span class='va'>ped</span>, <span class='va'>ped2kinpair</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>fid</span>, <span class='va'>kinpairs</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>  <span class='fu'>tidyr</span><span class='fu'>::</span><span class='fu'><a href='https://tidyr.tidyverse.org/reference/nest.html'>unnest</a></span><span class='op'>(</span>cols<span class='op'>=</span><span class='va'>kinpairs</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 288 × 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    fid      id1               id2                   k</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> testped1 testped1_g1-b1-s1 testped1_g1-b1-s1 0.5  </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> testped1 testped1_g1-b1-i1 testped1_g1-b1-s1 0    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> testped1 testped1_g1-b1-s1 testped1_g2-b1-s1 0    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> testped1 testped1_g1-b1-s1 testped1_g2-b1-i1 0.25 </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> testped1 testped1_g1-b1-s1 testped1_g2-b2-s1 0    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> testped1 testped1_g1-b1-s1 testped1_g2-b2-i1 0.25 </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> testped1 testped1_g1-b1-s1 testped1_g3-b1-i1 0.125</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> testped1 testped1_g1-b1-s1 testped1_g3-b2-i1 0.125</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> testped1 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5  </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> testped1 testped1_g1-b1-i1 testped1_g2-b1-s1 0    </span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 278 more rows</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -180,7 +180,7 @@ Converts a pedigree class object from fam2ped to a pairwise list of relationship
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

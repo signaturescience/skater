@@ -143,7 +143,7 @@ Affected Status
 
     </div>
 
-    <pre class="usage"><span class='fu'>read_fam</span>(<span class='no'>file</span>)</pre>
+    <pre class="usage"><span class='fu'>read_fam</span><span class='op'>(</span><span class='va'>file</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,23 +159,25 @@ Affected Status
     <p>A tibble containing the 6 columns from the fam file.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>famfile</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"3gens.fam"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"skater"</span>, <span class='kw'>mustWork</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>fam</span> <span class='kw'>&lt;-</span> <span class='fu'>read_fam</span>(<span class='no'>famfile</span>)
-<span class='no'>fam</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 64 x 6</span><span>
-#&gt;    fid      id                dadid             momid               sex affected
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> testped1 testped1_g1-b1-s1 0                 0                     1        1
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> testped1 testped1_g1-b1-i1 0                 0                     2        1
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> testped1 testped1_g2-b1-s1 0                 0                     1        1
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> testped1 testped1_g2-b1-i1 testped1_g1-b1-s1 testped1_g1-b1-i1     2        1
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> testped1 testped1_g2-b2-s1 0                 0                     1        1
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> testped1 testped1_g2-b2-i1 testped1_g1-b1-s1 testped1_g1-b1-i1     2        1
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> testped1 testped1_g3-b1-i1 testped1_g2-b1-s1 testped1_g2-b1-i1     2        1
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> testped1 testped1_g3-b2-i1 testped1_g2-b2-s1 testped1_g2-b2-i1     1        1
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> testped2 testped2_g1-b1-s1 0                 0                     2        1
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> testped2 testped2_g1-b1-i1 0                 0                     1        1
-#&gt; </span><span style='color: #949494;'># … with 54 more rows</span><span></div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>famfile</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"3gens.fam"</span>, package<span class='op'>=</span><span class='st'>"skater"</span>, mustWork<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>fam</span> <span class='op'>&lt;-</span> <span class='fu'>read_fam</span><span class='op'>(</span><span class='va'>famfile</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>fam</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 64 × 6</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    fid      id                dadid             momid               sex affected</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>    </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span> testped1 testped1_g1-b1-s1 0                 0                     1        1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span> testped1 testped1_g1-b1-i1 0                 0                     2        1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span> testped1 testped1_g2-b1-s1 0                 0                     1        1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span> testped1 testped1_g2-b1-i1 testped1_g1-b1-s1 testped1_g1-b1-i1     2        1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span> testped1 testped1_g2-b2-s1 0                 0                     1        1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span> testped1 testped1_g2-b2-i1 testped1_g1-b1-s1 testped1_g1-b1-i1     2        1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span> testped1 testped1_g3-b1-i1 testped1_g2-b1-s1 testped1_g2-b1-i1     2        1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span> testped1 testped1_g3-b2-i1 testped1_g2-b2-s1 testped1_g2-b2-i1     1        1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span> testped2 testped2_g1-b1-s1 0                 0                     2        1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span> testped2 testped2_g1-b1-i1 0                 0                     1        1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 54 more rows</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -191,7 +193,7 @@ Affected Status
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

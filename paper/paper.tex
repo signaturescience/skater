@@ -1,0 +1,772 @@
+\documentclass[9pt,a4paper,]{extarticle}
+
+\usepackage{f1000_styles}
+
+\usepackage[pdfborder={0 0 0}]{hyperref}
+
+\usepackage[numbers]{natbib}
+\bibliographystyle{unsrtnat}
+
+
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+
+% disable code chunks background
+%\renewenvironment{Shaded}{}{}
+
+% disable section numbers
+\setcounter{secnumdepth}{0}
+
+%% added by MLS, this is not in the F1000 style by default %%
+
+\hypersetup{unicode=true,
+            pdftitle={skater: An R package for SNP-based Kinship Analysis, Testing, and Evaluation},
+            pdfkeywords={bioinformatics, kinship, R, genealogy, SNPs, single nucleotide polymorphisms, relatedness},
+            pdfborder={0 0 0},
+            breaklinks=true}
+
+%% End added by MLS %%
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+
+
+
+\begin{document}
+\pagestyle{front}
+
+\title{\textbf{skater}: An R package for SNP-based Kinship Analysis, Testing, and Evaluation}
+
+\author[1]{Stephen D. Turner}
+\author[1]{V. P. Nagraj}
+\author[1]{Matthew Scholz}
+\author[1]{Shakeel Jessa}
+\author[1]{Carlos Acevedo}
+\author[2]{Jianye Ge}
+\author[2]{August E. Woerner}
+\author[2]{Bruce Budowle}
+\affil[1]{Signature Science, LLC., Austin, TX 78759, USA.}
+\affil[2]{Center for Human Identification, Department of Microbiology, Immunology, and Genetics, University of North Texas Health Science Center, Fort Worth, TX 76107, USA.}
+
+\maketitle
+\thispagestyle{front}
+
+\begin{abstract}
+\hfill\break
+\textbf{Motivation:} SNP-based kinship analysis with genome-wide relationship estimation and IBD segment analysis methods produces results that often require further downstream processing and manipulation. A dedicated software package that consistently and intuitively implements this analysis functionality is needed.\\
+\textbf{Results:} Here we present the skater R package for \textbf{S}NP-based \textbf{k}inship \textbf{a}nalysis, \textbf{t}esting, and \textbf{e}valuation with \textbf{R}. The skater package contains a suite of well-documented tools for importing, parsing, and analyzing pedigree data, performing relationship degree inference, benchmarking relationship degree classification, and summarizing IBD segment data.\\
+\textbf{Availability:} The skater package is implemented as an R package and is released under the MIT license at https://github.com/signaturescience/skater. Documentation is available at https://signaturescience.github.io/skater.
+\end{abstract}
+
+\section*{Keywords}
+bioinformatics, kinship, R, genealogy, SNPs, single nucleotide polymorphisms, relatedness
+
+
+\clearpage
+\pagestyle{main}
+
+\textbf{R version}: R version 4.0.4 (2021-02-15)
+
+\textbf{skater package version}: 0.1.0
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+Inferring familial relationships between individuals using genetic data is a common practice in population genetics, medical genetics, and forensics. There are multiple approaches to estimating relatedness between samples, including genome-wide measures, such as those implemented in Plink \citep{purcell2007} or KING \citep{manichaikul2010}, and methods that rely on identity by descent (IBD) segment detection, such as GERMLINE \citep{gusev2009}, hap-IBD \citep{zhou2020}, and IBIS \citep{seidman2020}. Recent efforts focusing on benchmarking these methods \citep{ramstetter2017} have been aided by tools for simulating pedigrees and genome-wide SNP data \citep{caballero2019}. Analyzing results from genome-wide SNP-based kinship analysis or comparing analyses to simulated data for benchmarking have to this point required writing one-off analysis functions or utility scripts that are seldom distributed with robust documentation, test suites, or narrative examples of usage. There is a need in the field for a well-documented software package with a consistent design and API that contains functions to assist with downstream manipulation, benchmarking, and analysis of SNP-based kinship assessment methods. Here we present the skater package for \textbf{S}NP-based \textbf{k}inship \textbf{a}nalysis, \textbf{t}esting, and \textbf{e}valuation with \textbf{R}.
+
+\hypertarget{methods}{%
+\section{Methods}\label{methods}}
+
+\hypertarget{implementation}{%
+\subsection{Implementation}\label{implementation}}
+
+The skater package provides an intuitive collection of analysis and utility functions for SNP-based kinship analysis. Functions in the package include tools for importing, parsing, and analyzing pedigree data, performing relationship degree inference, benchmarking relationship degree classification, and summarizing IBD segment data, described in full in the \emph{Use Cases} section below. The package adheres to ``tidy'' data analysis principles, and builds upon the tools released under the tidyverse R ecosystem \citep{Wickham2019}.
+
+The skater package is hosted in the Comprehensive R Archive Network (CRAN) which is the main repository for R packages: \url{http://CRAN.R-project.org/package=skater}. Users can install skater in R by executing the following code:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"skater"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Alternatively, the development version of skater is available on GitHub at \url{https://github.com/signaturescience/skater}. The development version may contain new features which are not yet available in the version hosted on CRAN. This version can be installed using the \texttt{install\_github()} function in the devtools package:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\NormalTok{devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"signaturescience/skater"}\NormalTok{, }\AttributeTok{build\_vignettes=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+When installing skater, other packages which skater depends on are automatically installed, including magritr, tibble, dplyr, tidyr, readr, purrr, kinship2, corrr, rlang, and others.
+
+\hypertarget{operation}{%
+\subsection{Operation}\label{operation}}
+
+Minimal system requirements for installing and using skater include R (version 3.0.0 or higher) and several tidyverse packages \citep{Wickham2019} that many R users will already have installed. Use cases are demonstrated in detail below. In summary, the skater package has functions for:
+
+\begin{itemize}
+\item
+  Reading in various output files produced by commonly used tools in SNP-based kinship analysis
+\item
+  Pedigree parsing, manpulation, and analysis
+\item
+  Relationship degree inference
+\item
+  Benchmarking and assessing relationship classification accuracy
+\item
+  IBD segment analysis post-processing
+\end{itemize}
+
+A comprehensive reference for all the functions in the skater package is available at \url{https://signaturescience.github.io/skater/}.
+
+\hypertarget{use-cases}{%
+\section{Use Cases}\label{use-cases}}
+
+The \texttt{skater} package provides a collection of analysis and utility functions for \textbf{S}NP-based \textbf{k}inship \textbf{a}nalysis, \textbf{t}esting, and \textbf{e}valuation as an \textbf{R} package. Functions in the package include tools for working with pedigree data, performing relationship degree inference, assessing classification accuracy, and summarizing IBD segment data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(skater)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{pedigree-parsing-manipulation-and-analysis}{%
+\subsection{Pedigree parsing, manipulation, and analysis}\label{pedigree-parsing-manipulation-and-analysis}}
+
+Pedigrees define familial relationships in a hierarchical structure. One of the common formats used by PLINK \citep{purcell2007} and other genetic analysis tools is the \texttt{.fam} file. A \texttt{.fam} file is a tabular format with one row per individual and columns for unique IDs of the mother, father, and the family unit. The package includes \texttt{read\_fam()} to read files in this format:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{famfile }\OtherTok{\textless{}{-}} \FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"3gens.fam"}\NormalTok{, }\AttributeTok{package=}\StringTok{"skater"}\NormalTok{, }\AttributeTok{mustWork=}\ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{fam }\OtherTok{\textless{}{-}} \FunctionTok{read\_fam}\NormalTok{(famfile)}
+\NormalTok{fam}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 64 x 6
+##    fid      id                dadid             momid               sex affected
+##    <chr>    <chr>             <chr>             <chr>             <int>    <int>
+##  1 testped1 testped1_g1-b1-s1 0                 0                     1        1
+##  2 testped1 testped1_g1-b1-i1 0                 0                     2        1
+##  3 testped1 testped1_g2-b1-s1 0                 0                     1        1
+##  4 testped1 testped1_g2-b1-i1 testped1_g1-b1-s1 testped1_g1-b1-i1     2        1
+##  5 testped1 testped1_g2-b2-s1 0                 0                     1        1
+##  6 testped1 testped1_g2-b2-i1 testped1_g1-b1-s1 testped1_g1-b1-i1     2        1
+##  7 testped1 testped1_g3-b1-i1 testped1_g2-b1-s1 testped1_g2-b1-i1     2        1
+##  8 testped1 testped1_g3-b2-i1 testped1_g2-b2-s1 testped1_g2-b2-i1     1        1
+##  9 testped2 testped2_g1-b1-s1 0                 0                     2        1
+## 10 testped2 testped2_g1-b1-i1 0                 0                     1        1
+## # ... with 54 more rows
+\end{verbatim}
+
+Family structures imported from \texttt{.fam} formated files can then be translated to the \texttt{pedigree} structure used by the \texttt{kinship2} package \citep{sinnwell2014}. The ``fam'' format may include multiple families, and the \texttt{fam2ped()} function will collapse them all into a \texttt{tibble} with one row per family:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{peds }\OtherTok{\textless{}{-}} \FunctionTok{fam2ped}\NormalTok{(fam)}
+\NormalTok{peds}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 8 x 3
+##   fid      data             ped       
+##   <chr>    <list>           <list>    
+## 1 testped1 <tibble [8 x 5]> <pedigree>
+## 2 testped2 <tibble [8 x 5]> <pedigree>
+## 3 testped3 <tibble [8 x 5]> <pedigree>
+## 4 testped4 <tibble [8 x 5]> <pedigree>
+## 5 testped5 <tibble [8 x 5]> <pedigree>
+## 6 testped6 <tibble [8 x 5]> <pedigree>
+## 7 testped7 <tibble [8 x 5]> <pedigree>
+## 8 testped8 <tibble [8 x 5]> <pedigree>
+\end{verbatim}
+
+In the example above, the resulting \texttt{tibble} is nested by family ID. The \texttt{data} column contains the individual family information, while the \texttt{ped} column contains the pedigree object for that family. Using standard tidyverse operations, the resulting tibble can be unnested for any particular family:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{peds }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(fid}\SpecialCharTok{==}\StringTok{"testped1"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  tidyr}\SpecialCharTok{::}\FunctionTok{unnest}\NormalTok{(}\AttributeTok{cols=}\NormalTok{data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 8 x 7
+##   fid      id                dadid             momid        sex affected ped    
+##   <chr>    <chr>             <chr>             <chr>      <int>    <dbl> <list> 
+## 1 testped1 testped1_g1-b1-s1 <NA>              <NA>           1        1 <pedig~
+## 2 testped1 testped1_g1-b1-i1 <NA>              <NA>           2        1 <pedig~
+## 3 testped1 testped1_g2-b1-s1 <NA>              <NA>           1        1 <pedig~
+## 4 testped1 testped1_g2-b1-i1 testped1_g1-b1-s1 testped1_~     2        1 <pedig~
+## 5 testped1 testped1_g2-b2-s1 <NA>              <NA>           1        1 <pedig~
+## 6 testped1 testped1_g2-b2-i1 testped1_g1-b1-s1 testped1_~     2        1 <pedig~
+## 7 testped1 testped1_g3-b1-i1 testped1_g2-b1-s1 testped1_~     2        1 <pedig~
+## 8 testped1 testped1_g3-b2-i1 testped1_g2-b2-s1 testped1_~     1        1 <pedig~
+\end{verbatim}
+
+A single pedigree can also be inspected or visualized (standard base R plot arguments such as \texttt{mar} or \texttt{cex} can be used to adjust aesthetics):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{peds}\SpecialCharTok{$}\NormalTok{ped[[}\DecValTok{1}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Pedigree object with 8 subjects
+## Bit size= 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(peds}\SpecialCharTok{$}\NormalTok{ped[[}\DecValTok{1}\NormalTok{]], }\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{), }\AttributeTok{cex=}\NormalTok{.}\DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{paper_files/figure-latex/plotped-1} \end{center}
+
+The \texttt{plot\_pedigree()} function from \texttt{skater} will iterate over a list of pedigree objects, writing a multi-page PDF, with each page containing a pedigree from family:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot\_pedigree}\NormalTok{(peds}\SpecialCharTok{$}\NormalTok{ped, }\AttributeTok{file=}\StringTok{"3gens.ped.pdf"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{ped2kinpair()} function takes a pedigree object and produces a pairwise list of relationships between all individuals in the data with the expected kinship coefficients for each pair.
+
+The function can be run on a single family:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ped2kinpair}\NormalTok{(peds}\SpecialCharTok{$}\NormalTok{ped[[}\DecValTok{1}\NormalTok{]])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 36 x 3
+##    id1               id2                   k
+##    <chr>             <chr>             <dbl>
+##  1 testped1_g1-b1-s1 testped1_g1-b1-s1 0.5  
+##  2 testped1_g1-b1-i1 testped1_g1-b1-s1 0    
+##  3 testped1_g1-b1-s1 testped1_g2-b1-s1 0    
+##  4 testped1_g1-b1-s1 testped1_g2-b1-i1 0.25 
+##  5 testped1_g1-b1-s1 testped1_g2-b2-s1 0    
+##  6 testped1_g1-b1-s1 testped1_g2-b2-i1 0.25 
+##  7 testped1_g1-b1-s1 testped1_g3-b1-i1 0.125
+##  8 testped1_g1-b1-s1 testped1_g3-b2-i1 0.125
+##  9 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5  
+## 10 testped1_g1-b1-i1 testped1_g2-b1-s1 0    
+## # ... with 26 more rows
+\end{verbatim}
+
+This function can also be mapped over all families in the pedigree:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{kinpairs }\OtherTok{\textless{}{-}} 
+\NormalTok{  peds }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{pairs=}\NormalTok{purrr}\SpecialCharTok{::}\FunctionTok{map}\NormalTok{(ped, ped2kinpair)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(fid, pairs) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  tidyr}\SpecialCharTok{::}\FunctionTok{unnest}\NormalTok{(}\AttributeTok{cols=}\NormalTok{pairs)}
+\NormalTok{kinpairs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 288 x 4
+##    fid      id1               id2                   k
+##    <chr>    <chr>             <chr>             <dbl>
+##  1 testped1 testped1_g1-b1-s1 testped1_g1-b1-s1 0.5  
+##  2 testped1 testped1_g1-b1-i1 testped1_g1-b1-s1 0    
+##  3 testped1 testped1_g1-b1-s1 testped1_g2-b1-s1 0    
+##  4 testped1 testped1_g1-b1-s1 testped1_g2-b1-i1 0.25 
+##  5 testped1 testped1_g1-b1-s1 testped1_g2-b2-s1 0    
+##  6 testped1 testped1_g1-b1-s1 testped1_g2-b2-i1 0.25 
+##  7 testped1 testped1_g1-b1-s1 testped1_g3-b1-i1 0.125
+##  8 testped1 testped1_g1-b1-s1 testped1_g3-b2-i1 0.125
+##  9 testped1 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5  
+## 10 testped1 testped1_g1-b1-i1 testped1_g2-b1-s1 0    
+## # ... with 278 more rows
+\end{verbatim}
+
+Note that this maps \texttt{ped2kinpair()} over all \texttt{ped} objects in the input \texttt{tibble}, and that relationships are not shown for between-family relationships.
+
+\hypertarget{relationship-degree-inference-and-benchmarking}{%
+\subsection{Relationship degree inference and benchmarking}\label{relationship-degree-inference-and-benchmarking}}
+
+The skater package includes functions to translate kinship coefficients to relationship degrees. The kinship coefficients could come from \texttt{ped2kinpair()} or other kinship estimation software.
+
+The \texttt{dibble()} function creates a \textbf{d}egree \textbf{i}nference \texttt{tibble}, with degrees up to the specified \texttt{max\_degree} (default=3), expected kinship coefficient, and lower (\texttt{l}) and upper (\texttt{u}) inference ranges as defined in \citet{manichaikul2010}. Degree 0 corresponds to self / identity / monozygotic twins, with an expected kinship coefficient of 0.5, with inference range \textgreater=0.354. Anything beyond the maximum degree resolution is considered unrelated (degree \texttt{NA}).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dibble}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 4
+##   degree      k       l      u
+##    <int>  <dbl>   <dbl>  <dbl>
+## 1      0 0.5     0.354  1     
+## 2      1 0.25    0.177  0.354 
+## 3      2 0.125   0.0884 0.177 
+## 4      3 0.0625  0.0442 0.0884
+## 5     NA 0      -1      0.0442
+\end{verbatim}
+
+The degree inference \texttt{max\_degree} default is 3. Change this argument to allow more granular degree inference ranges:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dibble}\NormalTok{(}\AttributeTok{max\_degree =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 4
+##   degree      k       l      u
+##    <int>  <dbl>   <dbl>  <dbl>
+## 1      0 0.5     0.354  1     
+## 2      1 0.25    0.177  0.354 
+## 3      2 0.125   0.0884 0.177 
+## 4      3 0.0625  0.0442 0.0884
+## 5      4 0.0312  0.0221 0.0442
+## 6      5 0.0156  0.0110 0.0221
+## 7     NA 0      -1      0.0110
+\end{verbatim}
+
+Note that the distance between relationship degrees becomes smaller as the relationship degree becomes more distant. The \texttt{dibble()} function will emit a warning with \texttt{max\_degree} \textgreater=10, and will stop with an error at \textgreater=12.
+
+The \texttt{kin2degree()} function infers the relationship degree given a kinship coefficient and a \texttt{max\_degree} up to which anything more distant is treated as unrelated. Example first degree relative:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kin2degree}\NormalTok{(.}\DecValTok{25}\NormalTok{, }\AttributeTok{max\_degree=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+Example 4th degree relative, but using the default max\_degree resolution of 3:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kin2degree}\NormalTok{(.}\DecValTok{0312}\NormalTok{, }\AttributeTok{max\_degree=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+Example 4th degree relative, but increasing the degree resolution:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{kin2degree}\NormalTok{(.}\DecValTok{0312}\NormalTok{, }\AttributeTok{max\_degree=}\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+The \texttt{kin2degree()} function is vectorized over values of \texttt{k}, so it can be used inside of a \texttt{mutate} on a \texttt{tibble} of kinship coefficients:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Get two pairs from each type of relationship we have in kinpairs:}
+\NormalTok{kinpairs\_subset }\OtherTok{\textless{}{-}} 
+\NormalTok{  kinpairs }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(k) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{slice}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{)}
+\NormalTok{kinpairs\_subset}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 4
+## # Groups:   k [5]
+##    fid      id1               id2                    k
+##    <chr>    <chr>             <chr>              <dbl>
+##  1 testped1 testped1_g1-b1-i1 testped1_g1-b1-s1 0     
+##  2 testped1 testped1_g1-b1-s1 testped1_g2-b1-s1 0     
+##  3 testped1 testped1_g3-b1-i1 testped1_g3-b2-i1 0.0625
+##  4 testped2 testped2_g3-b1-i1 testped2_g3-b2-i1 0.0625
+##  5 testped1 testped1_g1-b1-s1 testped1_g3-b1-i1 0.125 
+##  6 testped1 testped1_g1-b1-s1 testped1_g3-b2-i1 0.125 
+##  7 testped1 testped1_g1-b1-s1 testped1_g2-b1-i1 0.25  
+##  8 testped1 testped1_g1-b1-s1 testped1_g2-b2-i1 0.25  
+##  9 testped1 testped1_g1-b1-s1 testped1_g1-b1-s1 0.5   
+## 10 testped1 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Infer degree out to third degree relatives:}
+\NormalTok{kinpairs\_subset }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{degree=}\FunctionTok{kin2degree}\NormalTok{(k, }\AttributeTok{max\_degree=}\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 5
+## # Groups:   k [5]
+##    fid      id1               id2                    k degree
+##    <chr>    <chr>             <chr>              <dbl>  <int>
+##  1 testped1 testped1_g1-b1-i1 testped1_g1-b1-s1 0          NA
+##  2 testped1 testped1_g1-b1-s1 testped1_g2-b1-s1 0          NA
+##  3 testped1 testped1_g3-b1-i1 testped1_g3-b2-i1 0.0625      3
+##  4 testped2 testped2_g3-b1-i1 testped2_g3-b2-i1 0.0625      3
+##  5 testped1 testped1_g1-b1-s1 testped1_g3-b1-i1 0.125       2
+##  6 testped1 testped1_g1-b1-s1 testped1_g3-b2-i1 0.125       2
+##  7 testped1 testped1_g1-b1-s1 testped1_g2-b1-i1 0.25        1
+##  8 testped1 testped1_g1-b1-s1 testped1_g2-b2-i1 0.25        1
+##  9 testped1 testped1_g1-b1-s1 testped1_g1-b1-s1 0.5         0
+## 10 testped1 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5         0
+\end{verbatim}
+
+\hypertarget{benchmarking-degree-classification}{%
+\subsection{Benchmarking Degree Classification}\label{benchmarking-degree-classification}}
+
+Once estimated kinship is converted to degree, it may be of interest to compare the inferred degree to truth. When aggregated over many relationships and inferences, this method can help benchmark performance of a particular kinship analysis method.
+
+The skater package adapts a \texttt{confusion\_matrix()} function from \citet{clark2021} to provide standard contingency table metrics (e.g.~sensitivity, specificity, PPV, precision, recall, F1, etc.) with a new reciprocal RMSE (R-RMSE) metric. The \texttt{confusion\_matrix()} function on its own outputs a list with four objects:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  A \texttt{tibble} with calculated accuracy, lower and upper bounds, the guessing rate and p-value of the accuracy vs.~the guessing rate.
+\item
+  A \texttt{tibble} with contingency table statistics calculated for each class. Details on the statistics calculated for each class can be reviewed on the help page for \texttt{?confusion\_matrix}.
+\item
+  A \texttt{matrix} with the contingency table object itself.
+\item
+  A \texttt{vector} with the reciprocal RMSE (R-RMSE). The R-RMSE is calculated as \texttt{sqrt(mean((1/(Target+.5)-1/(Predicted+.5))\^{}2)))}, and represents an alternative to classification accuracy when benchmarking relationship degree estimation. Taking the reciprocal of the target and predicted degree results in larger penalties for more egregious misclassifications (e.g., classifying a first-degree relative pair as second degree) than misclassifications at more distant relationships (e.g., misclassifying a fourth-degree relative pair as fifth-degree). The +0.5 adjustment prevents division-by-zero when a 0th-degree (identical) relative pair is introduced.
+\end{enumerate}
+
+To illustrate the usage, this example will start with the \texttt{kinpairs} data from above and randomly flip \textasciitilde20\% of the true relationship degrees.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Function to randomly flip levels of a factor (at 20\%, by default)}
+\NormalTok{randomflip }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, }\AttributeTok{p=}\NormalTok{.}\DecValTok{2}\NormalTok{) }\FunctionTok{ifelse}\NormalTok{(}\FunctionTok{runif}\NormalTok{(}\FunctionTok{length}\NormalTok{(x))}\SpecialCharTok{\textless{}}\NormalTok{p, }\FunctionTok{sample}\NormalTok{(}\FunctionTok{unique}\NormalTok{(x)), x)}
+
+\CommentTok{\# Infer degree (truth/target) using kin2degree, then randomly flip 20\% of them}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\NormalTok{kinpairs\_inferred }\OtherTok{\textless{}{-}}\NormalTok{ kinpairs }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{degree\_truth=}\FunctionTok{kin2degree}\NormalTok{(k, }\AttributeTok{max\_degree=}\DecValTok{3}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{degree\_truth=}\NormalTok{tidyr}\SpecialCharTok{::}\FunctionTok{replace\_na}\NormalTok{(degree\_truth, }\StringTok{"unrelated"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{degree\_inferred=}\FunctionTok{randomflip}\NormalTok{(degree\_truth))}
+\NormalTok{kinpairs\_inferred}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 288 x 6
+##    fid      id1               id2                   k degree_truth degree_inferred
+##    <chr>    <chr>             <chr>             <dbl> <chr>        <chr>          
+##  1 testped1 testped1_g1-b1-s1 testped1_g1-b1-s1 0.5   0            0              
+##  2 testped1 testped1_g1-b1-i1 testped1_g1-b1-s1 0     unrelated    unrelated      
+##  3 testped1 testped1_g1-b1-s1 testped1_g2-b1-s1 0     unrelated    unrelated      
+##  4 testped1 testped1_g1-b1-s1 testped1_g2-b1-i1 0.25  1            1              
+##  5 testped1 testped1_g1-b1-s1 testped1_g2-b2-s1 0     unrelated    unrelated      
+##  6 testped1 testped1_g1-b1-s1 testped1_g2-b2-i1 0.25  1            1              
+##  7 testped1 testped1_g1-b1-s1 testped1_g3-b1-i1 0.125 2            2              
+##  8 testped1 testped1_g1-b1-s1 testped1_g3-b2-i1 0.125 2            1              
+##  9 testped1 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5   0            0              
+## 10 testped1 testped1_g1-b1-i1 testped1_g2-b1-s1 0     unrelated    unrelated      
+## # ... with 278 more rows
+\end{verbatim}
+
+Next, running the \texttt{confusion\_matrix()} function will return all four objects noted above.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confusion\_matrix}\NormalTok{(}\AttributeTok{prediction =}\NormalTok{ kinpairs\_inferred}\SpecialCharTok{$}\NormalTok{degree\_inferred, }
+                 \AttributeTok{target =}\NormalTok{ kinpairs\_inferred}\SpecialCharTok{$}\NormalTok{degree\_truth)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $Accuracy
+## # A tibble: 1 x 5
+##   Accuracy `Accuracy LL` `Accuracy UL` `Accuracy Guessing` `Accuracy P-value`
+##      <dbl>         <dbl>         <dbl>               <dbl>              <dbl>
+## 1    0.812         0.763         0.856               0.333           1.09e-62
+## 
+## $Other
+## # A tibble: 6 x 15
+##   Class         N `Sensitivity/Re~ `Specificity/TN~ `PPV/Precision`   NPV `F1/Dice`
+##   <chr>     <dbl>            <dbl>            <dbl>           <dbl> <dbl>     <dbl>
+## 1 0          64              0.75             0.964           0.857 0.931     0.8  
+## 2 1          72              0.806            0.944           0.829 0.936     0.817
+## 3 2          48              0.833            0.967           0.833 0.967     0.833
+## 4 3           8              0.75             0.936           0.25  0.992     0.375
+## 5 unrelated  96              0.854            0.958           0.911 0.929     0.882
+## 6 Average    57.6            0.799            0.954           0.736 0.951     0.741
+## # ... with 8 more variables: Prevalence <dbl>, Detection Rate <dbl>,
+## #   Detection Prevalence <dbl>, Balanced Accuracy <dbl>, FDR <dbl>, FOR <dbl>,
+## #   FPR/Fallout <dbl>, FNR <dbl>
+## 
+## $Table
+##            Target
+## Predicted    0  1  2  3 unrelated
+##   0         48  4  2  1         1
+##   1          5 58  4  0         3
+##   2          0  3 40  1         4
+##   3          8  4  0  6         6
+##   unrelated  3  3  2  0        82
+## 
+## $recip_rmse
+## [1] 0.4665971
+\end{verbatim}
+
+Standard tidyverse functions such as \texttt{purrr::pluck()} can be used to isolate just the contingency table:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confusion\_matrix}\NormalTok{(}\AttributeTok{prediction =}\NormalTok{ kinpairs\_inferred}\SpecialCharTok{$}\NormalTok{degree\_inferred, }
+                 \AttributeTok{target =}\NormalTok{ kinpairs\_inferred}\SpecialCharTok{$}\NormalTok{degree\_truth) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  purrr}\SpecialCharTok{::}\FunctionTok{pluck}\NormalTok{(}\StringTok{"Table"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            Target
+## Predicted    0  1  2  3 unrelated
+##   0         48  4  2  1         1
+##   1          5 58  4  0         3
+##   2          0  3 40  1         4
+##   3          8  4  0  6         6
+##   unrelated  3  3  2  0        82
+\end{verbatim}
+
+The \texttt{confusion\_matrix()} function includes an argument to output in a tidy (\texttt{longer=TRUE}) format, and the example below illustrates how to spread contingency table statistics by class:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{confusion\_matrix}\NormalTok{(}\AttributeTok{prediction =}\NormalTok{ kinpairs\_inferred}\SpecialCharTok{$}\NormalTok{degree\_inferred, }
+                 \AttributeTok{target =}\NormalTok{ kinpairs\_inferred}\SpecialCharTok{$}\NormalTok{degree\_truth, }
+                 \AttributeTok{longer =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  purrr}\SpecialCharTok{::}\FunctionTok{pluck}\NormalTok{(}\StringTok{"Other"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  tidyr}\SpecialCharTok{::}\FunctionTok{spread}\NormalTok{(Class, Value) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{relocate}\NormalTok{(Average, }\AttributeTok{.after=}\NormalTok{dplyr}\SpecialCharTok{::}\FunctionTok{last\_col}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate\_if}\NormalTok{(rlang}\SpecialCharTok{::}\NormalTok{is\_double, signif, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 14 x 7
+##    Statistic                 `0`    `1`    `2`    `3` unrelated Average
+##    <chr>                   <dbl>  <dbl>  <dbl>  <dbl>     <dbl>   <dbl>
+##  1 Balanced Accuracy       0.86   0.88   0.9   0.84       0.91    0.88 
+##  2 Detection Prevalence    0.19   0.24   0.17  0.083      0.31    0.2  
+##  3 Detection Rate          0.17   0.2    0.14  0.021      0.28    0.16 
+##  4 F1/Dice                 0.8    0.82   0.83  0.38       0.88    0.74 
+##  5 FDR                     0.14   0.17   0.17  0.75       0.089   0.26 
+##  6 FNR                     0.25   0.19   0.17  0.25       0.15    0.2  
+##  7 FOR                     0.069  0.064  0.033 0.0076     0.071   0.049
+##  8 FPR/Fallout             0.036  0.056  0.033 0.064      0.042   0.046
+##  9 N                      64     72     48     8         96      58    
+## 10 NPV                     0.93   0.94   0.97  0.99       0.93    0.95 
+## 11 PPV/Precision           0.86   0.83   0.83  0.25       0.91    0.74 
+## 12 Prevalence              0.22   0.25   0.17  0.028      0.33    0.2  
+## 13 Sensitivity/Recall/TPR  0.75   0.81   0.83  0.75       0.85    0.8  
+## 14 Specificity/TNR         0.96   0.94   0.97  0.94       0.96    0.95
+\end{verbatim}
+
+\hypertarget{ibd-segment-analysis}{%
+\subsection{IBD segment analysis}\label{ibd-segment-analysis}}
+
+Tools such as hap-IBD \citep{zhou2020}, and IBIS \citep{seidman2020} detect shared IBD segments between individuals. The skater package includes functionality to take those IBD segments, compute shared genomic centimorgan (cM) length, and converts that shared cM to a kinship coefficient. In addition to inferred segments, these functions can estimate ``truth'' kinship from simulated IBD segments \citep{caballero2019}. The \texttt{read\_ibd()} function reads pairwise IBD segments from IBD inference tools and from simulated IBD segments. The \texttt{read\_map()} function reads in genetic map in a standard format which is required to translate the total centimorgans shared IBD to a kinship coefficient using the \texttt{ibd2kin()} function. See \texttt{?read\_ibd} and \texttt{?read\_map} for additional details on expected format.
+
+The \texttt{read\_ibd()} function reads in the pairwise IBD segment format. Input to this function can either be inferred IBD segments from hap-IBD (\texttt{source="hapibd"}) or simulated segments (\texttt{source="pedsim"}). The first example below uses data in the \texttt{hap-ibd} output format:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{hapibd\_filepath }\OtherTok{\textless{}{-}} \FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"GBR.sim.ibd.gz"}\NormalTok{, }
+                               \AttributeTok{package=}\StringTok{"skater"}\NormalTok{)}
+\NormalTok{hapibd\_seg }\OtherTok{\textless{}{-}} \FunctionTok{read\_ibd}\NormalTok{(hapibd\_filepath, }\AttributeTok{source =} \StringTok{"hapibd"}\NormalTok{)}
+\NormalTok{hapibd\_seg}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3,954 x 6
+##    id1               id2                 chr     start       end length
+##    <chr>             <chr>             <dbl>     <dbl>     <dbl>  <dbl>
+##  1 testped1_g1-b1-s1 testped1_g3-b1-i1     1 197661576 234863602   47.1
+##  2 testped1_g2-b2-i1 testped1_g3-b1-i1     1 197661576 231017545   39.8
+##  3 testped1_g3-b1-i1 testped1_g3-b2-i1     1 197661576 212799139   20.3
+##  4 testped3_g1-b1-s1 testped3_g3-b2-i1     1   2352146  10862397   17.7
+##  5 testped3_g2-b2-i1 testped3_g3-b2-i1     1   2352146  10862397   17.7
+##  6 testped1_g1-b1-s1 testped1_g2-b1-i1     1   3328659  64123868   86.4
+##  7 testped1_g1-b1-s1 testped1_g3-b1-i1     1   3328659  33476811   51.2
+##  8 testped1_g2-b2-s1 testped1_g3-b2-i1     1   5003504  32315147   45.9
+##  9 testped2_g1-b1-i1 testped2_g3-b1-i1     1 240810528 248578622   15.9
+## 10 testped2_g1-b1-i1 testped2_g2-b2-i1     1 241186056 249170711   15.5
+## # ... with 3,944 more rows
+\end{verbatim}
+
+In order to translate the shared genomic cM length to a kinship coefficient, a genetic map must first be read in with \texttt{read\_map()}. Software for IBD segment inference and simulation requires a genetic map. The map loaded for kinship estimation should be the same one used for creating the shared IBD segment output. The example below uses a minimal genetic map that ships with \texttt{skater}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{gmap\_filepath }\OtherTok{\textless{}{-}} \FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"sexspec{-}avg{-}min.plink.map"}\NormalTok{, }
+                             \AttributeTok{package=}\StringTok{"skater"}\NormalTok{)}
+\NormalTok{gmap }\OtherTok{\textless{}{-}} \FunctionTok{read\_map}\NormalTok{(gmap\_filepath)}
+\NormalTok{gmap}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 28,726 x 3
+##      chr  value      bp
+##    <dbl>  <dbl>   <dbl>
+##  1     1 0       752721
+##  2     1 0.0292 1066029
+##  3     1 0.0829 1099342
+##  4     1 0.157  1106473
+##  5     1 0.246  1152631
+##  6     1 0.294  1314015
+##  7     1 0.469  1510801
+##  8     1 0.991  1612540
+##  9     1 1.12   1892325
+## 10     1 1.41   1916587
+## # ... with 28,716 more rows
+\end{verbatim}
+
+The \texttt{ibd2kin()} function takes the segments and map file and outputs a \texttt{tibble} with one row per pair of individuals and columns for individual 1 ID, individual 2 ID, and the kinship coefficient for the pair:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ibd\_dat }\OtherTok{\textless{}{-}} \FunctionTok{ibd2kin}\NormalTok{(}\AttributeTok{.ibd\_data=}\NormalTok{hapibd\_seg, }\AttributeTok{.map=}\NormalTok{gmap)}
+\NormalTok{ibd\_dat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 196 x 3
+##    id1               id2                kinship
+##    <chr>             <chr>                <dbl>
+##  1 testped1_g1-b1-i1 testped1_g1-b1-s1 0.000316
+##  2 testped1_g1-b1-i1 testped1_g2-b1-i1 0.261   
+##  3 testped1_g1-b1-i1 testped1_g2-b2-i1 0.263   
+##  4 testped1_g1-b1-i1 testped1_g2-b2-s1 0.000150
+##  5 testped1_g1-b1-i1 testped1_g3-b1-i1 0.145   
+##  6 testped1_g1-b1-i1 testped1_g3-b2-i1 0.133   
+##  7 testped1_g1-b1-i1 testped2_g1-b1-i1 0.000165
+##  8 testped1_g1-b1-i1 testped2_g1-b1-s1 0.000323
+##  9 testped1_g1-b1-i1 testped2_g2-b1-i1 0.000499
+## 10 testped1_g1-b1-i1 testped2_g2-b1-s1 0.000318
+## # ... with 186 more rows
+\end{verbatim}
+
+\hypertarget{summary}{%
+\section{Summary}\label{summary}}
+
+The skater R package provides a robust software package for data import, manipulation, and analysis tasks typically encountered when working with SNP-based kinship analysis tools. All package functions are internally documented with examples, and the package contains a vignette demonstrating usage, inputs, outputs, and interpretation of all key functions. The package contains internal tests that are automatically run with continuous integration via GitHub Actions whenever the package code is updated. The skater package is permissively licensed (MIT) and is easily extensible to accommodate outputs from new genome-wide relatedness and IBD segment methods as they become available.
+
+\hypertarget{software-availability}{%
+\section{Software availability}\label{software-availability}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Software available from: \url{http://CRAN.R-project.org/package=skater}.
+\item
+  Source code available from: \url{https://github.com/signaturescience/skater}.
+\item
+  Archived source code at time of publication: \textbf{FIXME Zenodo DOI to come here}.
+\item
+  Software license: MIT License.
+\end{enumerate}
+
+\hypertarget{author-information}{%
+\section{Author information}\label{author-information}}
+
+SDT, VPN, and MBS developed the R package.
+
+All authors contributed to method development.
+
+SDT wrote the first draft of the manuscript.
+
+All authors assisted with manuscript revision.
+
+All authors read and approved the final manuscript.
+
+\hypertarget{competing-interests}{%
+\section{Competing interests}\label{competing-interests}}
+
+No competing interests were disclosed.
+
+\hypertarget{grant-information}{%
+\section{Grant information}\label{grant-information}}
+
+This work was supported in part by award 2019-DU-BX-0046 (Dense DNA Data for Enhanced Missing Persons Identification) to B.B., awarded by the National Institute of Justice, Office of Justice Programs, U.S. Department of Justice and by internal funds from the Center for Human Identification. The opinions, findings, and conclusions or recommendations expressed are those of the authors and do not necessarily reflect those of the U.S. Department of Justice.
+
+{\small\bibliography{bibliography.bib}}
+
+\end{document}

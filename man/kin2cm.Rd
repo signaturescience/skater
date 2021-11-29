@@ -13,8 +13,6 @@ kin2cm(k)
 Estimated cM, ranging from 0-3560.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-
 "Converts" a kinship coefficient to put on the same scale as shared cM using the formula
 \eqn{cm <- pmin(3560, 4*pmax(0, k)*3560)}.
 }

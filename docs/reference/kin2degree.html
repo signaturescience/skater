@@ -127,7 +127,7 @@
     <p>Infers relationship degree given a kinship coefficient.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kin2degree</span>(<span class='no'>k</span>, <span class='kw'>max_degree</span> <span class='kw'>=</span> <span class='fl'>3L</span>)</pre>
+    <pre class="usage"><span class='fu'>kin2degree</span><span class='op'>(</span><span class='va'>k</span>, max_degree <span class='op'>=</span> <span class='fl'>3L</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -149,28 +149,48 @@
     <p>Inferred degree, up to the maximum degree in <code>dibble</code> (anything more distant is <code>NA</code>, i.e., unrelated).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>kin2degree</span>(<span class='fl'>0.5</span>)</div><div class='output co'>#&gt; [1] 0</div><div class='input'><span class='fu'>kin2degree</span>(<span class='fl'>0.25</span>)</div><div class='output co'>#&gt; [1] 1</div><div class='input'><span class='fu'>kin2degree</span>(<span class='fl'>0.125</span>)</div><div class='output co'>#&gt; [1] 2</div><div class='input'><span class='fu'>kin2degree</span>(<span class='fl'>0.0625</span>)</div><div class='output co'>#&gt; [1] 3</div><div class='input'><span class='fu'>kin2degree</span>(<span class='fl'>0.03125</span>)</div><div class='output co'>#&gt; [1] NA</div><div class='input'><span class='fu'>kin2degree</span>(<span class='fl'>0.03125</span>, <span class='kw'>max_degree</span><span class='kw'>=</span><span class='fl'>5</span>)</div><div class='output co'>#&gt; [1] 4</div><div class='input'><span class='fu'>kin2degree</span>(-<span class='fl'>0.05</span>)</div><div class='output co'>#&gt; [1] NA</div><div class='input'><span class='no'>k</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>.02</span>, <span class='fl'>.5</span>, <span class='fl'>.03</span>)
-<span class='fu'>kin2degree</span>(<span class='no'>k</span>)</div><div class='output co'>#&gt;  [1] NA  3  3  2  2  2  1  1  1  1  1  1  0  0  0  0  0</div><div class='input'><span class='fu'>kin2degree</span>(<span class='no'>k</span>, <span class='kw'>max_degree</span><span class='kw'>=</span><span class='fl'>5</span>)</div><div class='output co'>#&gt;  [1] 5 3 3 2 2 2 1 1 1 1 1 1 0 0 0 0 0</div><div class='input'><span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(<span class='kw'>k</span><span class='kw'>=</span><span class='no'>k</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span>(<span class='kw'>degree</span><span class='kw'>=</span><span class='fu'>kin2degree</span>(<span class='no'>k</span>))</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 17 x 2</span><span>
-#&gt;        k degree
-#&gt;    </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 1</span><span> 0.02      </span><span style='color: #BB0000;'>NA</span><span>
-#&gt; </span><span style='color: #BCBCBC;'> 2</span><span> 0.05       3
-#&gt; </span><span style='color: #BCBCBC;'> 3</span><span> 0.08       3
-#&gt; </span><span style='color: #BCBCBC;'> 4</span><span> 0.11       2
-#&gt; </span><span style='color: #BCBCBC;'> 5</span><span> 0.140      2
-#&gt; </span><span style='color: #BCBCBC;'> 6</span><span> 0.17       2
-#&gt; </span><span style='color: #BCBCBC;'> 7</span><span> 0.20       1
-#&gt; </span><span style='color: #BCBCBC;'> 8</span><span> 0.23       1
-#&gt; </span><span style='color: #BCBCBC;'> 9</span><span> 0.26       1
-#&gt; </span><span style='color: #BCBCBC;'>10</span><span> 0.29       1
-#&gt; </span><span style='color: #BCBCBC;'>11</span><span> 0.32       1
-#&gt; </span><span style='color: #BCBCBC;'>12</span><span> 0.35       1
-#&gt; </span><span style='color: #BCBCBC;'>13</span><span> 0.38       0
-#&gt; </span><span style='color: #BCBCBC;'>14</span><span> 0.41       0
-#&gt; </span><span style='color: #BCBCBC;'>15</span><span> 0.44       0
-#&gt; </span><span style='color: #BCBCBC;'>16</span><span> 0.47       0
-#&gt; </span><span style='color: #BCBCBC;'>17</span><span> 0.5        0</div><div class='input'>
-</div></span></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>kin2degree</span><span class='op'>(</span><span class='fl'>0.5</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 0</span>
+<span class='r-in'><span class='fu'>kin2degree</span><span class='op'>(</span><span class='fl'>0.25</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 1</span>
+<span class='r-in'><span class='fu'>kin2degree</span><span class='op'>(</span><span class='fl'>0.125</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 2</span>
+<span class='r-in'><span class='fu'>kin2degree</span><span class='op'>(</span><span class='fl'>0.0625</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 3</span>
+<span class='r-in'><span class='fu'>kin2degree</span><span class='op'>(</span><span class='fl'>0.03125</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] NA</span>
+<span class='r-in'><span class='fu'>kin2degree</span><span class='op'>(</span><span class='fl'>0.03125</span>, max_degree<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] 4</span>
+<span class='r-in'><span class='fu'>kin2degree</span><span class='op'>(</span><span class='op'>-</span><span class='fl'>0.05</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] NA</span>
+<span class='r-in'><span class='va'>k</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fl'>.02</span>, <span class='fl'>.5</span>, <span class='fl'>.03</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'>kin2degree</span><span class='op'>(</span><span class='va'>k</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] NA  3  3  2  2  2  1  1  1  1  1  1  0  0  0  0  0</span>
+<span class='r-in'><span class='fu'>kin2degree</span><span class='op'>(</span><span class='va'>k</span>, max_degree<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  [1] 5 3 3 2 2 2 1 1 1 1 1 1 0 0 0 0 0</span>
+<span class='r-in'><span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>k<span class='op'>=</span><span class='va'>k</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span> <span class='fu'>dplyr</span><span class='fu'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>degree<span class='op'>=</span><span class='fu'>kin2degree</span><span class='op'>(</span><span class='va'>k</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 17 × 2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        k degree</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    <span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span><span>  0.02     </span><span style='color: #BB0000;'>NA</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span><span>  0.05      3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 3</span><span>  0.08      3</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 4</span><span>  0.11      2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 5</span><span>  0.14      2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 6</span><span>  0.17      2</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 7</span><span>  0.2       1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 8</span><span>  0.23      1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 9</span><span>  0.26      1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>10</span><span>  0.29      1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>11</span><span>  0.32      1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>12</span><span>  0.35      1</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>13</span><span>  0.38      0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>14</span><span>  0.41      0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>15</span><span>  0.44      0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>16</span><span>  0.47      0</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>17</span><span>  0.5       0</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -186,7 +206,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

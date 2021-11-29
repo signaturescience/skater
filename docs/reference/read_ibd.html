@@ -173,7 +173,7 @@ Genetic length (end - start)
 
     </div>
 
-    <pre class="usage"><span class='fu'>read_ibd</span>(<span class='no'>file</span>, <span class='no'>source</span>)</pre>
+    <pre class="usage"><span class='fu'>read_ibd</span><span class='op'>(</span><span class='va'>file</span>, <span class='va'>source</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -207,10 +207,15 @@ Both the <code>hapibd</code> tibble, and the two <code>pedsim</code> tibbles con
 <p><a href='https://github.com/williamslab/ped-sim#output-ibd-segments-file'>https://github.com/williamslab/ped-sim#output-ibd-segments-file</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>hapibd_fp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"GBR.sim.ibd.gz"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"skater"</span>, <span class='kw'>mustWork</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>hapibd_seg</span> <span class='kw'>&lt;-</span> <span class='fu'>read_ibd</span>(<span class='no'>hapibd_fp</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"hapibd"</span>)
-<span class='no'>pedsim_fp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"extdata"</span>, <span class='st'>"GBR.sim.seg.gz"</span>, <span class='kw'>package</span><span class='kw'>=</span><span class='st'>"skater"</span>, <span class='kw'>mustWork</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='no'>pedsim_seg</span> <span class='kw'>&lt;-</span> <span class='fu'>read_ibd</span>(<span class='no'>pedsim_fp</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"pedsim"</span>)</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>hapibd_fp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"GBR.sim.ibd.gz"</span>, package<span class='op'>=</span><span class='st'>"skater"</span>, mustWork<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>hapibd_seg</span> <span class='op'>&lt;-</span> <span class='fu'>read_ibd</span><span class='op'>(</span><span class='va'>hapibd_fp</span>, source <span class='op'>=</span> <span class='st'>"hapibd"</span><span class='op'>)</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> New names:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> * `1` -&gt; `1...2`</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> * `1` -&gt; `1...4`</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> * `1` -&gt; `1...5`</span>
+<span class='r-in'><span class='va'>pedsim_fp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata"</span>, <span class='st'>"GBR.sim.seg.gz"</span>, package<span class='op'>=</span><span class='st'>"skater"</span>, mustWork<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>pedsim_seg</span> <span class='op'>&lt;-</span> <span class='fu'>read_ibd</span><span class='op'>(</span><span class='va'>pedsim_fp</span>, source <span class='op'>=</span> <span class='st'>"pedsim"</span><span class='op'>)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -226,7 +231,7 @@ Both the <code>hapibd</code> tibble, and the two <code>pedsim</code> tibbles con
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
