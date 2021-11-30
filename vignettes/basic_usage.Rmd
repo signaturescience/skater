@@ -40,9 +40,9 @@ fam <- read_fam(famfile)
 fam
 ```
 
-Family structures imported from ".fam" formated files can then be translated to the `pedigree` structure used by the `kinship2` package.[^kinship2-vignette] The "fam" format may include multiple families, and the `fam2ped()` function will collapse them all into a `tibble` with one row per family:
+Family structures imported from ".fam" formated files can then be translated to the `pedigree` structure used by the `kinship2` package.[^kinship2-ref] The "fam" format may include multiple families, and the `fam2ped()` function will collapse them all into a `tibble` with one row per family:
 
-[^kinship2-vignette]: https://cran.r-project.org/web/packages/kinship2/vignettes/pedigree.html
+[^kinship2-ref]: Sinnwell, Jason P., Terry M. Therneau, and Daniel J. Schaid. "The kinship2 R package for pedigree data." _Human heredity_ 78.2 (2014): 91-93.
 
 ```{r}
 peds <- fam2ped(fam)
