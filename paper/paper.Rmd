@@ -23,23 +23,15 @@ author:
   affiliation: Center for Human Identification, Department of Microbiology, Immunology,
     and Genetics, University of North Texas Health Science Center, Fort Worth, TX
     76107, USA.
-abstract: "| \n| **Motivation:** SNP-based kinship analysis with genome-wide relationship
-  estimation and IBD segment analysis methods produces results that often require
-  further downstream processing and manipulation. A dedicated software package that
-  consistently and intuitively implements this analysis functionality is needed.  \n|
-  **a**nalysis, **t**esting, and **e**valuation with **R**. The skater package contains
-  a suite of well-documented tools for importing, parsing, and analyzing pedigree
-  data, performing relationship degree inference, benchmarking relationship degree
-  package is implemented as an R package and is released under the MIT license at
-  **Results:**  Here we present the skater R package for **S**NP-based **k**inship
-  classification, and summarizing IBD segment data.  \n| **Availability:** The skater
-  https\\:\\/\\/github.com/signaturescience/skater. Documentation is available at
-  https\\:\\/\\/signaturescience.github.io/skater.\n"
+abstract: | 
+    | 
+    | **Motivation:** SNP-based kinship analysis with genome-wide relationship estimation and IBD segment analysis methods produces results that often require further downstream processing and manipulation. A dedicated software package that consistently and intuitively implements this analysis functionality is needed.  
+    | **Results:**  Here we present the skater R package for **S**NP-based **k**inship **a**nalysis, **t**esting, and **e**valuation with **R**. The skater package contains a suite of well-documented tools for importing, parsing, and analyzing pedigree data, performing relationship degree inference, benchmarking relationship degree classification, and summarizing IBD segment data.  
+    | **Availability:** The skater package is implemented as an R package and is released under the MIT license at https\:\/\/github.com/signaturescience/skater. Documentation is available at https\:\/\/signaturescience.github.io/skater.
 output:
   BiocWorkflowTools::f1000_article: default
 bibliography: bibliography.bib
-keywords: bioinformatics, kinship, R, genealogy, SNPs, single nucleotide polymorphisms,
-  relatedness
+keywords: bioinformatics, kinship, R, genealogy, SNPs, single nucleotide polymorphisms, relatedness
 ---
 
 **R version**: `r R.version.string`
