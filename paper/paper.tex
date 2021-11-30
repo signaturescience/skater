@@ -102,10 +102,9 @@
 \thispagestyle{front}
 
 \begin{abstract}
-\hfill\break
 \textbf{Motivation:} SNP-based kinship analysis with genome-wide relationship estimation and IBD segment analysis methods produces results that often require further downstream processing and manipulation. A dedicated software package that consistently and intuitively implements this analysis functionality is needed.\\
-\textbf{Results:} Here we present the skater R package for \textbf{S}NP-based \textbf{k}inship \textbf{a}nalysis, \textbf{t}esting, and \textbf{e}valuation with \textbf{R}. The skater package contains a suite of well-documented tools for importing, parsing, and analyzing pedigree data, performing relationship degree inference, benchmarking relationship degree classification, and summarizing IBD segment data.\\
-\textbf{Availability:} The skater package is implemented as an R package and is released under the MIT license at https://github.com/signaturescience/skater. Documentation is available at https://signaturescience.github.io/skater.
+\textbf{a}nalysis, \textbf{t}esting, and \textbf{e}valuation with \textbf{R}. The skater package contains a suite of well-documented tools for importing, parsing, and analyzing pedigree data, performing relationship degree inference, benchmarking relationship degree package is implemented as an R package and is released under the MIT license at \textbf{Results:} Here we present the skater R package for \textbf{S}NP-based \textbf{k}inship classification, and summarizing IBD segment data.\\
+\textbf{Availability:} The skater https://github.com/signaturescience/skater. Documentation is available at https://signaturescience.github.io/skater.
 \end{abstract}
 
 \section*{Keywords}
@@ -115,7 +114,7 @@ bioinformatics, kinship, R, genealogy, SNPs, single nucleotide polymorphisms, re
 \clearpage
 \pagestyle{main}
 
-\textbf{R version}: R version 4.0.4 (2021-02-15)
+\textbf{R version}: R version 4.0.2 (2020-06-22)
 
 \textbf{skater package version}: 0.1.0
 
@@ -138,7 +137,7 @@ The skater package is hosted in the Comprehensive R Archive Network (CRAN) which
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"skater"}\NormalTok{)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"skater"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -146,8 +145,8 @@ Alternatively, the development version of skater is available on GitHub at \url{
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
-\NormalTok{devtools}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{"signaturescience/skater"}\NormalTok{, }\AttributeTok{build\_vignettes=}\ConstantTok{TRUE}\NormalTok{)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"signaturescience/skater"}\NormalTok{, }\DataTypeTok{build_vignettes=}\OtherTok{TRUE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -180,7 +179,7 @@ The \texttt{skater} package provides a collection of analysis and utility functi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(skater)}
+\KeywordTok{library}\NormalTok{(skater)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -191,8 +190,8 @@ Pedigrees define familial relationships in a hierarchical structure. One of the 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{famfile }\OtherTok{\textless{}{-}} \FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"3gens.fam"}\NormalTok{, }\AttributeTok{package=}\StringTok{"skater"}\NormalTok{, }\AttributeTok{mustWork=}\ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{fam }\OtherTok{\textless{}{-}} \FunctionTok{read\_fam}\NormalTok{(famfile)}
+\NormalTok{famfile <-}\StringTok{ }\KeywordTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"3gens.fam"}\NormalTok{, }\DataTypeTok{package=}\StringTok{"skater"}\NormalTok{, }\DataTypeTok{mustWork=}\OtherTok{TRUE}\NormalTok{)}
+\NormalTok{fam <-}\StringTok{ }\KeywordTok{read_fam}\NormalTok{(famfile)}
 \NormalTok{fam}
 \end{Highlighting}
 \end{Shaded}
@@ -218,7 +217,17 @@ Family structures imported from \texttt{.fam} formated files can then be transla
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{peds }\OtherTok{\textless{}{-}} \FunctionTok{fam2ped}\NormalTok{(fam)}
+\NormalTok{peds <-}\StringTok{ }\KeywordTok{fam2ped}\NormalTok{(fam)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: replacing previous import 'vctrs::data_frame' by 'tibble::data_frame'
+## when loading 'dplyr'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{peds}
 \end{Highlighting}
 \end{Shaded}
@@ -241,9 +250,9 @@ In the example above, the resulting \texttt{tibble} is nested by family ID. The 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{peds }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(fid}\SpecialCharTok{==}\StringTok{"testped1"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  tidyr}\SpecialCharTok{::}\FunctionTok{unnest}\NormalTok{(}\AttributeTok{cols=}\NormalTok{data)}
+\NormalTok{peds }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{filter}\NormalTok{(fid}\OperatorTok{==}\StringTok{"testped1"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{unnest}\NormalTok{(}\DataTypeTok{cols=}\NormalTok{data)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -251,11 +260,11 @@ In the example above, the resulting \texttt{tibble} is nested by family ID. The 
 ## # A tibble: 8 x 7
 ##   fid      id                dadid             momid        sex affected ped    
 ##   <chr>    <chr>             <chr>             <chr>      <int>    <dbl> <list> 
-## 1 testped1 testped1_g1-b1-s1 <NA>              <NA>           1        1 <pedig~
-## 2 testped1 testped1_g1-b1-i1 <NA>              <NA>           2        1 <pedig~
-## 3 testped1 testped1_g2-b1-s1 <NA>              <NA>           1        1 <pedig~
+## 1 testped1 testped1_g1-b1-s1 NA                NA             1        1 <pedig~
+## 2 testped1 testped1_g1-b1-i1 NA                NA             2        1 <pedig~
+## 3 testped1 testped1_g2-b1-s1 NA                NA             1        1 <pedig~
 ## 4 testped1 testped1_g2-b1-i1 testped1_g1-b1-s1 testped1_~     2        1 <pedig~
-## 5 testped1 testped1_g2-b2-s1 <NA>              <NA>           1        1 <pedig~
+## 5 testped1 testped1_g2-b2-s1 NA                NA             1        1 <pedig~
 ## 6 testped1 testped1_g2-b2-i1 testped1_g1-b1-s1 testped1_~     2        1 <pedig~
 ## 7 testped1 testped1_g3-b1-i1 testped1_g2-b1-s1 testped1_~     2        1 <pedig~
 ## 8 testped1 testped1_g3-b2-i1 testped1_g2-b2-s1 testped1_~     1        1 <pedig~
@@ -265,7 +274,7 @@ A single pedigree can also be inspected or visualized (standard base R plot argu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{peds}\SpecialCharTok{$}\NormalTok{ped[[}\DecValTok{1}\NormalTok{]]}
+\NormalTok{peds}\OperatorTok{$}\NormalTok{ped[[}\DecValTok{1}\NormalTok{]]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -276,7 +285,7 @@ A single pedigree can also be inspected or visualized (standard base R plot argu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(peds}\SpecialCharTok{$}\NormalTok{ped[[}\DecValTok{1}\NormalTok{]], }\AttributeTok{mar=}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{), }\AttributeTok{cex=}\NormalTok{.}\DecValTok{7}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(peds}\OperatorTok{$}\NormalTok{ped[[}\DecValTok{1}\NormalTok{]], }\DataTypeTok{mar=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{), }\DataTypeTok{cex=}\NormalTok{.}\DecValTok{7}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -286,7 +295,7 @@ The \texttt{plot\_pedigree()} function from \texttt{skater} will iterate over a 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{plot\_pedigree}\NormalTok{(peds}\SpecialCharTok{$}\NormalTok{ped, }\AttributeTok{file=}\StringTok{"3gens.ped.pdf"}\NormalTok{)}
+\KeywordTok{plot_pedigree}\NormalTok{(peds}\OperatorTok{$}\NormalTok{ped, }\DataTypeTok{file=}\StringTok{"3gens.ped.pdf"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -296,7 +305,7 @@ The function can be run on a single family:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ped2kinpair}\NormalTok{(peds}\SpecialCharTok{$}\NormalTok{ped[[}\DecValTok{1}\NormalTok{]])}
+\KeywordTok{ped2kinpair}\NormalTok{(peds}\OperatorTok{$}\NormalTok{ped[[}\DecValTok{1}\NormalTok{]])}
 \end{Highlighting}
 \end{Shaded}
 
@@ -321,11 +330,11 @@ This function can also be mapped over all families in the pedigree:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{kinpairs }\OtherTok{\textless{}{-}} 
-\NormalTok{  peds }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{pairs=}\NormalTok{purrr}\SpecialCharTok{::}\FunctionTok{map}\NormalTok{(ped, ped2kinpair)) }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(fid, pairs) }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  tidyr}\SpecialCharTok{::}\FunctionTok{unnest}\NormalTok{(}\AttributeTok{cols=}\NormalTok{pairs)}
+\NormalTok{kinpairs <-}\StringTok{ }
+\StringTok{  }\NormalTok{peds }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pairs=}\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(ped, ped2kinpair)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(fid, pairs) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{unnest}\NormalTok{(}\DataTypeTok{cols=}\NormalTok{pairs)}
 \NormalTok{kinpairs}
 \end{Highlighting}
 \end{Shaded}
@@ -358,7 +367,7 @@ The \texttt{dibble()} function creates a \textbf{d}egree \textbf{i}nference \tex
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{dibble}\NormalTok{()}
+\KeywordTok{dibble}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -377,7 +386,7 @@ The degree inference \texttt{max\_degree} default is 3. Change this argument to 
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{dibble}\NormalTok{(}\AttributeTok{max\_degree =} \DecValTok{5}\NormalTok{)}
+\KeywordTok{dibble}\NormalTok{(}\DataTypeTok{max_degree =} \DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -400,7 +409,7 @@ The \texttt{kin2degree()} function infers the relationship degree given a kinshi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{kin2degree}\NormalTok{(.}\DecValTok{25}\NormalTok{, }\AttributeTok{max\_degree=}\DecValTok{3}\NormalTok{)}
+\KeywordTok{kin2degree}\NormalTok{(.}\DecValTok{25}\NormalTok{, }\DataTypeTok{max_degree=}\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -412,7 +421,7 @@ Example 4th degree relative, but using the default max\_degree resolution of 3:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{kin2degree}\NormalTok{(.}\DecValTok{0312}\NormalTok{, }\AttributeTok{max\_degree=}\DecValTok{3}\NormalTok{)}
+\KeywordTok{kin2degree}\NormalTok{(.}\DecValTok{0312}\NormalTok{, }\DataTypeTok{max_degree=}\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -424,7 +433,7 @@ Example 4th degree relative, but increasing the degree resolution:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{kin2degree}\NormalTok{(.}\DecValTok{0312}\NormalTok{, }\AttributeTok{max\_degree=}\DecValTok{5}\NormalTok{)}
+\KeywordTok{kin2degree}\NormalTok{(.}\DecValTok{0312}\NormalTok{, }\DataTypeTok{max_degree=}\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -436,12 +445,12 @@ The \texttt{kin2degree()} function is vectorized over values of \texttt{k}, so i
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Get two pairs from each type of relationship we have in kinpairs:}
-\NormalTok{kinpairs\_subset }\OtherTok{\textless{}{-}} 
-\NormalTok{  kinpairs }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{group\_by}\NormalTok{(k) }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{slice}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{)}
-\NormalTok{kinpairs\_subset}
+\CommentTok{# Get two pairs from each type of relationship we have in kinpairs:}
+\NormalTok{kinpairs_subset <-}\StringTok{ }
+\StringTok{  }\NormalTok{kinpairs }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(k) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{slice}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{)}
+\NormalTok{kinpairs_subset}
 \end{Highlighting}
 \end{Shaded}
 
@@ -464,9 +473,9 @@ The \texttt{kin2degree()} function is vectorized over values of \texttt{k}, so i
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Infer degree out to third degree relatives:}
-\NormalTok{kinpairs\_subset }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{degree=}\FunctionTok{kin2degree}\NormalTok{(k, }\AttributeTok{max\_degree=}\DecValTok{3}\NormalTok{))}
+\CommentTok{# Infer degree out to third degree relatives:}
+\NormalTok{kinpairs_subset }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{degree=}\KeywordTok{kin2degree}\NormalTok{(k, }\DataTypeTok{max_degree=}\DecValTok{3}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -490,7 +499,7 @@ The \texttt{kin2degree()} function is vectorized over values of \texttt{k}, so i
 \hypertarget{benchmarking-degree-classification}{%
 \subsection{Benchmarking Degree Classification}\label{benchmarking-degree-classification}}
 
-Once estimated kinship is converted to degree, it may be of interest to compare the inferred degree to truth. When aggregated over many relationships and inferences, this method can help benchmark performance of a particular kinship analysis method.
+Once estimated kinship is converted to degree, it may be of interest to compare the inferred degree to truth. When aggregated over many relationships and inferences, this approach can help benchmark performance of a particular kinship analysis method.
 
 The skater package adapts a \texttt{confusion\_matrix()} function from \citet{clark2021} to provide standard contingency table metrics (e.g.~sensitivity, specificity, PPV, precision, recall, F1, etc.) with a new reciprocal RMSE (R-RMSE) metric. The \texttt{confusion\_matrix()} function on its own outputs a list with four objects:
 
@@ -503,49 +512,53 @@ The skater package adapts a \texttt{confusion\_matrix()} function from \citet{cl
 \item
   A \texttt{matrix} with the contingency table object itself.
 \item
-  A \texttt{vector} with the reciprocal RMSE (R-RMSE). The R-RMSE is calculated as \texttt{sqrt(mean((1/(Target+.5)-1/(Predicted+.5))\^{}2)))}, and represents an alternative to classification accuracy when benchmarking relationship degree estimation. Taking the reciprocal of the target and predicted degree results in larger penalties for more egregious misclassifications (e.g., classifying a first-degree relative pair as second degree) than misclassifications at more distant relationships (e.g., misclassifying a fourth-degree relative pair as fifth-degree). The +0.5 adjustment prevents division-by-zero when a 0th-degree (identical) relative pair is introduced.
+  A \texttt{vector} with the reciprocal RMSE (R-RMSE). The R-RMSE represents an alternative to classification accuracy when benchmarking relationship degree estimation and is calculated using the formula in (1). Taking the reciprocal of the target and predicted degree results in larger penalties for more egregious misclassifications (e.g., classifying a first-degree relative pair as second degree) than misclassifications at more distant relationships (e.g., misclassifying a fourth-degree relative pair as fifth-degree). The +0.5 adjustment prevents division-by-zero when a 0th-degree (identical) relative pair is introduced.
 \end{enumerate}
 
-To illustrate the usage, this example will start with the \texttt{kinpairs} data from above and randomly flip \textasciitilde20\% of the true relationship degrees.
+\begin{equation}
+\sqrt{\frac{\sum_{i=1}^{k}(\frac{1}{\text{Target}+0.5}-\frac{1}{\text{Predicted}+0.5})^2}{k}}
+\end{equation}
+
+To illustrate the usage, this example will start with the \texttt{kinpairs} data from above and randomly flip \textasciitilde20\% of the true relationship degrees:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# Function to randomly flip levels of a factor (at 20\%, by default)}
-\NormalTok{randomflip }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, }\AttributeTok{p=}\NormalTok{.}\DecValTok{2}\NormalTok{) }\FunctionTok{ifelse}\NormalTok{(}\FunctionTok{runif}\NormalTok{(}\FunctionTok{length}\NormalTok{(x))}\SpecialCharTok{\textless{}}\NormalTok{p, }\FunctionTok{sample}\NormalTok{(}\FunctionTok{unique}\NormalTok{(x)), x)}
+\CommentTok{# Function to randomly flip levels of a factor (at 20%, by default)}
+\NormalTok{randomflip <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, }\DataTypeTok{p=}\NormalTok{.}\DecValTok{2}\NormalTok{) }\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{runif}\NormalTok{(}\KeywordTok{length}\NormalTok{(x))}\OperatorTok{<}\NormalTok{p, }\KeywordTok{sample}\NormalTok{(}\KeywordTok{unique}\NormalTok{(x)), x)}
 
-\CommentTok{\# Infer degree (truth/target) using kin2degree, then randomly flip 20\% of them}
-\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
-\NormalTok{kinpairs\_inferred }\OtherTok{\textless{}{-}}\NormalTok{ kinpairs }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{degree\_truth=}\FunctionTok{kin2degree}\NormalTok{(k, }\AttributeTok{max\_degree=}\DecValTok{3}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{degree\_truth=}\NormalTok{tidyr}\SpecialCharTok{::}\FunctionTok{replace\_na}\NormalTok{(degree\_truth, }\StringTok{"unrelated"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{degree\_inferred=}\FunctionTok{randomflip}\NormalTok{(degree\_truth))}
-\NormalTok{kinpairs\_inferred}
+\CommentTok{# Infer degree (truth/target) using kin2degree, then randomly flip 20% of them}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\NormalTok{kinpairs_inferred <-}\StringTok{ }\NormalTok{kinpairs }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{degree_truth=}\KeywordTok{kin2degree}\NormalTok{(k, }\DataTypeTok{max_degree=}\DecValTok{3}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{degree_truth=}\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{replace_na}\NormalTok{(degree_truth, }\StringTok{"unrelated"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{degree_inferred=}\KeywordTok{randomflip}\NormalTok{(degree_truth))}
+\NormalTok{kinpairs_inferred}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 288 x 6
-##    fid      id1               id2                   k degree_truth degree_inferred
-##    <chr>    <chr>             <chr>             <dbl> <chr>        <chr>          
-##  1 testped1 testped1_g1-b1-s1 testped1_g1-b1-s1 0.5   0            0              
-##  2 testped1 testped1_g1-b1-i1 testped1_g1-b1-s1 0     unrelated    unrelated      
-##  3 testped1 testped1_g1-b1-s1 testped1_g2-b1-s1 0     unrelated    unrelated      
-##  4 testped1 testped1_g1-b1-s1 testped1_g2-b1-i1 0.25  1            1              
-##  5 testped1 testped1_g1-b1-s1 testped1_g2-b2-s1 0     unrelated    unrelated      
-##  6 testped1 testped1_g1-b1-s1 testped1_g2-b2-i1 0.25  1            1              
-##  7 testped1 testped1_g1-b1-s1 testped1_g3-b1-i1 0.125 2            2              
-##  8 testped1 testped1_g1-b1-s1 testped1_g3-b2-i1 0.125 2            1              
-##  9 testped1 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5   0            0              
-## 10 testped1 testped1_g1-b1-i1 testped1_g2-b1-s1 0     unrelated    unrelated      
+##    fid      id1               id2                 k degree_truth degree_inferred
+##    <chr>    <chr>             <chr>           <dbl> <chr>        <chr>          
+##  1 testped1 testped1_g1-b1-s1 testped1_g1-b1~ 0.5   0            0              
+##  2 testped1 testped1_g1-b1-i1 testped1_g1-b1~ 0     unrelated    unrelated      
+##  3 testped1 testped1_g1-b1-s1 testped1_g2-b1~ 0     unrelated    unrelated      
+##  4 testped1 testped1_g1-b1-s1 testped1_g2-b1~ 0.25  1            1              
+##  5 testped1 testped1_g1-b1-s1 testped1_g2-b2~ 0     unrelated    unrelated      
+##  6 testped1 testped1_g1-b1-s1 testped1_g2-b2~ 0.25  1            1              
+##  7 testped1 testped1_g1-b1-s1 testped1_g3-b1~ 0.125 2            2              
+##  8 testped1 testped1_g1-b1-s1 testped1_g3-b2~ 0.125 2            1              
+##  9 testped1 testped1_g1-b1-i1 testped1_g1-b1~ 0.5   0            0              
+## 10 testped1 testped1_g1-b1-i1 testped1_g2-b1~ 0     unrelated    unrelated      
 ## # ... with 278 more rows
 \end{verbatim}
 
-Next, running the \texttt{confusion\_matrix()} function will return all four objects noted above.
+Next, running the \texttt{confusion\_matrix()} function will return all four objects noted above:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{confusion\_matrix}\NormalTok{(}\AttributeTok{prediction =}\NormalTok{ kinpairs\_inferred}\SpecialCharTok{$}\NormalTok{degree\_inferred, }
-                 \AttributeTok{target =}\NormalTok{ kinpairs\_inferred}\SpecialCharTok{$}\NormalTok{degree\_truth)}
+\KeywordTok{confusion_matrix}\NormalTok{(}\DataTypeTok{prediction =}\NormalTok{ kinpairs_inferred}\OperatorTok{$}\NormalTok{degree_inferred, }
+                 \DataTypeTok{target =}\NormalTok{ kinpairs_inferred}\OperatorTok{$}\NormalTok{degree_truth)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -558,14 +571,14 @@ Next, running the \texttt{confusion\_matrix()} function will return all four obj
 ## 
 ## $Other
 ## # A tibble: 6 x 15
-##   Class         N `Sensitivity/Re~ `Specificity/TN~ `PPV/Precision`   NPV `F1/Dice`
-##   <chr>     <dbl>            <dbl>            <dbl>           <dbl> <dbl>     <dbl>
-## 1 0          64              0.75             0.964           0.857 0.931     0.8  
-## 2 1          72              0.806            0.944           0.829 0.936     0.817
-## 3 2          48              0.833            0.967           0.833 0.967     0.833
-## 4 3           8              0.75             0.936           0.25  0.992     0.375
-## 5 unrelated  96              0.854            0.958           0.911 0.929     0.882
-## 6 Average    57.6            0.799            0.954           0.736 0.951     0.741
+##   Class      N `Sensitivity/Re~ `Specificity/TN~ `PPV/Precision`   NPV `F1/Dice`
+##   <chr>  <dbl>            <dbl>            <dbl>           <dbl> <dbl>     <dbl>
+## 1 0       64              0.75             0.964           0.857 0.931     0.8  
+## 2 1       72              0.806            0.944           0.829 0.936     0.817
+## 3 2       48              0.833            0.967           0.833 0.967     0.833
+## 4 3        8              0.75             0.936           0.25  0.992     0.375
+## 5 unrel~  96              0.854            0.958           0.911 0.929     0.882
+## 6 Avera~  57.6            0.799            0.954           0.736 0.951     0.741
 ## # ... with 8 more variables: Prevalence <dbl>, Detection Rate <dbl>,
 ## #   Detection Prevalence <dbl>, Balanced Accuracy <dbl>, FDR <dbl>, FOR <dbl>,
 ## #   FPR/Fallout <dbl>, FNR <dbl>
@@ -587,9 +600,9 @@ Standard tidyverse functions such as \texttt{purrr::pluck()} can be used to isol
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{confusion\_matrix}\NormalTok{(}\AttributeTok{prediction =}\NormalTok{ kinpairs\_inferred}\SpecialCharTok{$}\NormalTok{degree\_inferred, }
-                 \AttributeTok{target =}\NormalTok{ kinpairs\_inferred}\SpecialCharTok{$}\NormalTok{degree\_truth) }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  purrr}\SpecialCharTok{::}\FunctionTok{pluck}\NormalTok{(}\StringTok{"Table"}\NormalTok{)}
+\KeywordTok{confusion_matrix}\NormalTok{(}\DataTypeTok{prediction =}\NormalTok{ kinpairs_inferred}\OperatorTok{$}\NormalTok{degree_inferred, }
+                 \DataTypeTok{target =}\NormalTok{ kinpairs_inferred}\OperatorTok{$}\NormalTok{degree_truth) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{pluck}\NormalTok{(}\StringTok{"Table"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -607,13 +620,13 @@ The \texttt{confusion\_matrix()} function includes an argument to output in a ti
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{confusion\_matrix}\NormalTok{(}\AttributeTok{prediction =}\NormalTok{ kinpairs\_inferred}\SpecialCharTok{$}\NormalTok{degree\_inferred, }
-                 \AttributeTok{target =}\NormalTok{ kinpairs\_inferred}\SpecialCharTok{$}\NormalTok{degree\_truth, }
-                 \AttributeTok{longer =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  purrr}\SpecialCharTok{::}\FunctionTok{pluck}\NormalTok{(}\StringTok{"Other"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  tidyr}\SpecialCharTok{::}\FunctionTok{spread}\NormalTok{(Class, Value) }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{relocate}\NormalTok{(Average, }\AttributeTok{.after=}\NormalTok{dplyr}\SpecialCharTok{::}\FunctionTok{last\_col}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate\_if}\NormalTok{(rlang}\SpecialCharTok{::}\NormalTok{is\_double, signif, }\DecValTok{2}\NormalTok{)}
+\KeywordTok{confusion_matrix}\NormalTok{(}\DataTypeTok{prediction =}\NormalTok{ kinpairs_inferred}\OperatorTok{$}\NormalTok{degree_inferred, }
+                 \DataTypeTok{target =}\NormalTok{ kinpairs_inferred}\OperatorTok{$}\NormalTok{degree_truth, }
+                 \DataTypeTok{longer =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{pluck}\NormalTok{(}\StringTok{"Other"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{tidyr}\OperatorTok{::}\KeywordTok{spread}\NormalTok{(Class, Value) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{relocate}\NormalTok{(Average, }\DataTypeTok{.after=}\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{last_col}\NormalTok{()) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate_if}\NormalTok{(rlang}\OperatorTok{::}\NormalTok{is_double, signif, }\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -646,10 +659,10 @@ The \texttt{read\_ibd()} function reads in the pairwise IBD segment format. Inpu
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{hapibd\_filepath }\OtherTok{\textless{}{-}} \FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"GBR.sim.ibd.gz"}\NormalTok{, }
-                               \AttributeTok{package=}\StringTok{"skater"}\NormalTok{)}
-\NormalTok{hapibd\_seg }\OtherTok{\textless{}{-}} \FunctionTok{read\_ibd}\NormalTok{(hapibd\_filepath, }\AttributeTok{source =} \StringTok{"hapibd"}\NormalTok{)}
-\NormalTok{hapibd\_seg}
+\NormalTok{hapibd_filepath <-}\StringTok{ }\KeywordTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"GBR.sim.ibd.gz"}\NormalTok{, }
+                               \DataTypeTok{package=}\StringTok{"skater"}\NormalTok{)}
+\NormalTok{hapibd_seg <-}\StringTok{ }\KeywordTok{read_ibd}\NormalTok{(hapibd_filepath, }\DataTypeTok{source =} \StringTok{"hapibd"}\NormalTok{)}
+\NormalTok{hapibd_seg}
 \end{Highlighting}
 \end{Shaded}
 
@@ -674,9 +687,9 @@ In order to translate the shared genomic cM length to a kinship coefficient, a g
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{gmap\_filepath }\OtherTok{\textless{}{-}} \FunctionTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"sexspec{-}avg{-}min.plink.map"}\NormalTok{, }
-                             \AttributeTok{package=}\StringTok{"skater"}\NormalTok{)}
-\NormalTok{gmap }\OtherTok{\textless{}{-}} \FunctionTok{read\_map}\NormalTok{(gmap\_filepath)}
+\NormalTok{gmap_filepath <-}\StringTok{ }\KeywordTok{system.file}\NormalTok{(}\StringTok{"extdata"}\NormalTok{, }\StringTok{"sexspec-avg-min.plink.map"}\NormalTok{, }
+                             \DataTypeTok{package=}\StringTok{"skater"}\NormalTok{)}
+\NormalTok{gmap <-}\StringTok{ }\KeywordTok{read_map}\NormalTok{(gmap_filepath)}
 \NormalTok{gmap}
 \end{Highlighting}
 \end{Shaded}
@@ -702,8 +715,8 @@ The \texttt{ibd2kin()} function takes the segments and map file and outputs a \t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ibd\_dat }\OtherTok{\textless{}{-}} \FunctionTok{ibd2kin}\NormalTok{(}\AttributeTok{.ibd\_data=}\NormalTok{hapibd\_seg, }\AttributeTok{.map=}\NormalTok{gmap)}
-\NormalTok{ibd\_dat}
+\NormalTok{ibd_dat <-}\StringTok{ }\KeywordTok{ibd2kin}\NormalTok{(}\DataTypeTok{.ibd_data=}\NormalTok{hapibd_seg, }\DataTypeTok{.map=}\NormalTok{gmap)}
+\NormalTok{ibd_dat}
 \end{Highlighting}
 \end{Shaded}
 
