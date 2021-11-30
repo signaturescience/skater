@@ -9,12 +9,12 @@
 Utilities for SNP-based kinship analysis testing and evaluation (SKATE).
 }
 \author{
-\strong{Maintainer}: Stephen Turner \email{sturner@signaturescience.com} (\href{https://orcid.org/0000-0001-9140-9028}{ORCID})
+\strong{Maintainer}: Stephen Turner \email{vustephen@gmail.com} (\href{https://orcid.org/0000-0001-9140-9028}{ORCID})
 
 Authors:
 \itemize{
-  \item Matthew Scholz \email{mscholz@signaturescience.com}
-  \item VP Nagraj \email{pnagraj@signaturescience.com} (\href{https://orcid.org/0000-0003-0060-566X}{ORCID})
+  \item Matthew Scholz (\href{https://orcid.org/0000-0003-3686-1227}{ORCID})
+  \item VP Nagraj (\href{https://orcid.org/0000-0003-0060-566X}{ORCID})
 }
 
 }

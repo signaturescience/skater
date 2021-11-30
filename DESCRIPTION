@@ -6,16 +6,15 @@ Authors@R:
     c(person(given = "Stephen",
              family = "Turner",
              role = c("aut", "cre"),
-             email = "sturner@signaturescience.com",
+             email = "vustephen@gmail.com",
              comment = c(ORCID = "0000-0001-9140-9028")),
       person(given = "Matthew",
              family = "Scholz",
              role = "aut",
-             email = "mscholz@signaturescience.com"),
+             comment = c(ORCID = "0000-0003-3686-1227")),
       person(given = "VP",
              family = "Nagraj",
              role = "aut",
-             email = "pnagraj@signaturescience.com",
              comment = c(ORCID = "0000-0003-0060-566X")))
 License: MIT + file LICENSE
 Encoding: UTF-8
