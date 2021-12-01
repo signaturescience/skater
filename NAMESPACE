@@ -2,8 +2,6 @@
 
 export("%>%")
 export(arrange_ids)
-export(calc_accuracy)
-export(calc_stats)
 export(confusion_matrix)
 export(dibble)
 export(fam2ped)

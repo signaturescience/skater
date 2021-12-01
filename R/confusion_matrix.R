@@ -18,11 +18,12 @@ utils::globalVariables(c('Class', 'Positive', 'N Positive', 'N Negative', 'N'))
 #' @seealso \code{\link{binom.test}}
 #'
 #' @examples
+#' \dontrun{
 #' p = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
 #' o = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
 #' calc_accuracy(table(p, o))
+#' }
 #'
-#' @export
 calc_accuracy <- function(tabble) {
 
   acc <- sum(diag(tabble))/sum(tabble)
@@ -140,11 +141,12 @@ calc_accuracy <- function(tabble) {
 #' reduction.," \emph{Genetic Epidemiology}, vol 4, 306.
 #'
 #' @examples
+#' \dontrun{
 #' p = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
 #' o = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
 #' calc_stats(table(p, o), positive='a')
+#' }
 #'
-#' @export
 calc_stats <- function(tabble, prevalence = NULL, positive, ...) {
   # checks
   # using original all.equal checks will fail
@@ -302,7 +304,6 @@ calc_stats <- function(tabble, prevalence = NULL, positive, ...) {
 #'   \code{confusionMatrix} function from the \code{caret} package.
 #'
 #' @seealso \code{\link{calc_accuracy}} \code{\link{calc_stats}}
-#' \code{\link{confusion_matrix}}
 #'
 #' @return A list of tibble(s) with the associated statistics and possibly the
 #'   frequency table as list column of the first element. If classes contain >1
