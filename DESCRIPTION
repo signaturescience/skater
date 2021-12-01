@@ -1,9 +1,9 @@
 Package: skater
 Title: Utilities for SNP-Based Kinship Analysis
-Description: Utilities for SNP-based kinship analysis testing and evaluation.  
-    The skater package contains functions for importing, parsing, and analyzing 
-    pedigree data, performing relationship degree inference, benchmarking relationship 
-    degree classification, and summarizing identity by descent (IBD) segment data.
+Description: Utilities for single nucleotide polymorphism (SNP) based kinship analysis
+    testing and evaluation. The skater package contains functions for importing, parsing, 
+    and analyzing pedigree data, performing relationship degree inference, benchmarking 
+    relationship degree classification, and summarizing identity by descent (IBD) segment data.
 Version: 0.1.0
 Authors@R: 
     c(person(given = "Stephen",
