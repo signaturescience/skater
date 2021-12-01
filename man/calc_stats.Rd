@@ -77,9 +77,11 @@ This function is called by \code{confusion_matrix}, but if this is all you
 want, you can simply supply the table to this function.
 }
 \examples{
+\dontrun{
 p = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
 o = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
 calc_stats(table(p, o), positive='a')
+}
 
 }
 \references{

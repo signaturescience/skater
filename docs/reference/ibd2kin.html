@@ -41,7 +41,7 @@
 
 <meta property="og:title" content="Compute kinship coefficient from IBD segments — ibd2kin" />
 <meta property="og:description" content="This function is used to retrieve a relatedness measure from IBD segments.
-The relatedness value returned is the kinship coefficent." />
+The relatedness value returned is the kinship coefficient." />
 
 
 
@@ -126,7 +126,7 @@ The relatedness value returned is the kinship coefficent." />
 
     <div class="ref-description">
     <p>This function is used to retrieve a relatedness measure from IBD segments.
-The relatedness value returned is the kinship coefficent.</p>
+The relatedness value returned is the kinship coefficient.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ibd2kin</span><span class='op'>(</span><span class='va'>.ibd_data</span>, <span class='va'>.map</span>, type <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
@@ -162,7 +162,7 @@ The relatedness value returned is the kinship coefficent.</p>
 <a href='read_ibd.html'>read_ibd</a>. The function will internally loop over each
 chromosome, and use a specified genetic map to convert shared segments to
 genetic units. After doing so, the function converts the shared length to a
-kinship coefficient.</p>
+kinship coefficient by summing \(0.5*IBD2 + 0.25*IBD1\).</p>
 <p>Note that the data read in by <a href='read_ibd.html'>read_ibd</a> when <code>source="pedsim"</code> returns a
 list with separate tibbles for IBD1 and IBD2 segments. The current
 implementation of this function requires running this function independently

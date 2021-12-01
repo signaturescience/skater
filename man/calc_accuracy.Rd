@@ -22,9 +22,11 @@ p-value of the accuracy vs. the guessing rate. This function is called by
 the table to this function.
 }
 \examples{
+\dontrun{
 p = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
 o = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
 calc_accuracy(table(p, o))
+}
 
 }
 \seealso{
