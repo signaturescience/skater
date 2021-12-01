@@ -11,7 +11,7 @@
 - Local `R CMD check`: Status OK, 0 errors, 0 warnings, 0 notes
 - R hub: 
     - NOTE, New submission
-    - NOTE possibly mis-spelled words in description: IBD, et, al. IBD is defined in the DESCRIPTION as "identical by descent", and "et al." is used in a reference before linking to the doi with `<doi:...>`.
+    - NOTE possibly mis-spelled words in description: IBD, et, al, benchmarking, polymorphism. IBD is defined in the DESCRIPTION as "identical by descent"; benchmarking and polymorphism are spelled correctly; and "et al." is used in a reference before linking to the doi with `<doi:...>`.
 
 ## Revisions after initial CRAN inspection
 
