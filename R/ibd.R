@@ -2,14 +2,14 @@
 #'
 #' @description
 #' This function is used to retrieve a relatedness measure from IBD segments.
-#' The relatedness value returned is the kinship coefficent.
+#' The relatedness value returned is the kinship coefficient.
 #'
 #' @details
 #' The input data should be pairwise IBD segments prepared via
 #' \link[skater]{read_ibd}. The function will internally loop over each
 #' chromosome, and use a specified genetic map to convert shared segments to
 #' genetic units. After doing so, the function converts the shared length to a
-#' kinship coefficient.
+#' kinship coefficient by summing \eqn{0.5*IBD2 + 0.25*IBD1}.
 #'
 #' Note that the data read in by [read_ibd] when `source="pedsim"` returns a
 #' list with separate tibbles for IBD1 and IBD2 segments. The current
