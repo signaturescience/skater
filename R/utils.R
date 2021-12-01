@@ -46,7 +46,7 @@ dibble <- function(max_degree=3L) {
 #'   [dibble][skater::dibble]. Anything below the inference range of
 #'   `max_degree` will report `NA`. See [dibble][skater::dibble].
 #'
-#' @return Inferred degree, up to the maximum degree in `dibble` (anything more distant is `NA`, i.e., unrelated).
+#' @return A vector with inferred degree, up to the maximum degree in `dibble` (anything more distant is `NA`, i.e., unrelated).
 #'
 #' @examples
 #' kin2degree(0.5)
@@ -87,7 +87,7 @@ kin2degree <- function(k, max_degree=3L) {
 #'
 #' @param k Kinship coefficient (numeric, typically between 0 and .5, although KING can produce values <0).
 #'
-#' @return Estimated cM, ranging from 0-3560.
+#' @return A vector of numeric estimated cM, ranging from 0-3560.
 #'
 #' @examples
 #' kin2cm(.25)
