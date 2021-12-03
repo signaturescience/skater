@@ -17,12 +17,10 @@ utils::globalVariables(c('Class', 'Positive', 'N Positive', 'N Negative', 'N'))
 #'
 #' @seealso \code{\link{binom.test}}
 #'
-#' @examples
-#' \dontrun{
-#' p = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
-#' o = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
-#' calc_accuracy(table(p, o))
-#' }
+# #' @examples
+# #' p = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
+# #' o = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
+# #' calc_accuracy(table(p, o))
 #'
 calc_accuracy <- function(tabble) {
 
@@ -140,12 +138,10 @@ calc_accuracy <- function(tabble) {
 #' modeling in imbalanced datasets using multifactor dimensionality
 #' reduction.," \emph{Genetic Epidemiology}, vol 4, 306.
 #'
-#' @examples
-#' \dontrun{
-#' p = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
-#' o = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
-#' calc_stats(table(p, o), positive='a')
-#' }
+# #' @examples
+# #' p = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
+# #' o = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
+# #' calc_stats(table(p, o), positive='a')
 #'
 calc_stats <- function(tabble, prevalence = NULL, positive, ...) {
   # checks

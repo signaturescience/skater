@@ -20,6 +20,6 @@
 - Added Signature Science, LLC as `cph` in DESCRIPTION Authors.
 - Added reference to Description field of DESCRIPTION in the form: `authors (year) <doi:...>` with reference to preprint describing methods.
 - Better explanation of identical by descent (IBD) segment to kinship coefficient math in function documentation.
-- Stopped exporting two internal functions, but clarified documentation and retained examples.
+- Stopped exporting two internal functions, removed examples, clarified documentation.
 - Added a return value for `plot_pedigree()` (called for side effects).
 - Updated exported functions to ensure `@return` `\value` notes class of the output value and what it means.
