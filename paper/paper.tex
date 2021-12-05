@@ -490,7 +490,7 @@ The \texttt{kin2degree()} function is vectorized over values of \texttt{k}, so i
 \hypertarget{benchmarking-degree-classification}{%
 \subsection{Benchmarking Degree Classification}\label{benchmarking-degree-classification}}
 
-Once estimated kinship is converted to degree, it may be of interest to compare the inferred degree to truth. When aggregated over many relationships and inferences, this method can help benchmark performance of a particular kinship analysis method.
+Once estimated kinship is converted to degree, it may be of interest to compare the inferred degree to truth. When aggregated over many relationships and inferences, this approach can help benchmark performance of a particular kinship analysis method.
 
 The skater package adapts a \texttt{confusion\_matrix()} function from \citet{clark2021} to provide standard contingency table metrics (e.g.~sensitivity, specificity, PPV, precision, recall, F1, etc.) with a new reciprocal RMSE (R-RMSE) metric. The \texttt{confusion\_matrix()} function on its own outputs a list with four objects:
 
@@ -503,10 +503,14 @@ The skater package adapts a \texttt{confusion\_matrix()} function from \citet{cl
 \item
   A \texttt{matrix} with the contingency table object itself.
 \item
-  A \texttt{vector} with the reciprocal RMSE (R-RMSE). The R-RMSE is calculated as \texttt{sqrt(mean((1/(Target+.5)-1/(Predicted+.5))\^{}2)))}, and represents an alternative to classification accuracy when benchmarking relationship degree estimation. Taking the reciprocal of the target and predicted degree results in larger penalties for more egregious misclassifications (e.g., classifying a first-degree relative pair as second degree) than misclassifications at more distant relationships (e.g., misclassifying a fourth-degree relative pair as fifth-degree). The +0.5 adjustment prevents division-by-zero when a 0th-degree (identical) relative pair is introduced.
+  A \texttt{vector} with the reciprocal RMSE (R-RMSE). The R-RMSE represents an alternative to classification accuracy when benchmarking relationship degree estimation and is calculated using the formula in (1). Taking the reciprocal of the target and predicted degree results in larger penalties for more egregious misclassifications (e.g., classifying a first-degree relative pair as second degree) than misclassifications at more distant relationships (e.g., misclassifying a fourth-degree relative pair as fifth-degree). The +0.5 adjustment prevents division-by-zero when a 0th-degree (identical) relative pair is introduced.
 \end{enumerate}
 
-To illustrate the usage, this example will start with the \texttt{kinpairs} data from above and randomly flip \textasciitilde20\% of the true relationship degrees.
+\begin{equation}
+\sqrt{\frac{\sum_{i=1}^{k}(\frac{1}{\text{Target}+0.5}-\frac{1}{\text{Predicted}+0.5})^2}{k}}
+\end{equation}
+
+To illustrate the usage, this example will start with the \texttt{kinpairs} data from above and randomly flip \textasciitilde20\% of the true relationship degrees:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -540,7 +544,7 @@ To illustrate the usage, this example will start with the \texttt{kinpairs} data
 ## # ... with 278 more rows
 \end{verbatim}
 
-Next, running the \texttt{confusion\_matrix()} function will return all four objects noted above.
+Next, running the \texttt{confusion\_matrix()} function will return all four objects noted above:
 
 \begin{Shaded}
 \begin{Highlighting}[]

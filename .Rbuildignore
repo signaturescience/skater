@@ -10,3 +10,4 @@
 ^paper$
 ^doc$
 cran-comments.md
+^CRAN-RELEASE$

@@ -1,31 +1,37 @@
 ---
-title: "**skater**: An R package for SNP-based Kinship Analysis, Testing, and Evaluation"
-author: 
-  - name: Stephen D. Turner
-    affiliation: Signature Science, LLC., Austin, TX 78759, USA.
-  - name: V. P. Nagraj
-    affiliation: Signature Science, LLC., Austin, TX 78759, USA.
-  - name: Matthew Scholz
-    affiliation: Signature Science, LLC., Austin, TX 78759, USA.
-  - name: Shakeel Jessa
-    affiliation: Signature Science, LLC., Austin, TX 78759, USA.
-  - name: Carlos Acevedo
-    affiliation: Signature Science, LLC., Austin, TX 78759, USA.
-  - name: Jianye Ge
-    affiliation: Center for Human Identification, Department of Microbiology, Immunology, and Genetics, University of North Texas Health Science Center, Fort Worth, TX 76107, USA. 
-  - name: August E. Woerner
-    affiliation: Center for Human Identification, Department of Microbiology, Immunology, and Genetics, University of North Texas Health Science Center, Fort Worth, TX 76107, USA. 
-  - name: Bruce Budowle
-    affiliation: Center for Human Identification, Department of Microbiology, Immunology, and Genetics, University of North Texas Health Science Center, Fort Worth, TX 76107, USA. 
-# Abstract up to 300 words. No citations, minimal abbreviations.
+title: '**skater**: An R package for SNP-based Kinship Analysis, Testing, and Evaluation'
+author:
+- name: Stephen D. Turner
+  affiliation: Signature Science, LLC., Austin, TX 78759, USA.
+- name: V. P. Nagraj
+  affiliation: Signature Science, LLC., Austin, TX 78759, USA.
+- name: Matthew Scholz
+  affiliation: Signature Science, LLC., Austin, TX 78759, USA.
+- name: Shakeel Jessa
+  affiliation: Signature Science, LLC., Austin, TX 78759, USA.
+- name: Carlos Acevedo
+  affiliation: Signature Science, LLC., Austin, TX 78759, USA.
+- name: Jianye Ge
+  affiliation: Center for Human Identification, Department of Microbiology, Immunology,
+    and Genetics, University of North Texas Health Science Center, Fort Worth, TX
+    76107, USA.
+- name: August E. Woerner
+  affiliation: Center for Human Identification, Department of Microbiology, Immunology,
+    and Genetics, University of North Texas Health Science Center, Fort Worth, TX
+    76107, USA.
+- name: Bruce Budowle
+  affiliation: Center for Human Identification, Department of Microbiology, Immunology,
+    and Genetics, University of North Texas Health Science Center, Fort Worth, TX
+    76107, USA.
 abstract: | 
     | 
     | **Motivation:** SNP-based kinship analysis with genome-wide relationship estimation and IBD segment analysis methods produces results that often require further downstream processing and manipulation. A dedicated software package that consistently and intuitively implements this analysis functionality is needed.  
     | **Results:**  Here we present the skater R package for **S**NP-based **k**inship **a**nalysis, **t**esting, and **e**valuation with **R**. The skater package contains a suite of well-documented tools for importing, parsing, and analyzing pedigree data, performing relationship degree inference, benchmarking relationship degree classification, and summarizing IBD segment data.  
     | **Availability:** The skater package is implemented as an R package and is released under the MIT license at https\:\/\/github.com/signaturescience/skater. Documentation is available at https\:\/\/signaturescience.github.io/skater.
-keywords: bioinformatics, kinship, R, genealogy, SNPs, single nucleotide polymorphisms, relatedness
+output:
+  BiocWorkflowTools::f1000_article: default
 bibliography: bibliography.bib
-output: BiocWorkflowTools::f1000_article
+keywords: bioinformatics, kinship, R, genealogy, SNPs, single nucleotide polymorphisms, relatedness
 ---
 
 **R version**: `r R.version.string`
@@ -171,7 +177,7 @@ The skater package includes functions to translate kinship coefficients to relat
 <!-- The commented line below was used in the shorter JOSS/Bioinformatics submission, expanded here -->
 <!-- The `dibble()` function creates a **d**egree **i**nference t**ibble**, with degrees up to the specified maximum degree resolution, expected kinship coefficient, and lower and upper inference ranges as defined in @manichaikul2010. The `kin2degree()` function infers the relationship degree given a kinship coefficient and a maximum degree resolution (e.g., 7th-degree relatives) up to which anything more distant is classified as unrelated. -->
 
-The `dibble()` function creates a **d**egree **i**nference `tibble`, with degrees up to the specified `max_degree` (default=3), expected kinship coefficient, and lower (`l`) and upper (`u`) inference ranges as defined in @manichaikul2010. Degree 0 corresponds to self / identity / monozygotic twins, with an expected kinship coefficient of 0.5, with inference range >=0.354. Anything beyond the maximum degree resolution is considered unrelated (degree `NA`).
+The `dibble()` function creates a **d**egree **i**nference `tibble`, with degrees up to the specified `max_degree` (default=3), expected kinship coefficient, and lower (`l`) and upper (`u`) inference ranges as defined in @manichaikul2010. Degree 0 corresponds to self / identity / monozygotic twins, with an expected kinship coefficient of 0.5, with inference range >=0.354. Anything beyond the maximum degree resolution is considered unrelated (degree `NA`). Note also that while the theoretical upper boundary for the kinship coefficient is 0.5, the inference range for 0-degree (same person or identical twins) extends to 1 to allow for floating point arithmetic and stochastic effects resulting in kinship coefficients above 0.5.
 
 ```{r}
 dibble()
@@ -225,16 +231,20 @@ kinpairs_subset %>%
 <!-- The commented line below was used in the shorter JOSS/Bioinformatics submission, expanded here -->
 <!-- Once estimated kinship is converted to degree, it may be of interest to compare the inferred degree to known degrees of relatedness. When aggregated over many relationships and inferences, this can help benchmark performance of a particular kinship analysis method. The skater package adapts a `confusion_matrix()` function from @clark2021 to provide standard contingency table metrics (e.g. sensitivity, specificity, PPV, precision, recall, F1, etc.) with a new reciprocal RMSE (R-RMSE) metric. The R-RMSE metric is defined more thoroughly in the skater package vignette and may be a preferable measure of classification accuracy when benchmarking relationship degree estimation. In many kinship benchmarking analyses, classification error is treated in a categorical manner (exact match plus or minus one degree), neglecting the true amount of sharing as a real number. Taking the reciprocal of the target and predicted degree in a typical RMSE calculation results in larger penalties for more egregious misclassifications (e.g., classifying a first-degree relative pair as second-degree) than misclassifications at more distant relationships (e.g., classifying a fourth-degree relative pair as fifth-degree). -->
 
-Once estimated kinship is converted to degree, it may be of interest to compare the inferred degree to truth. When aggregated over many relationships and inferences, this method can help benchmark performance of a particular kinship analysis method.
+Once estimated kinship is converted to degree, it may be of interest to compare the inferred degree to truth. When aggregated over many relationships and inferences, this approach can help benchmark performance of a particular kinship analysis method.
 
 The skater package adapts a `confusion_matrix()` function from @clark2021 to provide standard contingency table metrics (e.g. sensitivity, specificity, PPV, precision, recall, F1, etc.) with a new reciprocal RMSE (R-RMSE) metric. The `confusion_matrix()` function on its own outputs a list with four objects:
 
 1. A `tibble` with calculated accuracy, lower and upper bounds, the guessing rate and p-value of the accuracy vs. the guessing rate. 
 2. A `tibble` with contingency table statistics calculated for each class. Details on the statistics calculated for each class can be reviewed on the help page for `?confusion_matrix`.
 3. A `matrix` with the contingency table object itself.
-4. A `vector` with the reciprocal RMSE (R-RMSE). The R-RMSE is calculated as `sqrt(mean((1/(Target+.5)-1/(Predicted+.5))^2)))`, and represents an alternative to classification accuracy when benchmarking relationship degree estimation. Taking the reciprocal of the target and predicted degree results in larger penalties for more egregious misclassifications (e.g., classifying a first-degree relative pair as second degree) than misclassifications at more distant relationships (e.g., misclassifying a fourth-degree relative pair as fifth-degree). The +0.5 adjustment prevents division-by-zero when a 0th-degree (identical) relative pair is introduced.
+4. A `vector` with the reciprocal RMSE (R-RMSE). The R-RMSE represents an alternative to classification accuracy when benchmarking relationship degree estimation and is calculated using the formula in (1). Taking the reciprocal of the target and predicted degree results in larger penalties for more egregious misclassifications (e.g., classifying a first-degree relative pair as second degree) than misclassifications at more distant relationships (e.g., misclassifying a fourth-degree relative pair as fifth-degree). The +0.5 adjustment prevents division-by-zero when a 0th-degree (identical) relative pair is introduced.
 
-To illustrate the usage, this example will start with the `kinpairs` data from above and randomly flip ~20% of the true relationship degrees.
+\begin{equation}
+\sqrt{\frac{\sum_{i=1}^{k}(\frac{1}{\text{Target}+0.5}-\frac{1}{\text{Predicted}+0.5})^2}{k}}
+\end{equation}
+
+To illustrate the usage, this example will start with the `kinpairs` data from above and randomly flip ~20% of the true relationship degrees:
 
 ```{r}
 # Function to randomly flip levels of a factor (at 20%, by default)
@@ -249,7 +259,7 @@ kinpairs_inferred <- kinpairs %>%
 kinpairs_inferred
 ```
 
-Next, running the `confusion_matrix()` function will return all four objects noted above.
+Next, running the `confusion_matrix()` function will return all four objects noted above:
 
 ```{r}
 confusion_matrix(prediction = kinpairs_inferred$degree_inferred, 

@@ -37,6 +37,8 @@ fam2ped <- function(fam) {
 #' @param width Width of output PDF
 #' @param height Height of output PDF
 #'
+#' @return No return value, called for side effects.
+#'
 #' @export
 plot_pedigree <- function(ped, file=NULL, width=10, height=8) {
   if (is.null(file)) stop("Must provide output PDF file path.")

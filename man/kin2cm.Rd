@@ -10,7 +10,7 @@ kin2cm(k)
 \item{k}{Kinship coefficient (numeric, typically between 0 and .5, although KING can produce values <0).}
 }
 \value{
-Estimated cM, ranging from 0-3560.
+A vector of numeric estimated cM, ranging from 0-3560.
 }
 \description{
 "Converts" a kinship coefficient to put on the same scale as shared cM using the formula

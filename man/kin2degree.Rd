@@ -14,7 +14,7 @@ kin2degree(k, max_degree = 3L)
 \code{max_degree} will report \code{NA}. See \link[=dibble]{dibble}.}
 }
 \value{
-Inferred degree, up to the maximum degree in \code{dibble} (anything more distant is \code{NA}, i.e., unrelated).
+A vector with inferred degree, up to the maximum degree in \code{dibble} (anything more distant is \code{NA}, i.e., unrelated).
 }
 \description{
 Infers relationship degree given a kinship coefficient.

@@ -21,12 +21,6 @@ p-value of the accuracy vs. the guessing rate. This function is called by
 \code{confusion_matrix}, but if this is all you want, you can simply supply
 the table to this function.
 }
-\examples{
-p = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
-o = sample(letters[1:4], 250, replace = TRUE, prob = 1:4)
-calc_accuracy(table(p, o))
-
-}
 \seealso{
 \code{\link{binom.test}}
 }

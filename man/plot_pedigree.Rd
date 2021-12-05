@@ -15,6 +15,9 @@ plot_pedigree(ped, file = NULL, width = 10, height = 8)
 
 \item{height}{Height of output PDF}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Plot pedigree
 }
