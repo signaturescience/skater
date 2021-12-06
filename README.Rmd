@@ -33,13 +33,18 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-Install from GitHub:
+Install stable release from CRAN:
+
+``` r
+install.packages("skater")
+```
+
+Install development version from GitHub:
 
 ``` r
 remotes::install_github("signaturescience/skater", build_vignettes=TRUE)
 ```
 
-<!-- A GitHub [personal access token](https://github.com/settings/tokens) must be in the environment variable `GITHUB_PAT` or supplied as a string to `auth_token`. See `?remotes::install_github`.  -->
 
 ## Usage
 
