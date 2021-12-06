@@ -357,7 +357,7 @@ The skater R package provides a robust software package for data import, manipul
 
 1. Software available from: <http://CRAN.R-project.org/package=skater>.
 1. Source code available from: <https://github.com/signaturescience/skater>.
-1. Archived source code at time of publication: **FIXME Zenodo DOI to come here**.
+1. Archived source code at time of publication: <https://doi.org/10.5281/zenodo.5761996>.
 1. Software license: MIT License.
 
 # Author information

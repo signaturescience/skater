@@ -354,7 +354,7 @@ Note that this maps \texttt{ped2kinpair()} over all \texttt{ped} objects in the 
 
 The skater package includes functions to translate kinship coefficients to relationship degrees. The kinship coefficients could come from \texttt{ped2kinpair()} or other kinship estimation software.
 
-The \texttt{dibble()} function creates a \textbf{d}egree \textbf{i}nference \texttt{tibble}, with degrees up to the specified \texttt{max\_degree} (default=3), expected kinship coefficient, and lower (\texttt{l}) and upper (\texttt{u}) inference ranges as defined in \citet{manichaikul2010}. Degree 0 corresponds to self / identity / monozygotic twins, with an expected kinship coefficient of 0.5, with inference range \textgreater=0.354. Anything beyond the maximum degree resolution is considered unrelated (degree \texttt{NA}).
+The \texttt{dibble()} function creates a \textbf{d}egree \textbf{i}nference \texttt{tibble}, with degrees up to the specified \texttt{max\_degree} (default=3), expected kinship coefficient, and lower (\texttt{l}) and upper (\texttt{u}) inference ranges as defined in \citet{manichaikul2010}. Degree 0 corresponds to self / identity / monozygotic twins, with an expected kinship coefficient of 0.5, with inference range \textgreater=0.354. Anything beyond the maximum degree resolution is considered unrelated (degree \texttt{NA}). Note also that while the theoretical upper boundary for the kinship coefficient is 0.5, the inference range for 0-degree (same person or identical twins) extends to 1 to allow for floating point arithmetic and stochastic effects resulting in kinship coefficients above 0.5.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -743,7 +743,7 @@ The skater R package provides a robust software package for data import, manipul
 \item
   Source code available from: \url{https://github.com/signaturescience/skater}.
 \item
-  Archived source code at time of publication: \textbf{FIXME Zenodo DOI to come here}.
+  Archived source code at time of publication: \url{https://doi.org/10.5281/zenodo.5761996}.
 \item
   Software license: MIT License.
 \end{enumerate}
