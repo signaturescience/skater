@@ -24,6 +24,8 @@ Authors@R:
       person("Signature Science, LLC.",
              role = "cph"))
 License: MIT + file LICENSE
+URL: https://github.com/signaturescience/skater
+BugReports: https://github.com/signaturescience/skater/issues
 Encoding: UTF-8
 RoxygenNote: 7.1.2
 Depends: 
