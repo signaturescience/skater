@@ -189,6 +189,7 @@ randomflip <- function(x, p=.2) ifelse(runif(length(x))<p, sample(unique(x)), x)
 set.seed(42)
 kinpairs_inferred <- kinpairs %>% 
   dplyr::mutate(degree_truth=kin2degree(k, max_degree=3)) %>% 
+  dplyr::mutate(degree_truth=as.character(degree_truth)) %>%
   dplyr::mutate(degree_truth=tidyr::replace_na(degree_truth, "unrelated")) %>% 
   dplyr::mutate(degree_inferred=randomflip(degree_truth))
 kinpairs_inferred
