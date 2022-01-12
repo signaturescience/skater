@@ -117,7 +117,7 @@ bioinformatics, kinship, R, genealogy, SNPs, single nucleotide polymorphisms, re
 
 \textbf{R version}: R version 4.0.4 (2021-02-15)
 
-\textbf{skater package version}: 0.1.0
+\textbf{skater package version}: 0.1.1
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -280,7 +280,14 @@ A single pedigree can also be inspected or visualized (standard base R plot argu
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{paper_files/figure-latex/plotped-1} \end{center}
+\begin{figure}
+
+{\centering \includegraphics{paper_files/figure-latex/plotped-1} 
+
+}
+
+\caption{Pedigree diagram for the first family in the pedigree shown in the code above.}\label{fig:plotped}
+\end{figure}
 
 The \texttt{plot\_pedigree()} function from \texttt{skater} will iterate over a list of pedigree objects, writing a multi-page PDF, with each page containing a pedigree from family:
 
@@ -529,18 +536,18 @@ To illustrate the usage, this example will start with the \texttt{kinpairs} data
 
 \begin{verbatim}
 ## # A tibble: 288 x 6
-##    fid      id1               id2                   k degree_truth degree_inferred
-##    <chr>    <chr>             <chr>             <dbl> <chr>        <chr>          
-##  1 testped1 testped1_g1-b1-s1 testped1_g1-b1-s1 0.5   0            0              
-##  2 testped1 testped1_g1-b1-i1 testped1_g1-b1-s1 0     unrelated    unrelated      
-##  3 testped1 testped1_g1-b1-s1 testped1_g2-b1-s1 0     unrelated    unrelated      
-##  4 testped1 testped1_g1-b1-s1 testped1_g2-b1-i1 0.25  1            1              
-##  5 testped1 testped1_g1-b1-s1 testped1_g2-b2-s1 0     unrelated    unrelated      
-##  6 testped1 testped1_g1-b1-s1 testped1_g2-b2-i1 0.25  1            1              
-##  7 testped1 testped1_g1-b1-s1 testped1_g3-b1-i1 0.125 2            2              
-##  8 testped1 testped1_g1-b1-s1 testped1_g3-b2-i1 0.125 2            1              
-##  9 testped1 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5   0            0              
-## 10 testped1 testped1_g1-b1-i1 testped1_g2-b1-s1 0     unrelated    unrelated      
+##    fid      id1               id2                 k degree_truth degree_inferred
+##    <chr>    <chr>             <chr>           <dbl> <chr>        <chr>          
+##  1 testped1 testped1_g1-b1-s1 testped1_g1-b1~ 0.5   0            0              
+##  2 testped1 testped1_g1-b1-i1 testped1_g1-b1~ 0     unrelated    unrelated      
+##  3 testped1 testped1_g1-b1-s1 testped1_g2-b1~ 0     unrelated    unrelated      
+##  4 testped1 testped1_g1-b1-s1 testped1_g2-b1~ 0.25  1            1              
+##  5 testped1 testped1_g1-b1-s1 testped1_g2-b2~ 0     unrelated    unrelated      
+##  6 testped1 testped1_g1-b1-s1 testped1_g2-b2~ 0.25  1            1              
+##  7 testped1 testped1_g1-b1-s1 testped1_g3-b1~ 0.125 2            2              
+##  8 testped1 testped1_g1-b1-s1 testped1_g3-b2~ 0.125 2            1              
+##  9 testped1 testped1_g1-b1-i1 testped1_g1-b1~ 0.5   0            0              
+## 10 testped1 testped1_g1-b1-i1 testped1_g2-b1~ 0     unrelated    unrelated      
 ## # ... with 278 more rows
 \end{verbatim}
 
@@ -562,14 +569,14 @@ Next, running the \texttt{confusion\_matrix()} function will return all four obj
 ## 
 ## $Other
 ## # A tibble: 6 x 15
-##   Class         N `Sensitivity/Re~ `Specificity/TN~ `PPV/Precision`   NPV `F1/Dice`
-##   <chr>     <dbl>            <dbl>            <dbl>           <dbl> <dbl>     <dbl>
-## 1 0          64              0.75             0.964           0.857 0.931     0.8  
-## 2 1          72              0.806            0.944           0.829 0.936     0.817
-## 3 2          48              0.833            0.967           0.833 0.967     0.833
-## 4 3           8              0.75             0.936           0.25  0.992     0.375
-## 5 unrelated  96              0.854            0.958           0.911 0.929     0.882
-## 6 Average    57.6            0.799            0.954           0.736 0.951     0.741
+##   Class      N `Sensitivity/Re~ `Specificity/TN~ `PPV/Precision`   NPV `F1/Dice`
+##   <chr>  <dbl>            <dbl>            <dbl>           <dbl> <dbl>     <dbl>
+## 1 0       64              0.75             0.964           0.857 0.931     0.8  
+## 2 1       72              0.806            0.944           0.829 0.936     0.817
+## 3 2       48              0.833            0.967           0.833 0.967     0.833
+## 4 3        8              0.75             0.936           0.25  0.992     0.375
+## 5 unrel~  96              0.854            0.958           0.911 0.929     0.882
+## 6 Avera~  57.6            0.799            0.954           0.736 0.951     0.741
 ## # ... with 8 more variables: Prevalence <dbl>, Detection Rate <dbl>,
 ## #   Detection Prevalence <dbl>, Balanced Accuracy <dbl>, FDR <dbl>, FOR <dbl>,
 ## #   FPR/Fallout <dbl>, FNR <dbl>

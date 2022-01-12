@@ -139,7 +139,7 @@ A single pedigree can also be inspected or visualized (standard base R plot argu
 peds$ped[[1]]
 ```
 
-```{r plotped, fig.width=6, fig.height=3}
+```{r plotped, fig.width=6, fig.height=3, fig.cap="Pedigree diagram for the first family in the pedigree shown in the code above."}
 plot(peds$ped[[1]], mar=c(1,4,1,4), cex=.7)
 ```
 
