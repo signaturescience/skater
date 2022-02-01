@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">skater</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -67,7 +67,14 @@
   <a href="news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/signaturescience/skater/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -85,21 +92,26 @@
 <!-- badges: start -->
 
 
+
+
+
 <!-- badges: end -->
 <p><strong>S</strong>NP-based <strong>K</strong>inship <strong>A</strong>nalysis <strong>T</strong>esting and <strong>E</strong>valuation: miscellaneous <strong>R</strong> data analysis utilties.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>Install from GitHub:</p>
+<p>Install stable release from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"skater"</span><span class="op">)</span></code></pre></div>
+<p>Install development version from GitHub:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"signaturescience/skater"</span>, build_vignettes<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
-<!-- A GitHub [personal access token](https://github.com/settings/tokens) must be in the environment variable `GITHUB_PAT` or supplied as a string to `auth_token`. See `?remotes::install_github`.  -->
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
 <p>The <a href="https://signaturescience.github.io/skater/articles/basic_usage.html">“Basic Usage” vignette</a> steps through the primary functionality of the <code>skater</code> package:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"basic_usage"</span>, package <span class="op">=</span> <span class="st">"skater"</span><span class="op">)</span></code></pre></div>
 <p>Full documentation: <a href="https://signaturescience.github.io/skater/" class="uri">https://signaturescience.github.io/skater/</a>.</p>
 </div>
@@ -107,7 +119,18 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2>Links</h2>
+<ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=skater">https://​cloud.r-project.org/​package=skater</a>
+</li>
+<li>Browse source code at <br><a href="https://github.com/signaturescience/skater/">https://​github.com/​signaturescience/​skater/​</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/signaturescience/skater/issues">https://​github.com/​signaturescience/​skater/​issues</a>
+</li>
+</ul>
+</div>
+<div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
@@ -127,6 +150,9 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
+<li><a href="https://CRAN.R-project.org/package=skater"><img src="https://www.r-pkg.org/badges/version/skater" alt="CRAN status"></a></li>
+<li><a href="https://www.biorxiv.org/content/10.1101/2021.07.21.453083v1"><img src="https://img.shields.io/badge/biorXiv-10.1101%2F2021.07.21.453083-red" alt="biorXiv"></a></li>
+<li><a href="https://zenodo.org/badge/latestdoi/339462170"><img src="https://zenodo.org/badge/339462170.svg" alt="DOI"></a></li>
 <li><a href="https://github.com/signaturescience/skater/actions"><img src="https://github.com/signaturescience/skater/workflows/R-CMD-check-stable/badge.svg" alt="R-CMD-check-stable"></a></li>
 <li><a href="https://github.com/signaturescience/skater/actions"><img src="https://github.com/signaturescience/skater/workflows/R-CMD-check-dev/badge.svg" alt="R-CMD-check-dev"></a></li>
 </ul>

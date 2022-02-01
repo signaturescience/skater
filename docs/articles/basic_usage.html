@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">skater</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -62,7 +62,14 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/signaturescience/skater/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -78,7 +85,7 @@
       <h1 data-toc-skip>Basic Usage</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/signaturescience/skater/blob/master/vignettes/basic_usage.Rmd"><code>vignettes/basic_usage.Rmd</code></a></small>
       <div class="hidden name"><code>basic_usage.Rmd</code></div>
 
     </div>
@@ -90,7 +97,7 @@
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p>The <code>skater</code> package provides a collection of analysis and utility functions for <strong>S</strong>NP-based <strong>k</strong>inship <strong>a</strong>nalysis, <strong>t</strong>esting, and <strong>e</strong>valuation as an <strong>R</strong> package. Functions in the package include tools for working with pedigree data, performing relationship degree inference, assessing classification accuracy, and summarizing IBD segment data.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">skater</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/signaturescience/skater">skater</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="pedigree-parsing-and-manipulation" class="section level2">
 <h2 class="hasAnchor">
@@ -321,22 +328,23 @@
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span>
 <span class="va">kinpairs_inferred</span> <span class="op">&lt;-</span> <span class="va">kinpairs</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>degree_truth<span class="op">=</span><span class="fu"><a href="../reference/kin2degree.html">kin2degree</a></span><span class="op">(</span><span class="va">k</span>, max_degree<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>degree_truth<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">degree_truth</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>degree_truth<span class="op">=</span><span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span><span class="op">(</span><span class="va">degree_truth</span>, <span class="st">"unrelated"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>degree_inferred<span class="op">=</span><span class="fu">randomflip</span><span class="op">(</span><span class="va">degree_truth</span><span class="op">)</span><span class="op">)</span>
 <span class="va">kinpairs_inferred</span>
 <span class="co"># # A tibble: 288 × 6</span>
-<span class="co">#    fid      id1               id2                   k degree_truth degree_inferred</span>
-<span class="co">#    &lt;chr&gt;    &lt;chr&gt;             &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;          </span>
-<span class="co">#  1 testped1 testped1_g1-b1-s1 testped1_g1-b1-s1 0.5   0            0              </span>
-<span class="co">#  2 testped1 testped1_g1-b1-i1 testped1_g1-b1-s1 0     unrelated    unrelated      </span>
-<span class="co">#  3 testped1 testped1_g1-b1-s1 testped1_g2-b1-s1 0     unrelated    unrelated      </span>
-<span class="co">#  4 testped1 testped1_g1-b1-s1 testped1_g2-b1-i1 0.25  1            1              </span>
-<span class="co">#  5 testped1 testped1_g1-b1-s1 testped1_g2-b2-s1 0     unrelated    unrelated      </span>
-<span class="co">#  6 testped1 testped1_g1-b1-s1 testped1_g2-b2-i1 0.25  1            1              </span>
-<span class="co">#  7 testped1 testped1_g1-b1-s1 testped1_g3-b1-i1 0.125 2            2              </span>
-<span class="co">#  8 testped1 testped1_g1-b1-s1 testped1_g3-b2-i1 0.125 2            1              </span>
-<span class="co">#  9 testped1 testped1_g1-b1-i1 testped1_g1-b1-i1 0.5   0            0              </span>
-<span class="co"># 10 testped1 testped1_g1-b1-i1 testped1_g2-b1-s1 0     unrelated    unrelated      </span>
+<span class="co">#    fid      id1               id2                 k degree_truth degree_inferred</span>
+<span class="co">#    &lt;chr&gt;    &lt;chr&gt;             &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;          </span>
+<span class="co">#  1 testped1 testped1_g1-b1-s1 testped1_g1-b1… 0.5   0            0              </span>
+<span class="co">#  2 testped1 testped1_g1-b1-i1 testped1_g1-b1… 0     unrelated    unrelated      </span>
+<span class="co">#  3 testped1 testped1_g1-b1-s1 testped1_g2-b1… 0     unrelated    unrelated      </span>
+<span class="co">#  4 testped1 testped1_g1-b1-s1 testped1_g2-b1… 0.25  1            1              </span>
+<span class="co">#  5 testped1 testped1_g1-b1-s1 testped1_g2-b2… 0     unrelated    unrelated      </span>
+<span class="co">#  6 testped1 testped1_g1-b1-s1 testped1_g2-b2… 0.25  1            1              </span>
+<span class="co">#  7 testped1 testped1_g1-b1-s1 testped1_g3-b1… 0.125 2            2              </span>
+<span class="co">#  8 testped1 testped1_g1-b1-s1 testped1_g3-b2… 0.125 2            1              </span>
+<span class="co">#  9 testped1 testped1_g1-b1-i1 testped1_g1-b1… 0.5   0            0              </span>
+<span class="co"># 10 testped1 testped1_g1-b1-i1 testped1_g2-b1… 0     unrelated    unrelated      </span>
 <span class="co"># # … with 278 more rows</span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/confusion_matrix.html">confusion_matrix</a></span><span class="op">(</span>prediction <span class="op">=</span> <span class="va">kinpairs_inferred</span><span class="op">$</span><span class="va">degree_inferred</span>, 
@@ -349,14 +357,14 @@
 <span class="co"># </span>
 <span class="co"># $Other</span>
 <span class="co"># # A tibble: 6 × 15</span>
-<span class="co">#   Class         N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`</span>
-<span class="co">#   &lt;chr&gt;     &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co"># 1 0          64              0.75             0.964           0.857 0.931     0.8  </span>
-<span class="co"># 2 1          72              0.806            0.944           0.829 0.936     0.817</span>
-<span class="co"># 3 2          48              0.833            0.967           0.833 0.967     0.833</span>
-<span class="co"># 4 3           8              0.75             0.936           0.25  0.992     0.375</span>
-<span class="co"># 5 unrelated  96              0.854            0.958           0.911 0.929     0.882</span>
-<span class="co"># 6 Average    57.6            0.799            0.954           0.736 0.951     0.741</span>
+<span class="co">#   Class      N `Sensitivity/Re… `Specificity/TN… `PPV/Precision`   NPV `F1/Dice`</span>
+<span class="co">#   &lt;chr&gt;  &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co"># 1 0       64              0.75             0.964           0.857 0.931     0.8  </span>
+<span class="co"># 2 1       72              0.806            0.944           0.829 0.936     0.817</span>
+<span class="co"># 3 2       48              0.833            0.967           0.833 0.967     0.833</span>
+<span class="co"># 4 3        8              0.75             0.936           0.25  0.992     0.375</span>
+<span class="co"># 5 unrel…  96              0.854            0.958           0.911 0.929     0.882</span>
+<span class="co"># 6 Avera…  57.6            0.799            0.954           0.736 0.951     0.741</span>
 <span class="co"># # … with 8 more variables: Prevalence &lt;dbl&gt;, Detection Rate &lt;dbl&gt;,</span>
 <span class="co"># #   Detection Prevalence &lt;dbl&gt;, Balanced Accuracy &lt;dbl&gt;, FDR &lt;dbl&gt;, FOR &lt;dbl&gt;,</span>
 <span class="co"># #   FPR/Fallout &lt;dbl&gt;, FNR &lt;dbl&gt;</span>
