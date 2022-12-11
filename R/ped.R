@@ -17,7 +17,7 @@
 #' @export
 fam2ped <- function(fam) {
   # Replace 0 father and mother IDs with NA
-  fam <- fam %>% dplyr::mutate(dplyr::across(c(dadid, momid), dplyr::na_if, 0))
+  fam <- fam %>% dplyr::mutate(dplyr::across(c(dadid, momid), ~ dplyr::na_if(.x, "0")))
   # Make affected status 1
   fam <- fam %>% dplyr::mutate(affected=1)
   # Create a listcol with the pedigree object for each family
@@ -71,7 +71,7 @@ plot_pedigree <- function(ped, file=NULL, width=10, height=8) {
 #'   tidyr::unnest(cols=kinpairs)
 #' @export
 ped2kinpair <- function(ped) {
-  if (class(ped)!="pedigree") stop("Input must be of class 'pedigree'.")
+  if (!inherits(ped, "pedigree")) stop("Input must be of class 'pedigree'.")
   kinship2::kinship(ped) %>%
     corrr::as_cordf(diagonal=0.5) %>%
     corrr::shave() %>%
