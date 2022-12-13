@@ -6,7 +6,7 @@
 \alias{skater-package}
 \title{skater: Utilities for SNP-Based Kinship Analysis}
 \description{
-Utilities for single nucleotide polymorphism (SNP) based kinship analysis testing and evaluation. The 'skater' package contains functions for importing, parsing, and analyzing pedigree data, performing relationship degree inference, benchmarking relationship degree classification, and summarizing identity by descent (IBD) segment data. Package functions and methods are described in Turner et al. (2021) "skater: An R package for SNP-based Kinship Analysis, Testing, and Evaluation" <doi:10.1101/2021.07.21.453083>.
+Utilities for single nucleotide polymorphism (SNP) based kinship analysis testing and evaluation. The 'skater' package contains functions for importing, parsing, and analyzing pedigree data, performing relationship degree inference, benchmarking relationship degree classification, and summarizing identity by descent (IBD) segment data. Package functions and methods are described in Turner et al. (2021) "skater: An R package for SNP-based Kinship Analysis, Testing, and Evaluation" \doi{10.1101/2021.07.21.453083}.
 }
 \seealso{
 Useful links:
