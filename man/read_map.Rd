@@ -29,9 +29,9 @@ This function reads in the content from a genetic map file to translate physical
 The columns must be in the order above. Note that only the first, third, and fourth columns are used in the function.
 }
 \details{
-The genetic map could come from different sources. One source is the HapMap map distributed by the Browning Lab (\href{http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/}{documentation}). If this map file is used, the non-sex chromosomes can be downloaded and concatenated to a single file as follows:
+The genetic map could come from different sources. One source is the HapMap map distributed by the Browning Lab (\href{https://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/}{documentation}). If this map file is used, the non-sex chromosomes can be downloaded and concatenated to a single file as follows:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
+\if{html}{\out{<div class="sourceCode">}}\preformatted{wget https://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
 unzip plink.GRCh37.map.zip
 cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map
 }\if{html}{\out{</div>}}
@@ -96,9 +96,9 @@ gmap <- read_map(gmapfile)
 
 }
 \references{
-\url{http://zzz.bwh.harvard.edu/plink/data.shtml#map}
+\url{https://zzz.bwh.harvard.edu/plink/data.shtml#map}
 
-\url{http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/}
+\url{https://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/}
 
 \url{https://github.com/williamslab/ped-sim#map-file}
 

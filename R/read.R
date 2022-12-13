@@ -255,10 +255,10 @@ read_ibd <- function(file, source) {
 #'
 #' @details
 #'
-#' The genetic map could come from different sources. One source is the HapMap map distributed by the Browning Lab ([documentation](http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/)). If this map file is used, the non-sex chromosomes can be downloaded and concatenated to a single file as follows:
+#' The genetic map could come from different sources. One source is the HapMap map distributed by the Browning Lab ([documentation](https://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/)). If this map file is used, the non-sex chromosomes can be downloaded and concatenated to a single file as follows:
 #'
 #' ```
-#' wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
+#' wget https://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
 #' unzip plink.GRCh37.map.zip
 #' cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map
 #' ```
@@ -327,8 +327,8 @@ read_ibd <- function(file, source) {
 #' 2. value (genetic length within the physical position boundary)
 #' 3. bp (physical position boundary)
 #'
-#' @references <http://zzz.bwh.harvard.edu/plink/data.shtml#map>
-#' @references <http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/>
+#' @references <https://zzz.bwh.harvard.edu/plink/data.shtml#map>
+#' @references <https://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/>
 #' @references <https://github.com/williamslab/ped-sim#map-file>
 #' @references <https://www.nature.com/articles/ncomms14994>
 #' @references <https://www.nature.com/articles/ncomms14994>
