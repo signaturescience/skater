@@ -29,12 +29,16 @@ This function reads in the content from a genetic map file to translate physical
 The columns must be in the order above. Note that only the first, third, and fourth columns are used in the function.
 }
 \details{
-The genetic map could come from different sources. One source is the HapMap map distributed by the Browning Lab (\href{http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/}{documentation}). If this map file is used, the non-sex chromosomes can be downloaded and concatenated to a single file as follows:\preformatted{wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
+The genetic map could come from different sources. One source is the HapMap map distributed by the Browning Lab (\href{http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/}{documentation}). If this map file is used, the non-sex chromosomes can be downloaded and concatenated to a single file as follows:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{wget http://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/plink.GRCh37.map.zip
 unzip plink.GRCh37.map.zip
 cat *chr[0-9]*GRCh37.map | sort -k1,1 -k4,4 --numeric-sort > plink.allchr.GRCh37.map
-}
+}\if{html}{\out{</div>}}
 
-Another source is a sex-specific map ("bherer") originally published by Bherer et al and recommended by the developers of \code{ped-sim} for simulating IBD segments (\href{https://github.com/williamslab/ped-sim#map-file}{documentation}). To retrieve and prep this map file for simulation:\preformatted{# Get the refined genetic map and extract
+Another source is a sex-specific map ("bherer") originally published by Bherer et al and recommended by the developers of \code{ped-sim} for simulating IBD segments (\href{https://github.com/williamslab/ped-sim#map-file}{documentation}). To retrieve and prep this map file for simulation:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# Get the refined genetic map and extract
 wget --no-check-certificate https://github.com/cbherer/Bherer_etal_SexualDimorphismRecombination/raw/master/Refined_genetic_map_b37.tar.gz
 tar xvfpz Refined_genetic_map_b37.tar.gz
 
@@ -48,10 +52,12 @@ done
 
 # Clean up
 rm -rf Refined_genetic_map_b37*
-}
+}\if{html}{\out{</div>}}
 
-After this, the \code{sexspec.pedsim.map} file is ready for use in simulation. However, it must be averaged and reformatted to "Plink format" to use here:\preformatted{cat sexspec.pedsim.map | grep -v "^#" | awk -v OFS="\\t" '\{print $1,".",($3+$4)/2,$2\}' > sexspec-avg.plink.map
-}
+After this, the \code{sexspec.pedsim.map} file is ready for use in simulation. However, it must be averaged and reformatted to "Plink format" to use here:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{cat sexspec.pedsim.map | grep -v "^#" | awk -v OFS="\\t" '\{print $1,".",($3+$4)/2,$2\}' > sexspec-avg.plink.map
+}\if{html}{\out{</div>}}
 
 #' The genetic maps created above are in the tens of megabytes size range. This is trivial to store for most systems but a reduced version would increase portability and ease testing. This "minimum viable genetic map" could be used for testing and as installed package data in an R package for example analysis. Read more about minimum viable genetic maps at:
 \itemize{
@@ -59,7 +65,9 @@ After this, the \code{sexspec.pedsim.map} file is ready for use in simulation. H
 \item Github repo with python code: \url{https://github.com/williamslab/min_map}
 }
 
-The code as written below reduces the averaged sex-specific genetic map from 833776 to 28726 positions (~30X reduction!).\preformatted{# Get minmap script from github
+The code as written below reduces the averaged sex-specific genetic map from 833776 to 28726 positions (~30X reduction!).
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# Get minmap script from github
 wget https://raw.githubusercontent.com/williamslab/min_map/main/min_map.py
 
 # Create empty minmap
@@ -78,7 +86,7 @@ for chr in \{1..22\}; do
   # Clean up
   rm -f min_viable_map$\{chr\}.txt tmp.$\{chr\}
 done
-}
+}\if{html}{\out{</div>}}
 
 This averaged version of the Bherer sex-specific map, reduced to a minimum viable genetic map with at most 5\% error, in Plink format, is available as installed package data (see examples). This is useful for testing code, but the full genetic map should be used for most analysis operations.
 }
