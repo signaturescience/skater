@@ -1,6 +1,6 @@
 ## Test environments
 
-- Local MacOS install, R 4.0.4
+- Local MacOS install, R 4.2.0
 - R hub
     - Fedora Linux, R-devel, clang, gfortran
     - Ubuntu Linux 20.04.1 LTS, R-release, GCC
@@ -12,9 +12,4 @@
 - R hub: 
     - Fedora Linux, R-devel, clang, gfortran: OK
     - Ubuntu Linux 20.04.1 LTS, R-release, GCC: OK
-    - Windows Server 2022, R-devel, 64 bit: 
-        ```
-        * checking for detritus in the temp directory ... NOTE
-        Found the following files/directories:
-          'lastMiKTeXException'
-        ```
+    - Windows Server 2022, R-devel, 64 bit: OK

@@ -6,7 +6,7 @@ Description: Utilities for single nucleotide polymorphism (SNP) based kinship an
     relationship degree classification, and summarizing identity by descent (IBD) segment data.
     Package functions and methods are described in Turner et al. (2021) "skater: An R package 
     for SNP-based Kinship Analysis, Testing, and Evaluation" <doi:10.1101/2021.07.21.453083>.
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: 
     c(person(given = "Stephen",
              family = "Turner",
@@ -27,7 +27,7 @@ License: MIT + file LICENSE
 URL: https://github.com/signaturescience/skater
 BugReports: https://github.com/signaturescience/skater/issues
 Encoding: UTF-8
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Depends: 
     R (>= 3.0.0)
 Imports: 
