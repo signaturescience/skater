@@ -244,7 +244,7 @@ read_ibd <- function(file, source) {
 #'
 #' @description
 #'
-#' This function reads in the content from a genetic map file to translate physical distance to genetic units (i.e. cM). Regardless of the source, the input file must be sex-averaged and in a tab-separated "Plink" format ([documentation](<http://zzz.bwh.harvard.edu/plink/data.shtml#map>)) with the following four columns and no header (i.e. no column names):
+#' This function reads in the content from a genetic map file to translate physical distance to genetic units (i.e. cM). Regardless of the source, the input file must be sex-averaged and in a tab-separated "Plink" format ([documentation](<https://www.cog-genomics.org/plink/1.9/formats#map>)) with the following four columns and no header (i.e. no column names):
 #'
 #' 1. Chromosome
 #' 2. Identifier (ignored in `read_map()`)
@@ -327,7 +327,7 @@ read_ibd <- function(file, source) {
 #' 2. value (genetic length within the physical position boundary)
 #' 3. bp (physical position boundary)
 #'
-#' @references <https://zzz.bwh.harvard.edu/plink/data.shtml#map>
+#' @references <https://www.cog-genomics.org/plink/1.9/formats#map>
 #' @references <https://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/>
 #' @references <https://github.com/williamslab/ped-sim#map-file>
 #' @references <https://www.nature.com/articles/ncomms14994>

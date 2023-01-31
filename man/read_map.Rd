@@ -18,7 +18,7 @@ A tibble containing 3 columns:
 }
 }
 \description{
-This function reads in the content from a genetic map file to translate physical distance to genetic units (i.e. cM). Regardless of the source, the input file must be sex-averaged and in a tab-separated "Plink" format (\href{http://zzz.bwh.harvard.edu/plink/data.shtml#map}{documentation}) with the following four columns and no header (i.e. no column names):
+This function reads in the content from a genetic map file to translate physical distance to genetic units (i.e. cM). Regardless of the source, the input file must be sex-averaged and in a tab-separated "Plink" format (\href{https://www.cog-genomics.org/plink/1.9/formats#map}{documentation}) with the following four columns and no header (i.e. no column names):
 \enumerate{
 \item Chromosome
 \item Identifier (ignored in \code{read_map()})
@@ -96,7 +96,7 @@ gmap <- read_map(gmapfile)
 
 }
 \references{
-\url{https://zzz.bwh.harvard.edu/plink/data.shtml#map}
+\url{https://www.cog-genomics.org/plink/1.9/formats#map}
 
 \url{https://bochet.gcc.biostat.washington.edu/beagle/genetic_maps/}
 
