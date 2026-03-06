@@ -1,3 +1,8 @@
+# skater 0.2.0
+
+- New maintainer (@vpnagraj)
+- Updated `read_ibis()` and `read_akt()` to use `read_table()` instead of `read_table2()` (which is now deprecated; thanks for the heads up @jennybc).
+
 # skater 0.1.2
 
 - Updated to handle future changes in dplyr where `...` will be deprecated in `na_if()`, and fixes use of `class()` that caused an issue with `R CMD check` (thanks @hadley, #57)

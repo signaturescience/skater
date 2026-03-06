@@ -17,12 +17,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Stephen Turner \email{vustephen@gmail.com} (\href{https://orcid.org/0000-0001-9140-9028}{ORCID})
+\strong{Maintainer}: VP Nagraj \email{nagraj@nagraj.net} (\href{https://orcid.org/0000-0003-0060-566X}{ORCID})
 
 Authors:
 \itemize{
+  \item Stephen Turner \email{vustephen@gmail.com} (\href{https://orcid.org/0000-0001-9140-9028}{ORCID})
   \item Matthew Scholz (\href{https://orcid.org/0000-0003-3686-1227}{ORCID})
-  \item VP Nagraj (\href{https://orcid.org/0000-0003-0060-566X}{ORCID})
 }
 
 Other contributors:

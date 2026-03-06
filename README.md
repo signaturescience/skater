@@ -12,9 +12,7 @@ status](https://www.r-pkg.org/badges/version/skater)](https://CRAN.R-project.org
 
 [![DOI](https://zenodo.org/badge/339462170.svg)](https://zenodo.org/badge/latestdoi/339462170)
 
-[![R-CMD-check-stable](https://github.com/signaturescience/skater/workflows/R-CMD-check-stable/badge.svg)](https://github.com/signaturescience/skater/actions)
-
-[![R-CMD-check-dev](https://github.com/signaturescience/skater/workflows/R-CMD-check-dev/badge.svg)](https://github.com/signaturescience/skater/actions)
+[![R-CMD-check](https://github.com/signaturescience/skater/actions/workflows/check-release.yaml/badge.svg)](https://github.com/signaturescience/skater/actions/workflows/check-release.yaml)
 
 <!-- badges: end -->
 
