@@ -1,15 +1,22 @@
+## New maintainer
+
+Please note that as of this release there is a new maintainer for the package.
+
 ## Test environments
 
-- Local MacOS install, R 4.2.0
-- R hub
-    - Fedora Linux, R-devel, clang, gfortran
-    - Ubuntu Linux 20.04.1 LTS, R-release, GCC
-    - Windows Server 2022, R-devel, 64 bit
+- Local MacOS install, R 4.4.0
+- R Hub
+    - m1-san (R-devel)
+    - windows (R-devel)
+    - macos-arm64 (R-devel)
+    - linux- (R-devel)
 
 ## R CMD check results
 
 - Local `R CMD check`: Status OK, 0 errors, 0 warnings, 0 notes
-- R hub: 
-    - Fedora Linux, R-devel, clang, gfortran: OK
-    - Ubuntu Linux 20.04.1 LTS, R-release, GCC: OK
-    - Windows Server 2022, R-devel, 64 bit: OK
+- R Hub
+    - m1-san (R-devel): OK
+    - windows (R-devel): OK
+    - macos-arm64 (R-devel): OK
+    - linux- (R-devel): OK
+
