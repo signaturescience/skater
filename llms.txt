@@ -1,0 +1,78 @@
+# skater
+
+**S**NP-based **K**inship **A**nalysis **T**esting and **E**valuation:
+miscellaneous **R** data analysis utilties.
+
+## Installation
+
+Install stable release from CRAN:
+
+``` r
+install.packages("skater")
+```
+
+Install development version from GitHub:
+
+``` r
+remotes::install_github("signaturescience/skater", build_vignettes=TRUE)
+```
+
+## Usage
+
+The [“Basic Usage”
+vignette](https://signaturescience.github.io/skater/articles/basic_usage.html)
+steps through the primary functionality of the `skater` package:
+
+``` r
+vignette("basic_usage", package = "skater")
+```
+
+Full documentation: <https://signaturescience.github.io/skater/>.
+
+# Package index
+
+## All functions
+
+- [`arrange_ids()`](https://signaturescience.github.io/skater/reference/arrange_ids.md)
+  : Order IDs across two columns
+- [`calc_accuracy()`](https://signaturescience.github.io/skater/reference/calc_accuracy.md)
+  : Calculate Accuracy
+- [`calc_stats()`](https://signaturescience.github.io/skater/reference/calc_stats.md)
+  : Calculate various statistics from a confusion matrix
+- [`confusion_matrix()`](https://signaturescience.github.io/skater/reference/confusion_matrix.md)
+  : Calculate various statistics from a confusion matrix
+- [`dibble()`](https://signaturescience.github.io/skater/reference/dibble.md)
+  : Degree tibble
+- [`fam2ped()`](https://signaturescience.github.io/skater/reference/fam2ped.md)
+  : Fam to pedigree
+- [`ibd2kin()`](https://signaturescience.github.io/skater/reference/ibd2kin.md)
+  : Compute kinship coefficient from IBD segments
+- [`interpolate()`](https://signaturescience.github.io/skater/reference/interpolate.md)
+  : Interpolate over segments
+- [`kin2cm()`](https://signaturescience.github.io/skater/reference/kin2cm.md)
+  : Kinship coefficient to cM
+- [`kin2degree()`](https://signaturescience.github.io/skater/reference/kin2degree.md)
+  : Kinship coefficient to degree
+- [`ped2kinpair()`](https://signaturescience.github.io/skater/reference/ped2kinpair.md)
+  : Pedigree to pairwise kinship
+- [`plot_pedigree()`](https://signaturescience.github.io/skater/reference/plot_pedigree.md)
+  : Plot pedigree
+- [`read_akt()`](https://signaturescience.github.io/skater/reference/read_akt.md)
+  : Read AKT kin output file
+- [`read_fam()`](https://signaturescience.github.io/skater/reference/read_fam.md)
+  : Read PLINK-formatted .fam file
+- [`read_ibd()`](https://signaturescience.github.io/skater/reference/read_ibd.md)
+  : Read IBD segment file
+- [`read_ibis()`](https://signaturescience.github.io/skater/reference/read_ibis.md)
+  : Read IBIS coef output file
+- [`read_map()`](https://signaturescience.github.io/skater/reference/read_map.md)
+  : Read genetic map file
+- [`read_plink2_king()`](https://signaturescience.github.io/skater/reference/read_plink2_king.md)
+  : Read PLINK KING table
+
+# Articles
+
+### All vignettes
+
+- [Basic
+  Usage](https://signaturescience.github.io/skater/articles/basic_usage.md):
