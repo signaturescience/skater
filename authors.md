@@ -14,7 +14,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/signaturescience/skater/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/signaturescience/skater/blob/v0.2.0/DESCRIPTION)
 
 Turner S, Scholz M, Nagraj V (2026). *skater: Utilities for SNP-Based
 Kinship Analysis*. R package version 0.2.0,
