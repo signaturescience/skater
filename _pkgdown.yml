@@ -1,1 +1,3 @@
-destination: docs
+url: https://signaturescience.github.io/skater/
+template:
+  bootstrap: 5
