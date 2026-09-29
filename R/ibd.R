@@ -90,7 +90,12 @@ ibd2kin <- function(.ibd_data, .map, type = NULL) {
       ibd_max_bp %>%
       dplyr::filter(chr == chrom)
 
-    tmp_chromgpos <- tmp_l[[chrom]]
+    ## look up the map by chromosome name ...
+    ## ... chr is numeric for hapibd segments, and indexing by number would pick the map by position
+    if (!as.character(chrom) %in% names(tmp_l)) {
+      stop(paste0("Chromosome '", chrom, "' in the IBD segments is not present in the genetic map."))
+    }
+    tmp_chromgpos <- tmp_l[[as.character(chrom)]]
 
     ## use interpolate to get centimorgan lengths
     mincm <- interpolate(ibd_bp = tmp_ibd_min_bp$bp, chromgpos = tmp_chromgpos)
